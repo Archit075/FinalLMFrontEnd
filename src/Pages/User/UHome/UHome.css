@@ -1,0 +1,31 @@
+#YBI {
+    margin-bottom: 5px;
+}
+
+#YBC {
+    margin-top: 55px;
+}
+
+.YBTR {
+    /* color: aliceblue; */
+    font-weight: bolder;
+    color: black;
+}
+
+#ybs {
+    font: bold;
+    font-weight: bold;
+}
+
+#vbtn {
+    margin-right: 10px;
+}
+
+.card-even {
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  }
+  
+  .card-odd {
+    background: linear-gradient(to right, #84fab0, #8fd3f4);
+  }
+  

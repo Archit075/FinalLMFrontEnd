@@ -1,0 +1,31 @@
+.react-pdf__Page__canvas{
+    /* margin-left: 461px; */
+    /* width: 50%; */
+    float: right;
+    /* float: left; */
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.react-pdf__Page__textContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+  }
+  
+
+#btnn {
+   margin-top: 10%;
+    margin: 10px;
+}
+
+.btndiv {
+    margin: 10%;
+    margin-bottom: 200px;
+    /* margin: 500px; */
+}
+
+
+  
+  

@@ -1,0 +1,28 @@
+#YBI {
+    margin-bottom: 5px;
+}
+
+#YBC {
+    margin-top: 55px;
+}
+
+.YBTR {
+    /* color: aliceblue; */
+    font-weight: bolder;
+    color: black;
+}
+
+#ybs {
+    font: bold;
+    font-weight: bold;
+}
+
+#vbtn {
+    margin-right: 10px;
+}
+
+.class-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Or use "space-between" if you want equal spaces between cards */
+  }
