@@ -13,6 +13,7 @@ import PDF from './Pages/Teacher/ViewPdf';
 import AddResource from './Pages/Teacher/AddResource';
 import PDFUser from './Pages/User/PDFView';
 import Home from './Pages/Home/Home/Home';
+import Home1 from './Pages/Home/Home/Home1';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
 
 
           <Route path="/TeacherHome" element={<THome/>} />
-          <Route path='/Teacher-Signin' element={<TSignin/>}/>
+         {/* <Route path = "/Teacher-Signin" element={<TSignin/>}/> */}
 
           <Route path='/Cards' element ={<ClassCard/>}/>
           <Route path='/Resource-List' element={<UResourceList/>}/>          

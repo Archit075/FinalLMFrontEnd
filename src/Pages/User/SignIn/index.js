@@ -74,11 +74,9 @@ const USignin = () => {
   };
 
 
-
   return (
     <div className='signin'>
       <h1 className="title" id='Stitle'>Student Signin</h1>
-
       <div className="row">
         <div className="col"></div>
         <div className="col">
@@ -86,7 +84,7 @@ const USignin = () => {
             <div className="mb-3">
               <label className="label-control" id='lab1'>
                 Email address
-              </label>
+              </label>;/
               <input
                 onChange={(e) => {
                   setEmail(e.target.value)

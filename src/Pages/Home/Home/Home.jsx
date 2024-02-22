@@ -197,19 +197,7 @@ export default Home;
       ></Parallax> */
 }
 
-{
-  /* <iframe
-                    loop="1"
-                    control="0"
-                    className="shadow-1-strong rounded"
-                    src={video2}
-                    allow="autoplay"
-                    title="YouTube video"
-                    allowFullScreen
-                    data-gtm-yt-inspected-2340190_699="true"
-                    id="388567449"
-                  ></iframe> */
-}
+ 
 {/* <div className="homepage">
          <div
           style={{

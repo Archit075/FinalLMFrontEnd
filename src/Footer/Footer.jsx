@@ -41,7 +41,7 @@ export default function Footer() {
               <h6 className="text-uppercase fw-bold mb-4">
                 Education Resource Repository
               </h6>
-              <span className="me-5 d-none d-lg-block">Get connected with us on social networks:</span>
+              <span className="me-5 d-none d-lg-block">Get connected with us on every platformss:</span>
               
             </MDBCol>
 
