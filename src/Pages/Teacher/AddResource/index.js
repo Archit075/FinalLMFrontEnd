@@ -37,3 +37,6 @@ const Background = styled.div`
     object-fit: cover;
   }
 `;
+
+
+

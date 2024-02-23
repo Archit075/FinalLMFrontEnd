@@ -1,25 +1,24 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Res1 from "./YourBooks.jpg";
+// import Res1 from "./YourBooks.jpg";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { UrlResources } from "../../../config";
-// import { toast } from "react-toastify";
-import moment from "moment";
-import "./ResourceList.css";
+import "./Publishable.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-export default function ResourceList() {
-  
+export default function Publishable() {
+ 
   const { standard } = sessionStorage;
+
   const { state } = useLocation();
   const classtd = state ? state.classtd : null;
 
-  // console.log("classstd : " +state.classtd);
-  console.log("classtd : " +classtd);
+  console.log("classstd : " +classtd);
+
 
   console.log("Value of standard in resourcelist : " + standard);
   const navigate = useNavigate();
@@ -28,13 +27,14 @@ export default function ResourceList() {
   const searchResources = () => {
 
     if (!classtd) {
-      console.error("Class standard is not available in the state.");
-      return;
-    }
+        console.error("Class standard is not available in the state.");
+        return;
+      }
+  
 
     console.log(standard);
     // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
-    const url = `${UrlResources}/api/Pdf/Pdf/Standard/${classtd}`;
+    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`;
     console.log("url is : " + url);
     console.dir(Resources)
 
@@ -47,7 +47,7 @@ export default function ResourceList() {
 
         if (result != null) {
           setResources(result);
-          toast.info("Welcome to Resources")
+        //   toast.info("Welcome to Resources")
           console.log(result["message"]);
         } else {
           toast.error("Resources are empty");
@@ -60,19 +60,20 @@ export default function ResourceList() {
       });
   };
 
-  const returnBook = (pdf_Name, date) => {
-      const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${date}`;
+  const PublishBook = (pdf_Name, std) => {
+      const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${std}`;
       console.log("pdf name is : " + pdf_Name);
+      console.log("url is : "+urlResource);
 
       axios
-        .delete(urlResource)
+        .post(urlResource)
         .then((response) => {
           console.log("response is : " + response);
           const result = response.data;
 
           if (result["statusCode"] === 1) {
-            toast.success("Resources deleted successfully!!");
-            console.log(result["message"]);
+            toast.success("Resource Published successfully!!");
+            console.log("message is " +result["message"]);
             setResources((prevResources) =>
               prevResources.filter((resource) => resource.pdfName !== pdf_Name)
             );
@@ -92,6 +93,7 @@ export default function ResourceList() {
 
   useEffect(() => {
     searchResources();
+  
     console.log("getting called");
   }, []);
 
@@ -106,7 +108,7 @@ export default function ResourceList() {
             <Card.Img
               style={{ height: "8rem", width: "100%" }}
               variant="top"
-              src={Res1}
+            //   src={Res1}
             />
             <Card.Body style={{ paddingTop: "5px", paddingBottom: "5px", backgroundColor: "#DDF5FF" }}>
               <Card.Title
@@ -129,29 +131,18 @@ export default function ResourceList() {
               >
                 {Resource.created}
               </Card.Text>
-              <Button
-                style={{ marginTop: "0" }}
-                variant="primary"
-                className="btn btn-success btn-sm"
-                id="vbtn"
-                onClick={() => {
-                  navigate("/pdfPage", {
-                    state: { pdfName: Resource.pdfName },
-                  });
-                  console.log(
-                    "pdfName in resourcelist is : " + Resource.pdfName
-                  );
-                }}
+              <Card.Text
+                style={{ paddingTop: "2px", paddingBottom: "2px", margin: "0" }}
               >
-                View
-              </Button>
+                {Resource.standard}
+              </Card.Text>
               <Button
-                variant="danger"
+                variant="primary"
                 className="btn mr-5 btn-sm"
                 id="rbtn"
-                onClick={() => returnBook(Resource.pdfName, Resource.standard, Resource.created)}
+                onClick={() => PublishBook(Resource.pdfName, Resource.standard)}
               >
-                Delete
+                Publish
               </Button>
             </Card.Body>
           </Card>

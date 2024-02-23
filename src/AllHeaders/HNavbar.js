@@ -1,69 +1,3 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import { styled } from "styled-components";
-
-// const HNavbar = () => {
-//     return (
-//       <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark py-2">
-//         <div className="container-fluid ">
-//           <a className="navbar-brand" href="#">Edu-Res Repository</a>
-//           <div className="collapse navbar-collapse" id="navbarSupportedContent" class="d-flex justify-content-end fs-4">
-//             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-//               <NavMenu>
-//                 <li>
-//                   <span><Link to="/User-UserSignin" style={{ color: '#FFF' ,textDecoration: 'none' }}>Student</Link></span>
-//                 </li>
-//                 <li>
-//                   <span><Link to="/Teacher-Signin" style={{ color: '#FFF',textDecoration: 'none' }}>Teacher</Link></span>
-//                 </li>
-//               </NavMenu>
-//             </ul>
-//           </div>
-//         </div>
-//       </nav>
-//     )
-// }
-
-// export default HNavbar
-
-// const NavMenu = styled.span`
-//   display:flex;
-
-//   li{
-//     display: flex;
-//     align-items: center;
-//     padding: 0 12px;
-//     cursor: pointer;
-
-//     span {
-//         font-size: 20px;
-//         color: white;
-//         letter-spacing: 1.42px;
-//         position: relative;
-
-//         &:after {
-//             content: "";
-//             height: 2px;
-//             background: red;
-//             position: absolute;
-//             left:0;
-//             right:0;
-//             bottom:-6px;
-//             opacity:0;
-//             transfer-origin: left center;
-//             transition: all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
-//             transform: scaleX(0);
-//         }
-//     }
-
-//     &:hover {
-//         span:after {
-//             transform: scaleX(1);
-//             opacity: 1;
-//         }
-//     }
-// }`
-
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -111,7 +45,8 @@ export default function Header() {
               className="d-inline align-top"
             />
             {""}
-            ER-Repo
+            <span style={{ color: "blue", fontWeight: "bold" }}>ER</span>-
+            <span style={{ color: "green", fontWeight: "bold" }}>Repo</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -231,10 +166,10 @@ function MyTeacherModal(props) {
     console.log("email is" + email);
     console.log("pass is" + password);
     if (email.length === 0) {
-      // toast.warning("please enter email");
+      toast.warning("please enter email");
       console.log("toast one called");
     } else if (password.length === 0) {
-      // alert("please enter password");
+      alert("please enter password");
       console.log("toast one else called");
     } else {
       const body = {
@@ -301,10 +236,10 @@ function MyTeacherModal(props) {
             />
           </MDBCol>
 
-          <MDBCol col="4" md="6">
+          <MDBCol style={{ borderColor: "blue" }} col="4" md="6">
             <div className="divider d-flex align-items-center my-4">
               <h1 className="text-center fw-bold mx-3 mb-0">
-                {action === true ? "Teacher SignUp" : "Teacher LogIn"}
+                {action === true ? "Teacher Sign-Up" : "Teacher Log-In"}
               </h1>
             </div>
 
@@ -378,10 +313,14 @@ function MyTeacherModal(props) {
                 </div>
                 <MDBRow>
                   <button
-                  className="button"
+                    className="button"
                     onClick={signInTeacher}
                     // className="mb-0 px-5"
-                    style={{ width: "8rem", height: "3rem", marginLeft: "1rem" }}
+                    style={{
+                      width: "8rem",
+                      height: "3rem",
+                      marginLeft: "1rem",
+                    }}
                     size="lg"
                   >
                     Sign Up
@@ -502,6 +441,12 @@ function MyStudentModal(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleStudentPasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   const navigate = useNavigate();
 
   const signinUser = async () => {
@@ -592,28 +537,9 @@ function MyStudentModal(props) {
           <MDBCol md="6">
             <MDBCard className="my-5">
               <MDBCardBody className="p-5">
-                {/* <MDBRow>
-                  <MDBCol col="6">
-                    <MDBInput
-                      wrapperClass="mb-4"
-                      label="First name"
-                      id="form1"
-                      type="text"
-                    />
-                  </MDBCol>
-
-                  <MDBCol col="6">
-                    <MDBInput
-                      wrapperClass="mb-4"
-                      label="Last name"
-                      id="form1"
-                      type="text"
-                    />
-                  </MDBCol>
-                </MDBRow> */}
                 <div className="divider d-flex align-items-center my-4">
                   <h1 className="text-center fw-bold mx-3 mb-9">
-                    Student LogIN
+                    Student LogIn
                   </h1>
                 </div>
 
@@ -625,15 +551,18 @@ function MyStudentModal(props) {
                   label="Email"
                   id="form1"
                   type="email"
+                  placeholder="student2004@gmail.com"
                 />
                 <MDBInput
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
                   wrapperClass="mb-4"
                   label="Password"
                   id="form1"
-                  type="password"
+                  type={passwordVisible ? "text" : "password"}
+                  placeholder="********"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
 
                 <div className="d-flex justify-content-center mb-4">
@@ -642,17 +571,28 @@ function MyStudentModal(props) {
                     value=""
                     id="flexCheckDefault"
                     label="Show Password"
+                    onClick={handleStudentPasswordVisibility}
                   />
                 </div>
 
-                <MDBBtn
-                  onClick={signinUser}
-                  style={{ backgroundColor: "rgb(15, 203, 153)" }}
-                  className="w-100 mb-4"
+                {/* <MDBBtn
+                  
+                  style={{  }}
                   size="md"
                 >
                   Log In
-                </MDBBtn>
+                </MDBBtn> */}
+                <button
+                  className="button w-100 mb-4"
+                  onClick={signinUser}
+                  style={{
+                    height: "2.5rem",
+                    backgroundColor: "rgb(15, 203, 153)",
+                  }}
+                  size="lg"
+                >
+                  Log In
+                </button>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

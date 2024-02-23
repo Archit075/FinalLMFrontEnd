@@ -9,7 +9,7 @@ export default function UResourceList() {
     <Container>
       <AHeader />
       <Background>
-        <img src="/images/LM3.png"  style={{opacity: "0.5"}}/>
+        <img src="/images/LM3.png"/>
       </Background>
       <ResourceList/>
     </Container>

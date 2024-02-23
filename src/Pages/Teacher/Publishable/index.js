@@ -1,23 +1,20 @@
+
 import React from "react";
 import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
-import ClassCard from "../ClassesCard/ClassesCard";
-import LM3 from "./LM3.png";
+import Publishable from "./Publishable";
 
-
-
-export default function THome() {
+export default function UPublishList() {
   return (
     <Container>
       <AHeader />
       <Background>
-        <img src={LM3} style={{opacity: "0.9"}}/>
+        <img src="/images/LM3.png"/>
       </Background>
-      <ClassCard/>
+      <Publishable/>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   position: relative;
@@ -25,7 +22,7 @@ const Container = styled.div`
 
 const Background = styled.div`
   position: fixed;
-  top: 50px;
+  top: 0;
   left: 0;
   bottom: 0;
   right: 0;

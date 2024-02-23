@@ -5,7 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import UserHome from './Pages/User/UHome';
 import USignin from './Pages/Home/USignIn';
 import SProfile from './Pages/User/Profile';
-import TSignin from './Pages/Home/TSignin';
 import THome from './Pages/Teacher/THome';
 import ClassCard from './Pages/Teacher/ClassesCard/ClassesCard';
 import UResourceList from './Pages/Teacher/ResourceList';
@@ -13,7 +12,7 @@ import PDF from './Pages/Teacher/ViewPdf';
 import AddResource from './Pages/Teacher/AddResource';
 import PDFUser from './Pages/User/PDFView';
 import Home from './Pages/Home/Home/Home';
-import Home1 from './Pages/Home/Home/Home1';
+import UPublishList from './Pages/Teacher/Publishable';
 
 function App() {
   return (
@@ -32,6 +31,7 @@ function App() {
 
           <Route path='/Cards' element ={<ClassCard/>}/>
           <Route path='/Resource-List' element={<UResourceList/>}/>          
+          <Route path='/Publish-List' element={<UPublishList/>}/>          
           <Route path="/pdfPage" element={<PDF />} />
           <Route path="/pdfUser" element={<PDFUser/>}/>
           <Route path="TAddResource" element={<AddResource/>}/>
