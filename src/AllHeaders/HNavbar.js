@@ -94,12 +94,26 @@ export default function Header() {
 }
 
 function MyTeacherModal(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [name, setName] = useState("");
-  const [standard, SetStandard] = useState();
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState();
+  // const [name, setName] = useState("");
+  // const [standard, SetStandard] = useState();
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    number: 0,
+    standard: 1,
+  });
+
+  const navigate = useNavigate();
   const [action, setAction] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   // const [showPassword, setShowPassword] = useState('');
@@ -111,47 +125,120 @@ function MyTeacherModal(props) {
   const handleToggle = () => {
     setAction(!action);
   };
+  //ugugvuvbil
+
+  // function MyForm() {
+  // const [formData, setFormData] = useState({
+  //   username: '',
+  //   email: '',
+  //   password: '',
+  //   Number: 0,
+  //   standard: 0
+  // });
+
+  //   const handleSubmit = (e) => {
+  //     e.preventDefault();
+
+  //     const data = new FormData();
+  //     data.append('username', formData.username);
+  //     data.append('email', formData.email);
+  //     data.append('password', formData.password);
+  //     data.append('Number', formData.number);
+  //     data.append('standard', formData.standard);
+
+  //     // Send FormData object to backend server using fetch or axios
+  //     fetch('/api/submit', {
+  //       method: 'POST',
+  //       body: data
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Error:', error));
+  //   };
+
+  //   const handleChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setFormData({ ...formData, [name]: value });
+  //   };
 
   const signInTeacher = () => {
     // setAction(!action);
-    if (name.length === 0) {
+    // if (name.length === 0) {
+    //   // toast.warning('please enter resource name')
+    //   console.log("please enetr Username");
+    // } else if (standard.length === 0) {
+    //   // toast.warning('Please enter resource category')
+    //   console.log("Please enter standard");
+    // } else if (email.length === 0) {
+    //   // toast.warning('Please enter standard')
+    //   console.log("Please enter email");
+    // } else if (password.length === 0) {
+    //   // toast.warning('Please upload pdf file')
+    //   console.log("Please enter the password");
+    // } else if (phoneNumber.length === 0) {
+    //   // toast.warning('Please upload pdf file')
+    //   console.log("Please enter the Contact details.");
+    // } else {
+
+    if (formData.username.length === 0) {
       // toast.warning('please enter resource name')
       console.log("please enetr Username");
-    } else if (standard.length === 0) {
+    } else if (formData.standard.length === 0) {
       // toast.warning('Please enter resource category')
       console.log("Please enter standard");
-    } else if (email.length === 0) {
+    } else if (formData.email.length === 0) {
       // toast.warning('Please enter standard')
       console.log("Please enter email");
-    } else if (password.length === 0) {
+    } else if (formData.password.length === 0) {
       // toast.warning('Please upload pdf file')
       console.log("Please enter the password");
-    } else if (phoneNumber.length === 0) {
+    } else if (formData.number.length === 0) {
       // toast.warning('Please upload pdf file')
       console.log("Please enter the Contact details.");
     } else {
-      const data = new FormData();
-      data.append("name", name);
-      data.append("standard", standard);
-      data.append("phoneNumber", phoneNumber);
-      data.append("email", email);
-      data.append("password", password);
 
-      console.log("username is " + name);
-      console.log("phoneNumber is " + phoneNumber);
-      const url = `${URLTeacher}/api/Home/register`;
+      const data = new FormData();
+
+      data.append("username", formData.username);
+      data.append("email", formData.email);
+      data.append("password", formData.password);
+      data.append("number", formData.number);
+      data.append("standard", formData.standard);
+
+      // const data = new FormData();
+
+      // data.append("name", name);
+      // data.append("standard", standard);
+      // data.append("phoneNumber", phoneNumber);
+      // data.append("email", email);
+      // data.append("password", password);
+
+      console.log("here the data is" + JSON.stringify(data));
+      //--------------
+      // console.log(name+"  "+ standard+" "+ phoneNumber+"   ");
+      // console.log()
+      //------------
+      console.log("username is " + formData.username);
+      console.log("phoneNumber is " + formData.number);
+
+      const url = `${URLTeacher}/api/Home/register`; // url----------
+
       console.log("url is : " + url);
       console.log("data is : " + data);
+
       axios.post(url, data).then((response) => {
         console.log("hello");
+
         const result = response.data;
+
         console.log(result);
         console.log("Status code is : " + result);
+
         if (result !== null) {
           // toast.success('resource successfully added')
           console.log("SignUp Successfull !!");
 
-          // navigate('/Resource-List', { state: { classtd: standard } })
+          navigate('/Resource-List', { state: { classtd: formData.standard } })
           setAction(!action);
         } else {
           // toast.error("something went wrong!!!")
@@ -160,30 +247,28 @@ function MyTeacherModal(props) {
       });
     }
   };
-  const navigate = useNavigate();
 
   const loginTeacher = () => {
-    console.log("email is" + email);
-    console.log("pass is" + password);
-    if (email.length === 0) {
+    console.log("email is" + formData.email);
+    console.log("pass is" + formData.password);
+    if (formData.email.length === 0) {
       toast.warning("please enter email");
       console.log("toast one called");
-    } else if (password.length === 0) {
+    } else if (formData.password.length === 0) {
       alert("please enter password");
       console.log("toast one else called");
     } else {
-      const body = {
-        email,
-        password,
-      };
+      // const body = {
+      //   formData.email,
+      //   formData.password,
+      // };
 
       // url to make signin api call
-      const urlTeacher = `${URLTeacher}/api/Home/token
-      `;
+      const urlTeacher = `${URLTeacher}/api/Home/token`;
 
       // make api call using axios
       axios
-        .post(urlTeacher, body)
+        .post(urlTeacher, formData.email, formData.password)
         .then((response) => {
           // get the server result
           const result = response.data;
@@ -246,9 +331,8 @@ function MyTeacherModal(props) {
             {action === true ? (
               <>
                 <MDBInput
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
+                  onChange={handleChange}
+                  // value={formData.username}
                   wrapperClass="mb-4"
                   placeholder="Sam2004"
                   label="Username"
@@ -258,9 +342,8 @@ function MyTeacherModal(props) {
                 />
 
                 <MDBInput
-                  onChange={(e) => {
-                    SetStandard(e.target.value);
-                  }}
+                  onChange={handleChange}
+                  // value={formData.standard}
                   wrapperClass="mb-4"
                   label="Standard"
                   placeholder="1 to 12"
@@ -269,9 +352,8 @@ function MyTeacherModal(props) {
                   size="sm"
                 />
                 <MDBInput
-                  onChange={(e) => {
-                    setPhoneNumber(e.target.value);
-                  }}
+                  onChange={handleChange}
+                  // value={formData.number}
                   wrapperClass="mb-4"
                   label="Contact"
                   id="formControlLg"
@@ -279,9 +361,8 @@ function MyTeacherModal(props) {
                   size="sm"
                 />
                 <MDBInput
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  onChange={handleChange}
+                  // value={formData.email}
                   wrapperClass="mb-4"
                   placeholder="sam2004@gmail.com"
                   label="Email address"
@@ -296,10 +377,8 @@ function MyTeacherModal(props) {
                   placeholder="*******"
                   type={passwordVisible ? "text" : "password"}
                   size="sm"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
+                  // value={formData.password}
+                  onChange={handleChange}
                 />
                 <div className="d-flex justify-content-between mb-4">
                   <MDBCheckbox
@@ -344,9 +423,8 @@ function MyTeacherModal(props) {
             ) : (
               <>
                 <MDBInput
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  onChange={handleChange}
+                  // value={formData.email}
                   wrapperClass="mb-4"
                   label="Email address"
                   placeholder="sam2004@gmail.com"
@@ -361,10 +439,8 @@ function MyTeacherModal(props) {
                   id="formControlLg"
                   type={passwordVisible ? "text" : "password"}
                   size="lg"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
+                  value={formData.password}
+                  // onChange={handleChange}
                 />
 
                 <div className="d-flex justify-content-between mb-4">
@@ -637,3 +713,33 @@ function MyStudentModal(props) {
     </Modal>
   );
 }
+
+// import React, { useState } from 'react';
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input
+//         type="text"
+//         name="username"
+//         placeholder="Username"
+//         value={formData.username}
+//         onChange={handleChange}
+//       />
+//       <input
+//         type="email"
+//         name="email"
+//         placeholder="Email"
+//         value={formData.email}
+//         onChange={handleChange}
+//       />
+//       <input
+//         type="password"
+//         name="password"
+//         placeholder="Password"
+//         value={formData.password}
+//         onChange={handleChange}
+//       />
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// }

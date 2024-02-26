@@ -15,21 +15,32 @@ export default function AHeader() {
   console.log("standard is : "+ standard);
   // const { state } = useLocation();
 
-  const handleButtonClick = (value) => {
-    // Update the state with the selected class
-    console.log("State value from card : " + value);
-    navigate("/Resource-List", { state: { classtd: value } }); // Navigate to the next page with the state
+  // const handleButtonClick = (value) => {
+  //   // Update the state with the selected class
+  //   console.log("State value from card : " + value);
+  //   navigate("/Resource-List", { state: { classtd: value } }); // Navigate to the next page with the state
+  // };
+  const handleBinClick = (value) => {
+    console.log("state value from the card: " + value)
+    navigate("/TResourceDel-List", {state: {classtd : value}})
+  }
+
+  const handleResourceListClick = () => {
+    // Navigate to Resource-List when the link is clicked
+    navigate("/Resource-List", { state: { classtd: standard } });
   };
+  const handleHomeClick = () =>{
+    navigate('/TeacherHome');
+  }
 
-  // const handleResourceListClick = () => {
-  //   // Navigate to Resource-List when the link is clicked
-  //   navigate("/Resource-List", { state: { classtd: standard } });
-  // };
-
-  // const handlePublishListClick = () => {
-  //   // Navigate to Publish-List when the link is clicked
-  //   navigate("/Publish-List", { state: { classtd: standard } });
-  // };
+  const handlePublishListClick = () => {
+    // Navigate to Publish-List when the link is clicked
+    navigate("/Publish-List", { state: { classtd: standard } });
+  };
+  const handleAddResource = () => {
+    navigate('TAddResource');
+    // {state: {classtd: standard}}
+  }
 
   const logoutAdmin = () => {
     // remove the logged users details from session storage
@@ -79,7 +90,8 @@ export default function AHeader() {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item" style={{ paddingTop: "7px" }}>
+              <NavLink>
+              <li className="nav-item" >
                 <span>
                   <Link
                     to="/TeacherHome"
@@ -87,21 +99,44 @@ export default function AHeader() {
                       color: "black",
                       textDecoration: "none",
                       marginRight: "1rem",
+                      backgroundColor: "#a4e7f3"
                     }}
                   >
                     Home
                   </Link>
                 </span>
               </li>
-              <li className="nav-item" style={{ paddingTop: "7px" }}>
+
+
+              {/* bin */}
+              <li className="nav-item" >
                 <span>
                   <Link
-                   to={{ pathname: "/Resource-List", state: { classtd: standard } }}
-                   
+                  //  onClick={handleBinClick}
                     style={{
                       color: "black",
                       textDecoration: "none",
                       marginRight: "1rem",
+                      backgroundColor: "#a4e7f3"
+                    }}
+                  >
+                    Bin
+                  </Link>
+                </span>
+              </li>
+              {/* bin */}
+
+
+              <li className="nav-item" >
+                <span>
+                  <Link
+                   to={{ pathname: "/Resource-List", state: { classtd: standard } }}
+                  //  onClick={handleResourceListClick}
+                    style={{
+                      color: "black",
+                      textDecoration: "none",
+                      marginRight: "1rem",
+                      backgroundColor: "#a4e7f3"
                     }}
                   >
                     Resources
@@ -109,14 +144,16 @@ export default function AHeader() {
                 </span>
               </li>
 
-              <li className="nav-item" style={{ paddingTop: "7px" }}>
+              <li className="nav-item" >
                 <span>
                   <Link
                    to={{ pathname: "/Publish-List", state: { classtd: standard } }}
-                   style={{
+                  // onClick={handlePublishListClick} 
+                  style={{
                       color: "black",
                       textDecoration: "none",
                       marginRight: "1rem",
+                      backgroundColor: "#a4e7f3"
                     }}
                   >
                     Unpublished
@@ -124,7 +161,7 @@ export default function AHeader() {
                 </span>
               </li>
 
-              <li>
+              {/* <li>
                 <NavDropdown title="Classes" >
                   {[...Array(12)].map((_, index) => (
                     <NavDropdown.Item
@@ -136,21 +173,23 @@ export default function AHeader() {
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>
-              </li>
+              </li> */}
 
-              <NavLink>
+              
                 <li className="nav-item">
                   <span>
-                    <Link
-                      to="/TAddResource"
+                    <Button
+                      // onClick={handleBinClick}
+                      
                       style={{
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
+                        backgroundColor: "#a4e7f3"
                       }}
                     >
                       Add Resource
-                    </Link>
+                    </Button>
                   </span>
                 </li>
                 <li className="nav-item">
@@ -162,8 +201,6 @@ export default function AHeader() {
                         textDecoration: "none",
                         border: "1px solid blue",
                         borderRadius: "4px",
-                        marginLeft: "1rem",
-                        padding: "0.5rem",
                       }}
                     >
                       Logout

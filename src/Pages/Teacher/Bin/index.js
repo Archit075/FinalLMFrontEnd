@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
-import Publishable from "./Publishable";
+import TResourceBin from "./TResourceBin";
 
-export default function UPublishList() {
+export default function TResourceDel() {
   return (
     <Container>
       <AHeader />
       <Background>
         <img src="/images/LM3.png"/>
       </Background>
-      <Publishable/>
+      <TResourceBin/>
     </Container>
   );
 }

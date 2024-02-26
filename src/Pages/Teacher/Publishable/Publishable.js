@@ -34,7 +34,7 @@ export default function Publishable() {
 
     console.log(standard);
     // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
-    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`;
+    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`;  https://localhost:7030/api/Pdf/productPdf/delete/1
     console.log("url is : " + url);
     console.dir(Resources)
 
@@ -140,7 +140,7 @@ export default function Publishable() {
                 variant="primary"
                 className="btn mr-5 btn-sm"
                 id="rbtn"
-                onClick={() => PublishBook(Resource.pdfName, Resource.standard)}
+                onClick={() => PublishBook(Resource.pdfName, standard)}
               >
                 Publish
               </Button>
