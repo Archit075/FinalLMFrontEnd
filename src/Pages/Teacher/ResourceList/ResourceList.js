@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 export default function ResourceList() {
   
   const { standard } = sessionStorage;
+ 
   const { state } = useLocation();
   const classtd = state ? state.classtd : null;
 
@@ -59,13 +60,13 @@ export default function ResourceList() {
       });
   };
 
-  const returnBook = (pdf_Name, date) => {
-    const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}?/date=${date}`;
+  const returnBook = (pdf_Name, id) => {
+    const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
     //https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
     // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf5?/date=2024-02-23T17:09:28.0920332
     console.log("pdf name is : " + pdf_Name);
-    console.log("pdf date is  : " + date);
+    console.log("pdf date is  : " + id);
     // console.log(urlResource, UrlResources);
     console.log("url is "+urlResource);
 
@@ -104,7 +105,7 @@ export default function ResourceList() {
   }, []);
 
   return (
-    <div style={{ paddingTop: "2px" }} className="container" id="YBC">
+    <div style={{ paddingTop: "50px" }} className="container" id="YBC">
       <Container>
         <Row>
           {Resources.map((Resource) => (
@@ -180,7 +181,7 @@ export default function ResourceList() {
                     className="btn mr-5 btn-sm"
                     id="rbtn"
                     onClick={() =>
-                      returnBook(Resource.pdfName, Resource.created)
+                      returnBook(Resource.pdfName, Resource.id)
                     }
                   >
                     Delete

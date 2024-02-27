@@ -20,9 +20,9 @@ export default function AHeader() {
   //   console.log("State value from card : " + value);
   //   navigate("/Resource-List", { state: { classtd: value } }); // Navigate to the next page with the state
   // };
-  const handleBinClick = (value) => {
-    console.log("state value from the card: " + value);
-    navigate("/TResourceDel-List", { state: { classtd: value } });
+  const handleBinClick = () => {
+ 
+    navigate("/TResourceDel-List", { state: { classtd: standard } });
   };
 
   const handleResourceListClick = () => {
@@ -30,7 +30,7 @@ export default function AHeader() {
     navigate("/Resource-List", { state: { classtd: standard } });
   };
   const handleHomeClick = () => {
-    navigate("/TeacherHome");
+    navigate("/TeacherHome", {state: {classtd: standard}});
   };
 
   const handlePublishListClick = () => {
@@ -89,13 +89,21 @@ export default function AHeader() {
             className="d-flex justify-content-end"
             id="navbarSupportedContent"
           >
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul
+              className="navbar-nav me-auto mb-lg-0"
+              style={{ paddingTop: "0px", marginTop: "0px" }}
+            >
               <NavLink>
                 <li className="nav-item">
                   <span>
-                    <Link
-                      to="/TeacherHome"
+                    <button
+                      // to="/TeacherHome"
+                      className="btn btn-outline-secondary"
+                      onClick={handleHomeClick}
                       style={{
+                        border: "0px solid grey",
+                        borderRadius: "4px",
+                        padding: "6px",
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
@@ -103,17 +111,20 @@ export default function AHeader() {
                       }}
                     >
                       Home
-                    </Link>
+                    </button>
                   </span>
                 </li>
 
                 {/* bin */}
-                <li className="nav-item">
+                <li className="nav-item" >
                   <span>
-                    <Link
-                      to="/TResourceDel-List"
-                      //  onClick={handleBinClick}
+                    <button
+                      // to="/TResourceDel-List"
+                       onClick={handleBinClick}
                       style={{
+                        border: "0px solid black",
+                        borderRadius: "4px",
+                        padding: "6px",
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
@@ -121,20 +132,24 @@ export default function AHeader() {
                       }}
                     >
                       Bin
-                    </Link>
+                    </button>
                   </span>
                 </li>
                 {/* bin */}
 
                 <li className="nav-item">
                   <span>
-                    <Link
-                      to={{
-                        pathname: "/Resource-List",
-                        state: { classtd: standard },
-                      }}
-                      //  onClick={handleResourceListClick}
+                    <button
+                      // to={{
+                      //   pathname: "/Resource-List",
+                      //   state: { classtd: standard },
+                      // }}
+                      className="btn btn-outline-secondary"
+                      onClick={handleResourceListClick}
                       style={{
+                        border: "0px solid black",
+                        borderRadius: "4px",
+                        padding: "6px",
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
@@ -142,19 +157,24 @@ export default function AHeader() {
                       }}
                     >
                       Resources
-                    </Link>
+                    </button>
                   </span>
                 </li>
 
                 <li className="nav-item">
                   <span>
-                    <Link
-                      to={{
-                        pathname: "/Publish-List",
-                        state: { classtd: standard },
-                      }}
-                      // onClick={handlePublishListClick}
+                    <button
+                      // to={{
+                      //   pathname: "/Publish-List",
+                      //   state: { classtd: standard },
+                      // }}
+                      // onMouseOver={}
+                      className="btn btn-outline-secondary"
+                      onClick={handlePublishListClick}
                       style={{
+                        border: "0px solid black",
+                        borderRadius: "4px",
+                        padding: "6px",
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
@@ -162,7 +182,7 @@ export default function AHeader() {
                       }}
                     >
                       Unpublished
-                    </Link>
+                    </button>
                   </span>
                 </li>
 
@@ -182,32 +202,37 @@ export default function AHeader() {
 
                 <li className="nav-item">
                   <span>
-                    <Button
+                    <button
+                      type="span"
+                      className="btn btn-outline-secondary "
                       onClick={handleAddResource}
                       style={{
+                        border: "0px",
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
-                        backgroundColor: "#a4e7f3",
+                        // backgroundColor: "#a4e7f3",
                       }}
                     >
                       Add Resource
-                    </Button>
+                    </button>
                   </span>
                 </li>
                 <li className="nav-item">
-                  <Button
+                  <button
                     onClick={logoutAdmin}
+                    type="span"
+                    className="btn btn-outline-secondary"
                     style={{
-                      backgroundColor: "rgb(15, 203, 153)",
-                      color: "white",
+                      // backgroundColor: "rgb(15, 203, 153)",
+                      color: "black",
                       textDecoration: "none",
-                      border: "1px solid blue",
+                      border: "1px solid grey",
                       borderRadius: "4px",
                     }}
                   >
                     Logout
-                  </Button>
+                  </button>
                 </li>
               </NavLink>
             </ul>

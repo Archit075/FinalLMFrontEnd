@@ -32,7 +32,7 @@ function App() {
 
           <Route path='/Cards' element ={<ClassCard/>}/>
           <Route path='/Resource-List' element={<UResourceList/>}/>
-          {/* <Route path='/TResourceDel-List' element={<TResourceDel />} />           */}
+          <Route path='/TResourceDel-List' element={<TResourceDel />} />          
           <Route path='/Publish-List' element={<UPublishList/>}/>          
           <Route path="/pdfPage" element={<PDF />} />
           <Route path="/pdfUser" element={<PDFUser/>}/>

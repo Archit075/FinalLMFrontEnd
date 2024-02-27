@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TAddResource from "./AddResource";
 import AHeader from "../../../AllHeaders/AHeader";
 import LM3 from "./LM3.png";
+import Footer from "../../../Footer/Footer";
 
 export default function AddResource() {
   return (
@@ -10,9 +11,12 @@ export default function AddResource() {
       <br/>
       <AHeader />
       <Background>
-      <img src={LM3} style={{opacity: "0.5"}} />
+      <img src={LM3} 
+      // style={{opacity: "0.5"}} 
+      />
       </Background>
       <TAddResource />
+      <Footer />
     </Container>
   );
 }

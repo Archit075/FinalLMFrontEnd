@@ -9,6 +9,7 @@ import { UrlResources } from "../../../config";
 import "./Publishable.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Res1 from './YourBooks.jpg';
 
 export default function Publishable() {
  
@@ -98,17 +99,16 @@ export default function Publishable() {
   }, []);
 
   return (
-    <div className="container" id="YBC">
-      
-      <Container >
+    <div className="container" id="YBC" >
+      <Container style={{paddingTop: "50px"}}>
         <Row >
           {Resources.map((Resource) => (
-            <Col md={4} sm={12} lg={3}>
+            <Col md={4} sm={12} lg={3} style={{padding: "20px"}}>
           <Card >
             <Card.Img
               style={{ height: "8rem", width: "100%" }}
               variant="top"
-            //   src={Res1}
+              src={Res1}
             />
             <Card.Body style={{ paddingTop: "5px", paddingBottom: "5px", backgroundColor: "#DDF5FF" }}>
               <Card.Title

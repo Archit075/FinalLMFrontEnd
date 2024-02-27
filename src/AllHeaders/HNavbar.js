@@ -56,25 +56,25 @@ export default function Header() {
               <Nav.Link href="#contact">ContactUs</Nav.Link>
             </Nav>
             <Nav>
-              <Button
-                type="button"
-                className="btn"
-                style={{ backgroundColor: "rgb(15, 203, 153)" }}
+              <button
+                type="span"
+                className="btn btn-outline-secondary fw-bold"
+                // style={{ backgroundColor: "rgb(15, 203, 153)" }}
                 onClick={() => setModalTeacher(true)}
               >
                 Teacher
-              </Button>
-              <Button
-                type="button"
-                className="btn"
+              </button>
+              <button
+                type="span"
+                className="btn btn-outline-secondary fw-bold"
                 style={{
-                  backgroundColor: "rgb(15, 203, 153)",
+                  // backgroundColor: "rgb(15, 203, 153)",
                   marginLeft: "1rem",
                 }}
                 onClick={() => setModalStudent(true)}
               >
                 Student
-              </Button>
+              </button>
             </Nav>
           </Navbar.Collapse>
         </Container>

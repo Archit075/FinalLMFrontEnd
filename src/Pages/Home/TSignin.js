@@ -10,8 +10,8 @@ const TSignin = () => {
         {/* <Header/> */}
         <HNavbar />
         <Background>
-          <img src="/images/LM1.jpg"/>
-        </Background>
+          <img src={imagURL} />        
+          </Background>
         <TeacherSignin />
       </Container> 
     );
