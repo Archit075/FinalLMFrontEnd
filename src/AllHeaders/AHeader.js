@@ -8,11 +8,11 @@ import { Button, NavDropdown, Navbar } from "react-bootstrap";
 export default function AHeader() {
   const navigate = useNavigate();
 
-  const [standard, setStandard] = useState(sessionStorage.standard || null);  // const classtd = standard;
+  const [standard, setStandard] = useState(sessionStorage.standard || null); // const classtd = standard;
 
   console.log("sessionStorage.standard:", sessionStorage.standard);
 
-  console.log("standard is : "+ standard);
+  console.log("standard is : " + standard);
   // const { state } = useLocation();
 
   // const handleButtonClick = (value) => {
@@ -21,26 +21,26 @@ export default function AHeader() {
   //   navigate("/Resource-List", { state: { classtd: value } }); // Navigate to the next page with the state
   // };
   const handleBinClick = (value) => {
-    console.log("state value from the card: " + value)
-    navigate("/TResourceDel-List", {state: {classtd : value}})
-  }
+    console.log("state value from the card: " + value);
+    navigate("/TResourceDel-List", { state: { classtd: value } });
+  };
 
   const handleResourceListClick = () => {
     // Navigate to Resource-List when the link is clicked
     navigate("/Resource-List", { state: { classtd: standard } });
   };
-  const handleHomeClick = () =>{
-    navigate('/TeacherHome');
-  }
+  const handleHomeClick = () => {
+    navigate("/TeacherHome");
+  };
 
   const handlePublishListClick = () => {
     // Navigate to Publish-List when the link is clicked
     navigate("/Publish-List", { state: { classtd: standard } });
   };
   const handleAddResource = () => {
-    navigate('TAddResource');
+    navigate("/TAddResource");
     // {state: {classtd: standard}}
-  }
+  };
 
   const logoutAdmin = () => {
     // remove the logged users details from session storage
@@ -91,77 +91,82 @@ export default function AHeader() {
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <NavLink>
-              <li className="nav-item" >
-                <span>
-                  <Link
-                    to="/TeacherHome"
-                    style={{
-                      color: "black",
-                      textDecoration: "none",
-                      marginRight: "1rem",
-                      backgroundColor: "#a4e7f3"
-                    }}
-                  >
-                    Home
-                  </Link>
-                </span>
-              </li>
+                <li className="nav-item">
+                  <span>
+                    <Link
+                      to="/TeacherHome"
+                      style={{
+                        color: "black",
+                        textDecoration: "none",
+                        marginRight: "1rem",
+                        backgroundColor: "#a4e7f3",
+                      }}
+                    >
+                      Home
+                    </Link>
+                  </span>
+                </li>
 
+                {/* bin */}
+                <li className="nav-item">
+                  <span>
+                    <Link
+                      to="/TResourceDel-List"
+                      //  onClick={handleBinClick}
+                      style={{
+                        color: "black",
+                        textDecoration: "none",
+                        marginRight: "1rem",
+                        backgroundColor: "#a4e7f3",
+                      }}
+                    >
+                      Bin
+                    </Link>
+                  </span>
+                </li>
+                {/* bin */}
 
-              {/* bin */}
-              <li className="nav-item" >
-                <span>
-                  <Link
-                  //  onClick={handleBinClick}
-                    style={{
-                      color: "black",
-                      textDecoration: "none",
-                      marginRight: "1rem",
-                      backgroundColor: "#a4e7f3"
-                    }}
-                  >
-                    Bin
-                  </Link>
-                </span>
-              </li>
-              {/* bin */}
+                <li className="nav-item">
+                  <span>
+                    <Link
+                      to={{
+                        pathname: "/Resource-List",
+                        state: { classtd: standard },
+                      }}
+                      //  onClick={handleResourceListClick}
+                      style={{
+                        color: "black",
+                        textDecoration: "none",
+                        marginRight: "1rem",
+                        backgroundColor: "#a4e7f3",
+                      }}
+                    >
+                      Resources
+                    </Link>
+                  </span>
+                </li>
 
+                <li className="nav-item">
+                  <span>
+                    <Link
+                      to={{
+                        pathname: "/Publish-List",
+                        state: { classtd: standard },
+                      }}
+                      // onClick={handlePublishListClick}
+                      style={{
+                        color: "black",
+                        textDecoration: "none",
+                        marginRight: "1rem",
+                        backgroundColor: "#a4e7f3",
+                      }}
+                    >
+                      Unpublished
+                    </Link>
+                  </span>
+                </li>
 
-              <li className="nav-item" >
-                <span>
-                  <Link
-                   to={{ pathname: "/Resource-List", state: { classtd: standard } }}
-                  //  onClick={handleResourceListClick}
-                    style={{
-                      color: "black",
-                      textDecoration: "none",
-                      marginRight: "1rem",
-                      backgroundColor: "#a4e7f3"
-                    }}
-                  >
-                    Resources
-                  </Link>
-                </span>
-              </li>
-
-              <li className="nav-item" >
-                <span>
-                  <Link
-                   to={{ pathname: "/Publish-List", state: { classtd: standard } }}
-                  // onClick={handlePublishListClick} 
-                  style={{
-                      color: "black",
-                      textDecoration: "none",
-                      marginRight: "1rem",
-                      backgroundColor: "#a4e7f3"
-                    }}
-                  >
-                    Unpublished
-                  </Link>
-                </span>
-              </li>
-
-              {/* <li>
+                {/* <li>
                 <NavDropdown title="Classes" >
                   {[...Array(12)].map((_, index) => (
                     <NavDropdown.Item
@@ -175,17 +180,15 @@ export default function AHeader() {
                 </NavDropdown>
               </li> */}
 
-              
                 <li className="nav-item">
                   <span>
                     <Button
-                      // onClick={handleBinClick}
-                      
+                      onClick={handleAddResource}
                       style={{
                         color: "black",
                         textDecoration: "none",
                         marginRight: "1rem",
-                        backgroundColor: "#a4e7f3"
+                        backgroundColor: "#a4e7f3",
                       }}
                     >
                       Add Resource
@@ -193,18 +196,18 @@ export default function AHeader() {
                   </span>
                 </li>
                 <li className="nav-item">
-                    <Button
-                      onClick={logoutAdmin}
-                      style={{
-                        backgroundColor: "rgb(15, 203, 153)",
-                        color: "white",
-                        textDecoration: "none",
-                        border: "1px solid blue",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      Logout
-                    </Button>
+                  <Button
+                    onClick={logoutAdmin}
+                    style={{
+                      backgroundColor: "rgb(15, 203, 153)",
+                      color: "white",
+                      textDecoration: "none",
+                      border: "1px solid blue",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    Logout
+                  </Button>
                 </li>
               </NavLink>
             </ul>

@@ -94,26 +94,26 @@ export default function Header() {
 }
 
 function MyTeacherModal(props) {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState();
-  // const [name, setName] = useState("");
-  // const [standard, SetStandard] = useState();
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    number: 0,
-    standard: 1,
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [name, setName] = useState("");
+  const [standard, SetStandard] = useState();
+  // const [formData, setFormData] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  //   number: 0,
+  //   standard: 1,
+  // });
 
   const navigate = useNavigate();
   const [action, setAction] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   // const [showPassword, setShowPassword] = useState('');
@@ -161,67 +161,72 @@ function MyTeacherModal(props) {
   //     setFormData({ ...formData, [name]: value });
   //   };
 
+  //jugctxjytrc7yuh
+
   const signInTeacher = () => {
-    // setAction(!action);
-    // if (name.length === 0) {
+    setAction(!action);
+    if (name.length === 0) {
+      toast.warning('please enter resource name')
+      console.log("please enetr Username");
+    } else if (standard.length === 0) {
+      toast.warning('Please enter resource category')
+      console.log("Please enter standard");
+    } else if (email.length === 0) {
+      toast.warning('Please enter standard')
+      console.log("Please enter email");
+    } else if (password.length === 0) {
+      toast.warning('Please upload pdf file')
+      console.log("Please enter the password");
+    } else if (phoneNumber.length === 0) {
+      toast.warning('Please upload pdf file')
+      console.log("Please enter the Contact details.");
+    } else {
+
+    // if (formData.username.length === 0) {
     //   // toast.warning('please enter resource name')
     //   console.log("please enetr Username");
-    // } else if (standard.length === 0) {
+    // } else if (formData.standard.length === 0) {
     //   // toast.warning('Please enter resource category')
     //   console.log("Please enter standard");
-    // } else if (email.length === 0) {
+    // } else if (formData.email.length === 0) {
     //   // toast.warning('Please enter standard')
     //   console.log("Please enter email");
-    // } else if (password.length === 0) {
+    // } else if (formData.password.length === 0) {
     //   // toast.warning('Please upload pdf file')
     //   console.log("Please enter the password");
-    // } else if (phoneNumber.length === 0) {
+    // } else if (formData.number.length === 0) {
     //   // toast.warning('Please upload pdf file')
     //   console.log("Please enter the Contact details.");
     // } else {
 
-    if (formData.username.length === 0) {
-      // toast.warning('please enter resource name')
-      console.log("please enetr Username");
-    } else if (formData.standard.length === 0) {
-      // toast.warning('Please enter resource category')
-      console.log("Please enter standard");
-    } else if (formData.email.length === 0) {
-      // toast.warning('Please enter standard')
-      console.log("Please enter email");
-    } else if (formData.password.length === 0) {
-      // toast.warning('Please upload pdf file')
-      console.log("Please enter the password");
-    } else if (formData.number.length === 0) {
-      // toast.warning('Please upload pdf file')
-      console.log("Please enter the Contact details.");
-    } else {
-
-      const data = new FormData();
-
-      data.append("username", formData.username);
-      data.append("email", formData.email);
-      data.append("password", formData.password);
-      data.append("number", formData.number);
-      data.append("standard", formData.standard);
-
       // const data = new FormData();
 
-      // data.append("name", name);
-      // data.append("standard", standard);
-      // data.append("phoneNumber", phoneNumber);
-      // data.append("email", email);
-      // data.append("password", password);
+      // data.append("username", formData.username);
+      // data.append("email", formData.email);
+      // data.append("password", formData.password);
+      // data.append("number", formData.number);
+      // data.append("standard", formData.standard);
+
+      // console.log(formData.username+"  "+ formData.standard+" "+ formData.number+"   ");
+
+      const data = new FormData();
+      data.append("name", name);
+      data.append("standard", standard);
+      data.append("phoneNumber", phoneNumber);
+      data.append("email", email);
+      data.append("password", password);
 
       console.log("here the data is" + JSON.stringify(data));
       //--------------
-      // console.log(name+"  "+ standard+" "+ phoneNumber+"   ");
       // console.log()
       //------------
-      console.log("username is " + formData.username);
-      console.log("phoneNumber is " + formData.number);
+      // console.log("username is " + formData.username);
+      console.log("username is " + name);
+      // console.log("phoneNumber is " + formData.number);
+      console.log("phoneNumber is " + phoneNumber);
 
-      const url = `${URLTeacher}/api/Home/register`; // url----------
+
+      const url = `${URLTeacher}/api/Home/register`; // url--------
 
       console.log("url is : " + url);
       console.log("data is : " + data);
@@ -238,37 +243,47 @@ function MyTeacherModal(props) {
           // toast.success('resource successfully added')
           console.log("SignUp Successfull !!");
 
-          navigate('/Resource-List', { state: { classtd: formData.standard } })
-          setAction(!action);
+          // navigate('/Resource-List', { state: { classtd: formData.standard } })
+          // navigate('/Resource-List', { state: { classtd: standard } })
+          navigate('/TeacherHome', { state: { classtd: standard } })
+
+          // setAction(!action);
         } else {
           // toast.error("something went wrong!!!")
           console.log("something went wrong");
         }
+      }).catch((error)=>{
+        console.log(error);
+        console.log("got error");
       });
     }
   };
 
   const loginTeacher = () => {
-    console.log("email is" + formData.email);
-    console.log("pass is" + formData.password);
-    if (formData.email.length === 0) {
+    // console.log("email is" + formData.email);
+    console.log("email is" + email);
+    // console.log("pass is" + formData.password);
+    console.log("pass is" + password);
+    // if (formData.email.length === 0) {
+    if (email.length === 0) {
       toast.warning("please enter email");
       console.log("toast one called");
-    } else if (formData.password.length === 0) {
+    // } else if (formData.password.length === 0) {
+    } else if (password.length === 0) {
       alert("please enter password");
       console.log("toast one else called");
     } else {
-      // const body = {
-      //   formData.email,
-      //   formData.password,
-      // };
+      const body = {
+        email,
+        password,
+      };
 
       // url to make signin api call
       const urlTeacher = `${URLTeacher}/api/Home/token`;
 
       // make api call using axios
       axios
-        .post(urlTeacher, formData.email, formData.password)
+        .post(urlTeacher, body)
         .then((response) => {
           // get the server result
           const result = response.data;
@@ -290,7 +305,7 @@ function MyTeacherModal(props) {
             sessionStorage["phone_number"] = phoneNumber;
 
             // navigate to home component
-            navigate("/TeacherHome");
+            navigate("/TeacherHome", );
           } else {
             // toast.error("Invalid admin name or password");
             console.error("Invalid admin name or password");
@@ -331,8 +346,11 @@ function MyTeacherModal(props) {
             {action === true ? (
               <>
                 <MDBInput
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // value={formData.username}
+                  onChange={(e) =>{
+                    setName(e.target.value)
+                  }}
                   wrapperClass="mb-4"
                   placeholder="Sam2004"
                   label="Username"
@@ -342,8 +360,11 @@ function MyTeacherModal(props) {
                 />
 
                 <MDBInput
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // value={formData.standard}
+                  onChange={(e) =>{
+                    SetStandard(e.target.value)
+                  }}
                   wrapperClass="mb-4"
                   label="Standard"
                   placeholder="1 to 12"
@@ -352,8 +373,11 @@ function MyTeacherModal(props) {
                   size="sm"
                 />
                 <MDBInput
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // value={formData.number}
+                  onChange={(e) =>{
+                    setPhoneNumber(e.target.value)
+                  }}
                   wrapperClass="mb-4"
                   label="Contact"
                   id="formControlLg"
@@ -361,8 +385,11 @@ function MyTeacherModal(props) {
                   size="sm"
                 />
                 <MDBInput
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // value={formData.email}
+                  onChange={(e) =>{
+                    setEmail(e.target.value)
+                  }}
                   wrapperClass="mb-4"
                   placeholder="sam2004@gmail.com"
                   label="Email address"
@@ -371,14 +398,18 @@ function MyTeacherModal(props) {
                   size="sm"
                 />
                 <MDBInput
+                onChange={(e) =>{
+                  setPassword(e.target.value)
+                }}
                   wrapperClass="mb-4"
                   label="Password"
                   id="formControlLg"
                   placeholder="*******"
                   type={passwordVisible ? "text" : "password"}
                   size="sm"
+                  value={password}
                   // value={formData.password}
-                  onChange={handleChange}
+                  // onChange={handleChange}
                 />
                 <div className="d-flex justify-content-between mb-4">
                   <MDBCheckbox
@@ -423,23 +454,30 @@ function MyTeacherModal(props) {
             ) : (
               <>
                 <MDBInput
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // value={formData.email}
+                  onChange={(e) =>{
+                    setEmail(e.target.value)
+                  }}
                   wrapperClass="mb-4"
                   label="Email address"
                   placeholder="sam2004@gmail.com"
                   id="formControlLg"
-                  type="email"
+                  type="text"
                   size="lg"
                 />
                 <MDBInput
+                onChange={(e) =>{
+                  setPassword(e.target.value)
+                }}
                   wrapperClass="mb-4"
                   label="Password"
                   placeholder="********"
                   id="formControlLg"
                   type={passwordVisible ? "text" : "password"}
                   size="lg"
-                  value={formData.password}
+                  value={password}
+                  // value={formData.password}
                   // onChange={handleChange}
                 />
 
