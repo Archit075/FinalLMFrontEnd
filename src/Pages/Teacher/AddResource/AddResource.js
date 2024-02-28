@@ -32,17 +32,17 @@ function TAddResource() {
 
   const addResource = () => {
     if (ResourceName.length === 0) {
-      toast.warning("please enter resource name");
+      toast.error("please enter resource name");
     } else if (ResourceCategory.length === 0) {
-      toast.warning("Please enter resource category");
+      toast.error("Please enter resource category");
     } else if (standard.length === 0) {
-      toast.warning("Please enter standard");
+      toast.error("Please enter standard");
     } else if (Subject.length === 0) {
-      toast.warning("Please enter Subject");
+      toast.error("Please enter Subject");
     } else if (ResourceDescription.length === 0) {
-      toast.warning("Please enter Description");
+      toast.error("Please enter Description");
     } else if (PdfFile.length === 0) {
-      toast.warning("Please upload pdf file");
+      toast.error("Please upload pdf file");
     } else {
       const data = new FormData();
       data.append("ResourceName", ResourceName);

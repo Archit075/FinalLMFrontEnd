@@ -36,27 +36,30 @@ export default function ResourceList() {
     // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
     const url = `${UrlResources}/api/Pdf/Pdf/Standard/${classtd}`;
     console.log("url is : " + url);
-    console.dir(Resources);
+    // console.dir(Resources);
 
     axios
       .post(url)
       .then((response) => {
         const result = response.data;
+        const str1 = result[1].created;
+        const str2 = result[1].dateCreated;
         console.log("result is :" + result[0]);
         console.log(result);
 
         if (result != null) {
           setResources(result);
           toast.info("Welcome to Resources");
-          console.log(result["message"]);
+          console.log(result[1].message);
+          console.dir( "********** "+ str1.slice(0, 10) + "  "+typeof(str2) + " **********");
         } else {
-          toast.error("Resources are empty");
+          // toast.error("Resources are empty");
           console.log("PDf List is empty.");
           console.error(result["message"]);
         }
       })
       .catch((error) => {
-        toast.warning("Resources are empty");
+        // toast.warning("Resources are empty");
       });
   };
 
@@ -86,7 +89,7 @@ export default function ResourceList() {
           );
           // searchIssuedBooksBySpring();
         } else {
-          console.log("Diud not delete");
+          console.log("Did not delete");
           console.log(result["message"]);
           // toast.error(result["message"]);
         }
@@ -105,12 +108,12 @@ export default function ResourceList() {
   }, []);
 
   return (
-    <div style={{ paddingTop: "50px" }} className="container" id="YBC">
+    <div style={{ paddingTop: "50px", paddingBottom: "100px" }} className="container" id="YBC">
       <Container>
         <Row>
-          {Resources.map((Resource) => (
+          {Resources != { } ? Resources.map((Resource) => (
             <Col md={4} sm={12} lg={3}>
-              <Card>
+              <Card style={{marginBottom: "24px"}}>
                 <Card.Img
                   style={{ height: "8rem", width: "100%" }}
                   variant="top"
@@ -158,7 +161,7 @@ export default function ResourceList() {
                       margin: "0",
                     }}
                   >
-                    {Resource.created}
+                    {Resource.created.slice(0, 10)}
                   </Card.Text>
                   <Button
                     style={{ marginTop: "0" }}
@@ -189,7 +192,7 @@ export default function ResourceList() {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          ))  : <div> </div>}
         </Row>
       </Container>
       {/* </div> */}

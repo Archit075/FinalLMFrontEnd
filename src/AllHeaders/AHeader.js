@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import logo1 from "./logoerr1.png";
-import { Button, NavDropdown, Navbar } from "react-bootstrap";
+import { Button, NavDropdown, Navbar, Dropdown } from "react-bootstrap";
+// import DropDown from "cdbreact/dist/components/DropDown";
 
 export default function AHeader() {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ export default function AHeader() {
   //   navigate("/Resource-List", { state: { classtd: value } }); // Navigate to the next page with the state
   // };
   const handleBinClick = () => {
- 
     navigate("/TResourceDel-List", { state: { classtd: standard } });
   };
 
@@ -30,7 +30,7 @@ export default function AHeader() {
     navigate("/Resource-List", { state: { classtd: standard } });
   };
   const handleHomeClick = () => {
-    navigate("/TeacherHome", {state: {classtd: standard}});
+    navigate("/TeacherHome", { state: { classtd: standard } });
   };
 
   const handlePublishListClick = () => {
@@ -91,11 +91,13 @@ export default function AHeader() {
           >
             <ul
               className="navbar-nav me-auto mb-lg-0"
-              style={{ paddingTop: "0px", marginTop: "0px" }}
+              style={{ paddingTop: "0px", marginTop: "0px",  }}
             >
-              <NavLink>
+              <NavLink 
+              // style={{justifyContent: "space-between"}}
+              >
                 <li className="nav-item">
-                  <span>
+                  {/* <span> */}
                     <button
                       // to="/TeacherHome"
                       className="btn btn-outline-secondary"
@@ -106,21 +108,21 @@ export default function AHeader() {
                         padding: "6px",
                         color: "black",
                         textDecoration: "none",
-                        marginRight: "1rem",
+                        marginLeft: "3rem",
                         backgroundColor: "#a4e7f3",
                       }}
                     >
                       Home
                     </button>
-                  </span>
+                  {/* </span> */}
                 </li>
 
                 {/* bin */}
-                <li className="nav-item" >
+                {/* <li className="nav-item">
                   <span>
                     <button
                       // to="/TResourceDel-List"
-                       onClick={handleBinClick}
+                      onClick={handleBinClick}
                       style={{
                         border: "0px solid black",
                         borderRadius: "4px",
@@ -134,10 +136,10 @@ export default function AHeader() {
                       Bin
                     </button>
                   </span>
-                </li>
+                </li> */}
                 {/* bin */}
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <span>
                     <button
                       // to={{
@@ -159,9 +161,9 @@ export default function AHeader() {
                       Resources
                     </button>
                   </span>
-                </li>
+                </li> */}
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <span>
                     <button
                       // to={{
@@ -184,7 +186,7 @@ export default function AHeader() {
                       Unpublished
                     </button>
                   </span>
-                </li>
+                </li> */}
 
                 {/* <li>
                 <NavDropdown title="Classes" >
@@ -200,7 +202,7 @@ export default function AHeader() {
                 </NavDropdown>
               </li> */}
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <span>
                     <button
                       type="span"
@@ -217,8 +219,126 @@ export default function AHeader() {
                       Add Resource
                     </button>
                   </span>
+                </li> */}
+
+                <li 
+                  style={{ marginRight: "2%" }}
+                >
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      Students
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleAddResource}
+                        >
+                          Add Student
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handlePublishListClick}
+                        >
+                          Unpublished
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleBinClick}
+                        >
+                          Bin
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleResourceListClick}
+                        >
+                          View
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleResourceListClick}
+                        >
+                          Add Students
+                        </button>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </li>
-                <li className="nav-item">
+
+                <li 
+                  style={{ marginRight: "2%" }}
+                >
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      Resources
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleAddResource}
+                        >
+                          Add Resources
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handlePublishListClick}
+                        >
+                          Unpublished
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleBinClick}
+                        >
+                          Bin
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleResourceListClick}
+                        >
+                          View
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{ backgroundColor: "white", color: "black" }}
+                          onClick={handleResourceListClick}
+                        >
+                          Add Students
+                        </button>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+
+                </li>
+                <li 
+                  className="nav-item" 
+                  style={{ marginRight: "7%" }}
+                >
                   <button
                     onClick={logoutAdmin}
                     type="span"

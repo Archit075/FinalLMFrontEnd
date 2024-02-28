@@ -164,7 +164,7 @@ function MyTeacherModal(props) {
   //jugctxjytrc7yuh
 
   const signInTeacher = () => {
-    setAction(!action);
+    // setAction(!action);
     if (name.length === 0) {
       toast.warning('please enter resource name')
       console.log("please enetr Username");
@@ -240,21 +240,26 @@ function MyTeacherModal(props) {
         console.log("Status code is : " + result);
 
         if (result !== null) {
-          // toast.success('resource successfully added')
+          toast.success('Signed Up successfully')
           console.log("SignUp Successfull !!");
 
           // navigate('/Resource-List', { state: { classtd: formData.standard } })
           // navigate('/Resource-List', { state: { classtd: standard } })
-          navigate('/TeacherHome', { state: { classtd: standard } })
-
-          // setAction(!action);
+          // navigate('/TeacherHome', { state: { classtd: standard } })
+          setEmail("")
+          setPassword("")
+          setPasswordVisible(false)
+          setAction(!action);
         } else {
-          // toast.error("something went wrong!!!")
+          toast.error(result)
+          console.log(result);
           console.log("something went wrong");
         }
       }).catch((error)=>{
         console.log(error);
-        console.log("got error");
+        console.log("got error" + error["response"]);
+        console.dir(error.response.data)
+        toast.error(error.response.data)
       });
     }
   };
@@ -465,6 +470,7 @@ function MyTeacherModal(props) {
                   id="formControlLg"
                   type="text"
                   size="lg"
+                  value={email}
                 />
                 <MDBInput
                 onChange={(e) =>{

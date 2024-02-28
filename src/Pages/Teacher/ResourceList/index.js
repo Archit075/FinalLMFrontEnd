@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import ResourceList from "./ResourceList";
 import AHeader from "../../../AllHeaders/AHeader";
+import Footer from "../../../Footer/Footer";
 
 export default function UResourceList() {
   return (
@@ -12,6 +13,7 @@ export default function UResourceList() {
         <img src="/images/LM3.png"/>
       </Background>
       <ResourceList/>
+      <Footer/>
     </Container>
   );
 }
