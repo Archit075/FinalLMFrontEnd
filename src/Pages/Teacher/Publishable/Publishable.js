@@ -35,7 +35,7 @@ export default function Publishable() {
 
     console.log(standard);
     // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
-    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`;  https://localhost:7030/api/Pdf/productPdf/delete/1
+    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`;  //https://localhost:7030/api/Pdf/productPdf/delete/1
     console.log("url is : " + url);
     console.dir(Resources)
 
@@ -48,7 +48,7 @@ export default function Publishable() {
 
         if (result != null) {
           setResources(result);
-        //   toast.info("Welcome to Resources")
+          toast.info("Welcome to Publishable!!")
           console.log(result["message"]);
         } else {
           toast.error("Resources are empty");
@@ -104,7 +104,7 @@ export default function Publishable() {
         <Row >
           {Resources.map((Resource) => (
             <Col md={4} sm={12} lg={3} style={{padding: "20px"}}>
-          <Card >
+          {/* <Card >
             <Card.Img
               style={{ height: "8rem", width: "100%" }}
               variant="top"
@@ -145,7 +145,43 @@ export default function Publishable() {
                 Publish
               </Button>
             </Card.Body>
-          </Card>
+          </Card> */}
+
+
+          <div className="cardBox3" style={{ marginBottom: "24px" }}>
+                  <div className="card3">
+                    <h2>{Resource.pdfName}</h2>
+                    <span1>{Resource.category}</span1>
+                    <div class="content">
+                      {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
+                      <p>{Resource.description}</p>
+                      {/* <Button
+                        style={{ marginTop: "0" }}
+                        variant="primary"
+                        className="btn btn-success btn-sm"
+                        id="vbtn"
+                        onClick={() => {
+                          navigate("/pdfPage", {
+                            state: { pdfName: Resource.pdfName },
+                          });
+                          console.log(
+                            "pdfName in resourcelist is : " + Resource.pdfName
+                          );
+                        }}
+                      >
+                        View
+                      </Button> */}
+                      <Button
+                        variant="primary"
+                        className="btn mr-5 btn-sm"
+                        id="rbtn"
+                        onClick={() => PublishBook(Resource.pdfName, standard)}
+                      >
+                        Publish
+                      </Button>
+                    </div>
+                  </div>
+                </div>
           </Col>
           ))} 
         </Row>

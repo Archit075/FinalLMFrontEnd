@@ -11,11 +11,11 @@ import moment from "moment";
 import "./ResourceList.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
+import NotFound from "./NotFound/NotFound";
 
 export default function ResourceList() {
-  
   const { standard } = sessionStorage;
- 
+
   const { state } = useLocation();
   const classtd = state ? state.classtd : null;
 
@@ -46,156 +46,218 @@ export default function ResourceList() {
         const str2 = result[1].dateCreated;
         console.log("result is :" + result[0]);
         console.log(result);
-
+        
         if (result != null) {
           setResources(result);
           toast.info("Welcome to Resources");
           console.log(result[1].message);
-          console.dir( "********** "+ str1.slice(0, 10) + "  "+typeof(str2) + " **********");
-        } else {
-          // toast.error("Resources are empty");
-          console.log("PDf List is empty.");
-          console.error(result["message"]);
-        }
-      })
-      .catch((error) => {
-        // toast.warning("Resources are empty");
-      });
-  };
-
-  const returnBook = (pdf_Name, id) => {
-    const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
-    //https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
-    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
-   // https://localhost:7030/api/Pdf/productPdf/delete/Pdf5?/date=2024-02-23T17:09:28.0920332
-    console.log("pdf name is : " + pdf_Name);
-    console.log("pdf date is  : " + id);
-    // console.log(urlResource, UrlResources);
-    console.log("url is "+urlResource);
-
-
-    axios
-      .delete(urlResource)
-      .then((response) => {
-       
-        const result = JSON.parse(response);
-        console.log("response is : " + result);
-
-        if (result["statusCode"] === 1) {
-          toast.success("Resources deleted successfully!!");
-          console.log(result["message"]);
-          setResources((prevResources) =>
+          console.dir(
+            "********** " +
+            str1.slice(0, 10) +
+            "  " +
+            typeof str2 +
+            " **********"
+            );
+          } else {
+            // toast.error("Resources are empty");
+            console.log("PDf List is empty.");
+            console.error(result["message"]);
+          }
+        })
+        .catch((error) => {
+          // toast.warning("Resources are empty");
+        });
+      };
+      
+      const returnBook = (pdf_Name, id) => {
+        const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
+        //https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
+        // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
+        // https://localhost:7030/api/Pdf/productPdf/delete/Pdf5?/date=2024-02-23T17:09:28.0920332
+        console.log("pdf name is : " + pdf_Name);
+        console.log("pdf date is  : " + id);
+        // console.log(urlResource, UrlResources);
+        console.log("url is " + urlResource);
+        
+        axios
+        .delete(urlResource)
+        .then((response) => {
+          const result = JSON.parse(response);
+          console.log("response is : " + result);
+          
+          if (result["statusCode"] === 1) {
+            toast.success("Resources deleted successfully!!");
+            console.log(result["message"]);
+            setResources((prevResources) =>
             prevResources.filter((resource) => resource.pdfName !== pdf_Name)
-          );
-          // searchIssuedBooksBySpring();
-        } else {
-          console.log("Did not delete");
-          console.log(result["message"]);
-          // toast.error(result["message"]);
-        }
-      })
+            );
+            // searchIssuedBooksBySpring();
+          } else {
+            console.log("Did not delete");
+            console.log(result["message"]);
+            // toast.error(result["message"]);
+          }
+        })
       .catch((error) => {
         console.log("error");
         searchResources();
         console.log("There is an error");
-       // console.error(error.response.data.error);
+        // console.error(error.response.data.error);
       });
-  };
-
-  useEffect(() => {
-    searchResources();
-    console.log("getting called");
-  }, []);
-
-  return (
-    <div style={{ paddingTop: "50px", paddingBottom: "100px" }} className="container" id="YBC">
-      <Container>
+    };
+    
+    useEffect(() => {
+      // searchResources();
+      returnBook();
+      console.log("getting called");
+    }, []);
+    
+    return (
+      <div
+      style={{ paddingTop: "50px", paddingBottom: "100px", }}
+      className="container"
+      id="YBC"
+      >
+      <Container style={{paddingBottom: "400px"}}>
         <Row>
-          {Resources != { } ? Resources.map((Resource) => (
-            <Col md={4} sm={12} lg={3}>
-              <Card style={{marginBottom: "24px"}}>
-                <Card.Img
+          {Resources != {} ? (
+            Resources.map((Resource) => (
+              <Col md={4} sm={12} lg={3}>
+                {/* <Card style={{ marginBottom: "24px" }}>
+                  <Card.Img
                   style={{ height: "8rem", width: "100%" }}
                   variant="top"
                   src={Res1}
-                />
-                <Card.Body
+                  />
+                  <Card.Body
                   style={{
                     paddingTop: "5px",
                     paddingBottom: "5px",
                     backgroundColor: "#DDF5FF",
                   }}
-                >
-                  <Card.Title
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
                   >
-                    {Resource.pdfName}
-                  </Card.Title>
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.category}
-                  </Card.Text>
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.dateCreated}
-                  </Card.Text>
-                  <br />
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.created.slice(0, 10)}
-                  </Card.Text>
-                  <Button
-                    style={{ marginTop: "0" }}
-                    variant="primary"
-                    className="btn btn-success btn-sm"
-                    id="vbtn"
-                    onClick={() => {
-                      navigate("/pdfPage", {
-                        state: { pdfName: Resource.pdfName },
-                      });
-                      console.log(
-                        "pdfName in resourcelist is : " + Resource.pdfName
-                      );
-                    }}
-                  >
-                    View
-                  </Button>
-                  <Button
-                    variant="danger"
-                    className="btn mr-5 btn-sm"
-                    id="rbtn"
-                    onClick={() =>
-                      returnBook(Resource.pdfName, Resource.id)
-                    }
-                  >
-                    Delete
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))  : <div> </div>}
+                    <Card.Title
+                      style={{
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        margin: "0",
+                      }}
+                    >
+                      {Resource.pdfName}
+                    </Card.Title>
+                    <Card.Text
+                      style={{
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        margin: "0",
+                      }}
+                    >
+                      {Resource.category}
+                    </Card.Text>
+                    <Card.Text
+                      style={{
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        margin: "0",
+                      }}
+                    >
+                      {Resource.dateCreated}
+                    </Card.Text>
+                    <br />
+                    <Card.Text
+                      style={{
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        margin: "0",
+                      }}
+                    >
+                      {Resource.created.slice(0, 10)}
+                    </Card.Text>
+                    <Button
+                      style={{ marginTop: "0" }}
+                      variant="primary"
+                      className="btn btn-success btn-sm"
+                      id="vbtn"
+                      onClick={() => {
+                        navigate("/pdfPage", {
+                          state: { pdfName: Resource.pdfName },
+                        });
+                        console.log(
+                          "pdfName in resourcelist is : " + Resource.pdfName
+                        );
+                      }}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      variant="danger"
+                      className="btn mr-5 btn-sm"
+                      id="rbtn"
+                      onClick={() => returnBook(Resource.pdfName, Resource.id)}
+                    >
+                      Delete
+                    </Button>
+                  </Card.Body>
+                </Card> */}
+                <div className="cardBox1" style={{ marginBottom: "24px" }}>
+                  <div className="card1">
+                    <h2>{Resource.pdfName}</h2>
+                    <span1>{Resource.category}</span1>
+                    <div class="content">
+                      <h3> {Resource.created.slice(0, 10)}</h3>
+                      <p>{Resource.description}</p>
+                      <Button
+                        style={{ marginTop: "0" }}
+                        variant="primary"
+                        className="btn btn-success btn-sm"
+                        id="vbtn"
+                        onClick={() => {
+                          navigate("/pdfPage", {
+                            state: { pdfName: Resource.pdfName },
+                          });
+                          console.log(
+                            "pdfName in resourcelist is : " + Resource.pdfName
+                          );
+                        }}
+                      >
+                        View
+                      </Button>
+                      <Button
+                        variant="danger"
+                        className="btn mr-5 btn-sm"
+                        id="rbtn"
+                        onClick={() =>
+                          returnBook(Resource.pdfName, Resource.id)
+                        }
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Col>
+            ))
+          ) : (
+            <div>
+              <NotFound />
+            </div>
+          )}
         </Row>
       </Container>
       {/* </div> */}
     </div>
   );
+}
+
+{
+  /* <div class="cardBox">
+  <div class="card">
+    <h2>Animated Card</h2>
+    <span>Hover Me</span>
+    <div class="content">
+      <h3>How's it goin Fam ?</h3>
+      <p>This is Sachin Samal, your tech mate!!! I love you all. Lets make this world a better place for all of us. Keep prospering...Keep learning!!!</p>
+    </div>
+  </div>
+</div> */
 }

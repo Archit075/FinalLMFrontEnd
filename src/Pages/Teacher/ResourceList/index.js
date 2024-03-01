@@ -12,7 +12,7 @@ export default function UResourceList() {
       <Background>
         <img src="/images/LM3.png"/>
       </Background>
-      <ResourceList/>
+      <ResourceList />
       <Footer/>
     </Container>
   );

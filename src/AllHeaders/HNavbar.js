@@ -386,7 +386,7 @@ function MyTeacherModal(props) {
                   wrapperClass="mb-4"
                   label="Contact"
                   id="formControlLg"
-                  type="phoneNumber"
+                  type="Number"
                   size="sm"
                 />
                 <MDBInput
@@ -583,7 +583,7 @@ function MyStudentModal(props) {
       console.log("Email is : " + body.email);
       console.log("Password is " + body.password);
 
-      const url = `${URLUser}/api/User/Login`;
+      const url = `${URLUser}/api/UserControllers/Login`;
 
       console.log(url);
       // make api call using axios

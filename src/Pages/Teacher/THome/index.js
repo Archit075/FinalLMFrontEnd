@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
 import ClassCard from "../ClassesCard/ClassesCard";
 import LM3 from "./LM3.png";
+import Footer from "../../../Footer/Footer";
 
 
 
@@ -15,9 +16,10 @@ export default function THome() {
     <Container>
       <AHeader />
       <Background>
-        <img src={imagURL1} />
+        <img src={LM3} />
       </Background>
       <ClassCard/>
+      <Footer />
     </Container>
   );
 }

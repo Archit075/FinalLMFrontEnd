@@ -1,0 +1,94 @@
+#YBC {
+    margin-top: 55px;
+  }
+.cardBox3 {
+    width: 270px;
+    height: 350px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 10px 0px,
+      rgba(0, 0, 0, 0.5) 0px 2px 25px 0px;
+  }
+  .card3 {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    background: rgb(243, 137, 8);
+    border-radius: 20px;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+    padding: 20px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.5) 0px 18px 36px -18px inset;
+  }
+  .card3 h2,
+  span1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 500;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  span1 {
+    top: 75%;
+  }
+  
+  .card3 .content h3 {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+  }
+  .card3 .content p {
+    font-size: 1.6rem;
+    line-height: 25px;
+  }
+  .card3 .content {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .card3:hover .content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .card3:hover h2,
+  .card3:hover span1 {
+    opacity: 0;
+  }
+  
+  .cardBox3::before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 150%;
+    /* background: #40e0d0;
+    background: -webkit-linear-gradient(to right, #ff0080, #ff8c00, #40e0d0);
+    background: linear-gradient(to right, #ff0080, #ff8c00, #40e0d0);
+    animation: glowing01 5s linear infinite;
+    transform-origin: center;
+    animation: glowing 5s linear infinite; */
+  }
+  
+  @keyframes glowing {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

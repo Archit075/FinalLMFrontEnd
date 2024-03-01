@@ -29,6 +29,7 @@ function TAddResource() {
   const { standard } = sessionStorage;
 
   const navigate = useNavigate();
+  toast.info("Add your resources here!!")
 
   const addResource = () => {
     if (ResourceName.length === 0) {

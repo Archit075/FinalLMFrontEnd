@@ -100,15 +100,17 @@ export default function AHeader() {
                   {/* <span> */}
                     <button
                       // to="/TeacherHome"
-                      className="btn btn-outline-secondary"
+                      className="btn btn-sm btn-outline-secondary"
+                      size="sm"
                       onClick={handleHomeClick}
                       style={{
                         border: "0px solid grey",
                         borderRadius: "4px",
-                        padding: "6px",
+                        padding: "4px",
                         color: "black",
                         textDecoration: "none",
-                        marginLeft: "3rem",
+                        // marginLeft: "2rem",
+                        marginRight: "0.5rem",
                         backgroundColor: "#a4e7f3",
                       }}
                     >
@@ -225,7 +227,7 @@ export default function AHeader() {
                   style={{ marginRight: "2%" }}
                 >
                   <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
                       Students
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -282,7 +284,7 @@ export default function AHeader() {
                   style={{ marginRight: "2%" }}
                 >
                   <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
                       Resources
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -322,7 +324,7 @@ export default function AHeader() {
                           View
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item>
+                      {/* <Dropdown.Item>
                         <button
                           className="btn btn-outline-secondary"
                           style={{ backgroundColor: "white", color: "black" }}
@@ -330,19 +332,19 @@ export default function AHeader() {
                         >
                           Add Students
                         </button>
-                      </Dropdown.Item>
+                      </Dropdown.Item> */}
                     </Dropdown.Menu>
                   </Dropdown>
 
                 </li>
                 <li 
-                  className="nav-item" 
+                  className="nav-item"
                   style={{ marginRight: "7%" }}
                 >
                   <button
                     onClick={logoutAdmin}
                     type="span"
-                    className="btn btn-outline-secondary"
+                    className="btn btn-sm btn-outline-secondary"
                     style={{
                       // backgroundColor: "rgb(15, 203, 153)",
                       color: "black",
@@ -365,7 +367,7 @@ export default function AHeader() {
 
 const NavLink = styled.li`
   display: flex;
-  margin-top: 8px;
+  margin-top: 6px;
   margin-left: 4px;
   margin-right: 6px;
 `;
