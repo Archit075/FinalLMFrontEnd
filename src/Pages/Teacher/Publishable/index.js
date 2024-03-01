@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
 import Publishable from "./Publishable";
+import Footer from "../../../Footer/Footer";
 
 export default function UPublishList() {
   return (
@@ -11,6 +12,7 @@ export default function UPublishList() {
         <img src="/images/LM3.png"/>
       </Background>
       <Publishable/>
+      <Footer />
     </Container>
   );
 }

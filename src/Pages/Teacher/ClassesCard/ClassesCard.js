@@ -20,7 +20,7 @@ export default function ClassCard() {
   };
 
   return (
-    <div className="container" id="YBC">
+    <div className="container" id="YBC" style={{paddingBottom: "200px"}}>
       {/* <h1 id="YBID" style={{ paddingTop: "15px", fontWeight:"bolder" }}>
         Classes
       </h1> */}
@@ -55,7 +55,7 @@ export default function ClassCard() {
             <div class="container1" onClick={() => handleButtonClick(index + 1)}>
               <div class="content1">
                 <h1>CLASS {index + 1}</h1>
-                <p>This is an amazing card with nice animation</p>
+                <p>Here's the resources of class {index + 1}</p>
               </div>
             </div>
             ;

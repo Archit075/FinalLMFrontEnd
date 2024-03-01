@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
 import TResourceBin from "./TResourceBin";
+import Footer from "../../../Footer/Footer";
 
 export default function TResourceDel() {
   return (
@@ -11,6 +12,7 @@ export default function TResourceDel() {
         <img src="/images/LM3.png"/>
       </Background>
       <TResourceBin/>
+      <Footer />
     </Container>
   );
 }

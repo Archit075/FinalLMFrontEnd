@@ -230,50 +230,32 @@ export default function AHeader() {
                     <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
                       Students
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item>
+                    <Dropdown.Menu style={{backgroundColor: "#a4e7f3"}}>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "40px", marginRight: "0" }}
                           onClick={handleAddResource}
                         >
-                          Add Student
+                          Add Students
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
-                          onClick={handlePublishListClick}
-                        >
-                          Unpublished
-                        </button>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <button
-                          className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "35px", marginRight: "0" }}
                           onClick={handleBinClick}
                         >
-                          Bin
+                          Inactive Users
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "35px", marginRight: "0" }}
                           onClick={handleResourceListClick}
                         >
-                          View
-                        </button>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <button
-                          className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
-                          onClick={handleResourceListClick}
-                        >
-                          Add Students
+                          View Students
                         </button>
                       </Dropdown.Item>
                     </Dropdown.Menu>
@@ -287,38 +269,38 @@ export default function AHeader() {
                     <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
                       Resources
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item>
+                    <Dropdown.Menu style={{backgroundColor: "#a4e7f3"}}>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "27px", marginRight: "0" }}
                           onClick={handleAddResource}
                         >
                           Add Resources
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "47.5px", marginRight: "0" }}
                           onClick={handlePublishListClick}
                         >
                           Unpublished
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "113px", marginRight: "0" }}
                           onClick={handleBinClick}
                         >
                           Bin
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item>
+                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "white", color: "black" }}
+                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "102px", marginRight: "0" }}
                           onClick={handleResourceListClick}
                         >
                           View

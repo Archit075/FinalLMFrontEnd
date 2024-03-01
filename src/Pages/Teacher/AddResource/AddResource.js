@@ -29,7 +29,7 @@ function TAddResource() {
   const { standard } = sessionStorage;
 
   const navigate = useNavigate();
-  toast.info("Add your resources here!!")
+  // toast.info("Add your resources here!!")
 
   const addResource = () => {
     if (ResourceName.length === 0) {
@@ -62,7 +62,7 @@ function TAddResource() {
         console.log("result is : " + result);
         console.log("Status code is : " + result["statusCode"]);
         if (result["statusCode"] === 1) {
-          toast.success("resource successfully added");
+          toast.success("resource successfully added", {autoClose: 800});
 
           navigate("/Publish-List", { state: { classtd: standard } });
         } else {
@@ -78,7 +78,7 @@ function TAddResource() {
   };
 
   return (
-    <div className="container mt-3" style={{paddingLeft: "180px", }}>
+    <div className="container mt-3" style={{paddingLeft: "180px", paddingBottom: "150px" }}>
       <MDBContainer fluid>
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol lg="8">

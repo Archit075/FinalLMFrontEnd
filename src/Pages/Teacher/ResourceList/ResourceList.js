@@ -1,16 +1,16 @@
-import Card from "react-bootstrap/Card";
+// import Card from "react-bootstrap/Card";
+// import Res1 from "./YourBooks.jpg";
+// import { Link } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import moment from "moment";
+import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
-import Res1 from "./YourBooks.jpg";
-import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { UrlResources } from "../../../config";
-// import { toast } from "react-toastify";
-import moment from "moment";
 import "./ResourceList.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
 import NotFound from "./NotFound/NotFound";
 
 export default function ResourceList() {
@@ -46,79 +46,79 @@ export default function ResourceList() {
         const str2 = result[1].dateCreated;
         console.log("result is :" + result[0]);
         console.log(result);
-        
+
         if (result != null) {
           setResources(result);
-          toast.info("Welcome to Resources");
+          toast.info("Welcome to Resources", {autoClose: 800});
           console.log(result[1].message);
           console.dir(
             "********** " +
-            str1.slice(0, 10) +
-            "  " +
-            typeof str2 +
-            " **********"
-            );
-          } else {
-            // toast.error("Resources are empty");
-            console.log("PDf List is empty.");
-            console.error(result["message"]);
-          }
-        })
-        .catch((error) => {
-          // toast.warning("Resources are empty");
-        });
-      };
-      
-      const returnBook = (pdf_Name, id) => {
-        const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
-        //https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
-        // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
-        // https://localhost:7030/api/Pdf/productPdf/delete/Pdf5?/date=2024-02-23T17:09:28.0920332
-        console.log("pdf name is : " + pdf_Name);
-        console.log("pdf date is  : " + id);
-        // console.log(urlResource, UrlResources);
-        console.log("url is " + urlResource);
-        
-        axios
-        .delete(urlResource)
-        .then((response) => {
-          const result = JSON.parse(response);
-          console.log("response is : " + result);
-          
-          if (result["statusCode"] === 1) {
-            toast.success("Resources deleted successfully!!");
-            console.log(result["message"]);
-            setResources((prevResources) =>
+              str1.slice(0, 10) +
+              "  " +
+              typeof str2 +
+              " **********"
+          );
+        } else {
+          // toast.error("Resources are empty");
+          console.log("PDf List is empty.");
+          console.error(result["message"]);
+        }
+      })
+      .catch((error) => {
+        // toast.warning("Resources are empty");
+      });
+  };
+
+  const returnBook = (pdf_Name, id) => {
+    const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
+    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
+    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
+    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf5?/date=2024-02-23T17:09:28.0920332
+    console.log("pdf name is : " + pdf_Name);
+    console.log("pdf date is  : " + id);
+    // console.log(urlResource, UrlResources);
+    console.log("url is " + urlResource);
+
+    axios
+      .delete(urlResource)
+      .then((response) => {
+        const result = JSON.parse(response);
+        console.log("response is : " + result);
+
+        if (result["statusCode"] === 1) {
+          toast.success("Resources deleted successfully!!", {autoClose: 800});
+          console.log(result["message"]);
+          setResources((prevResources) =>
             prevResources.filter((resource) => resource.pdfName !== pdf_Name)
-            );
-            // searchIssuedBooksBySpring();
-          } else {
-            console.log("Did not delete");
-            console.log(result["message"]);
-            // toast.error(result["message"]);
-          }
-        })
+          );
+          // searchIssuedBooksBySpring();
+        } else {
+          console.log("Did not delete");
+          console.log(result["message"]);
+          // toast.error(result["message"]);
+        }
+      })
       .catch((error) => {
         console.log("error");
         searchResources();
         console.log("There is an error");
         // console.error(error.response.data.error);
       });
-    };
-    
-    useEffect(() => {
-      // searchResources();
-      returnBook();
-      console.log("getting called");
-    }, []);
-    
-    return (
-      <div
-      style={{ paddingTop: "50px", paddingBottom: "100px", }}
+  };
+
+  useEffect(() => {
+    // searchResources();
+    returnBook();
+    console.log("getting called");
+  }, [setResources]);
+
+  return (
+    <div
+      style={{ paddingTop: "50px", paddingBottom: "100px" }}
       className="container"
       id="YBC"
-      >
-      <Container style={{paddingBottom: "400px"}}>
+    >
+      <Container style={{ paddingBottom: "200px" }}>
         <Row>
           {Resources != {} ? (
             Resources.map((Resource) => (

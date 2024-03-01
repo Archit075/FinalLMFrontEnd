@@ -45,7 +45,7 @@ export default function TResourceBin() {
 
         if (result != null) {
           setResources(result);
-            toast.info("Welcome to Bin!!")
+          toast.info("Welcome to Bin!!", {autoClose: 800});
           console.log(result["message"]);
         } else {
           toast.error("Resources are empty");
@@ -70,7 +70,7 @@ export default function TResourceBin() {
         const result = response.data;
 
         if (result["statusCode"] === 1) {
-          toast.success("Resource Published successfully!!");
+          toast.success("Resource Published successfully!!", {autoClose: 800});
           console.log("message is " + result["message"]);
           setResources((prevResources) =>
             prevResources.filter((resource) => resource.pdfName !== pdf_Name)
@@ -95,11 +95,15 @@ export default function TResourceBin() {
   }, []);
 
   return (
-    <div className="container" id="YBC">
-      <Container style={{ paddingTop: "50px" }}>
+    <div
+      style={{ paddingTop: "50px", paddingBottom: "100px" }}
+      className="container"
+      id="YBC"
+    >
+      <Container style={{ paddingTop: "50px", paddingBottom: "200px" }}>
         <Row>
           {Resources.map((Resource) => (
-            <Col md={4} sm={12} lg={3} style={{ }}>
+                <Col md={4} sm={12} lg={3} style={{ marginBottom: "24px", margin: "2.5rem" }} >
               {/* <Card>
                 <Card.Img
                   style={{ height: "8rem", width: "100%" }}
@@ -169,14 +173,17 @@ export default function TResourceBin() {
                 </Card.Body>
               </Card> */}
 
-              <div className="cardBox2" style={{ marginBottom: "24px", margin: "2.5rem" }}>
-                  <div className="card2">
-                    <h2>{Resource.pdfName}</h2>
-                    <span1>{Resource.category}</span1>
-                    <div class="content">
-                      {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
-                      <p>{Resource.description}</p>
-                      {/* <Button
+              <div
+                className="cardBox2"
+                style={{ marginBottom: "24px", margin: "2.5rem" }}
+              >
+                <div className="card2">
+                  <h2>{Resource.pdfName}</h2>
+                  <span1>{Resource.category}</span1>
+                  <div class="content">
+                    {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
+                    <p>{Resource.description}</p>
+                    {/* <Button
                         style={{ marginTop: "0" }}
                         variant="primary"
                         className="btn btn-success btn-sm"
@@ -192,17 +199,17 @@ export default function TResourceBin() {
                       >
                         View
                       </Button> */}
-                      <Button
-                        variant="primary"
-                        className="btn mr-5 btn-sm"
-                        id="rbtn"
-                        onClick={() => binBook(Resource.pdfName, standard)}
-                      >
-                        Publish
-                      </Button>
-                    </div>
+                    <Button
+                      variant="primary"
+                      className="btn mr-5 btn-sm"
+                      id="rbtn"
+                      onClick={() => binBook(Resource.pdfName, standard)}
+                    >
+                      Publish
+                    </Button>
                   </div>
                 </div>
+              </div>
             </Col>
           ))}
         </Row>
