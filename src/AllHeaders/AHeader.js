@@ -25,10 +25,18 @@ export default function AHeader() {
     navigate("/TResourceDel-List", { state: { classtd: standard } });
   };
 
+  const handleAddstudent = () => {
+    navigate("/AddStudent", {state: { classtd: standard } });
+  };
+  const handleViewStudent = () => {
+    navigate("/ViewStudent", {state: { classtd: standard} })
+  };
+
   const handleResourceListClick = () => {
     // Navigate to Resource-List when the link is clicked
     navigate("/Resource-List", { state: { classtd: standard } });
   };
+
   const handleHomeClick = () => {
     navigate("/TeacherHome", { state: { classtd: standard } });
   };
@@ -37,6 +45,7 @@ export default function AHeader() {
     // Navigate to Publish-List when the link is clicked
     navigate("/Publish-List", { state: { classtd: standard } });
   };
+
   const handleAddResource = () => {
     navigate("/TAddResource");
     // {state: {classtd: standard}}
@@ -235,12 +244,13 @@ export default function AHeader() {
                         <button
                           className="btn btn-outline-secondary"
                           style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "40px", marginRight: "0" }}
-                          onClick={handleAddResource}
+                          onClick={handleAddstudent}
                         >
                           Add Students
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+
+                      {/* <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
                           style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "35px", marginRight: "0" }}
@@ -248,12 +258,13 @@ export default function AHeader() {
                         >
                           Inactive Users
                         </button>
-                      </Dropdown.Item>
+                      </Dropdown.Item> */}
+
                       <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
                         <button
                           className="btn btn-outline-secondary"
                           style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "35px", marginRight: "0" }}
-                          onClick={handleResourceListClick}
+                          onClick={handleViewStudent}
                         >
                           View Students
                         </button>

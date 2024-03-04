@@ -58,7 +58,8 @@ export default function ClassCard() {
                 <p>Here's the resources of class {index + 1}</p>
               </div>
             </div>
-            ;
+            <br />
+            <br />
           </div>
         ))}
       </div>

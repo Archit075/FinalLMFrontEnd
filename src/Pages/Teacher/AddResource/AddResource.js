@@ -56,33 +56,42 @@ function TAddResource() {
 
       const url = `${UrlResources}/api/Pdf`;
 
-      axios.post(url, data).then((response) => {
-        console.log("hello");
-        const result = response.data;
-        console.log("result is : " + result);
-        console.log("Status code is : " + result["statusCode"]);
-        if (result["statusCode"] === 1) {
-          toast.success("resource successfully added", {autoClose: 800});
+      axios
+        .post(url, data)
+        .then((response) => {
+          console.log("hello");
+          const result = response.data;
+          console.log("result is : " + result);
+          console.log("Status code is : " + result["statusCode"]);
+          if (result["statusCode"] === 1) {
+            toast.success("resource successfully added", { autoClose: 800 });
 
-          navigate("/Publish-List", { state: { classtd: standard } });
-        } else {
-          // toast.error("something went wrong!!!")
-          console.log("message is  : " + result["message"]);
+            navigate("/Publish-List", { state: { classtd: standard } });
+          } else {
+            // toast.error("something went wrong!!!")
+            console.log("message is  : " + result["message"]);
 
-          console.log("something went wrong");
-        }
-      }).catch((error) =>{
+            console.log("something went wrong");
+          }
+        })
+        .catch((error) => {
           console.log("error occured.");
-      });
+        });
     }
   };
 
   return (
-    <div className="container mt-3" style={{paddingLeft: "180px", paddingBottom: "150px" }}>
+    <div
+      className="container mt-3"
+      style={{ paddingLeft: "180px", paddingBottom: "150px" }}
+    >
       <MDBContainer fluid>
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol lg="8">
-            <MDBCard className="my-5 rounded-3" style={{ maxWidth: "600px", overflow: "hidden" }}>
+            <MDBCard
+              className="my-5 rounded-3"
+              style={{ maxWidth: "600px", overflow: "hidden" }}
+            >
               {/* <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp' className='w-100 rounded-top'  alt="Sample photo"/> */}
 
               <MDBCardBody className="px-5">
@@ -100,8 +109,21 @@ function TAddResource() {
                 />
 
                 <MDBRow>
-                  <MDBCol md="6">
+                  <MDBCol md='6' className='mb-4'>
+                  <select
+                      onChange={(e) => {
+                        setResourceCategory(e.target.value);
+                      }}
+                    data={[
+                      { text: 'Gender', value: 1, disabled: true },
+                      { text: 'Female', value: 2 },
+                      { text: 'Male', value: 3 }
+                    ]}
+                    />
+                  </MDBCol>
+                  {/* <MDBCol md="6">
                     <MDBInput
+                    
                       wrapperClass="mb-4"
                       label="Resource category"
                       id="form2"
@@ -111,7 +133,7 @@ function TAddResource() {
                         setResourceCategory(e.target.value);
                       }}
                     />
-                  </MDBCol>
+                  </MDBCol> */}
 
                   <MDBCol md="6" className="mb-4">
                     <MDBInput

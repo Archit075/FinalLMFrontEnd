@@ -14,6 +14,10 @@ import PDFUser from './Pages/User/PDFView';
 import Home from './Pages/Home/Home/Home';
 import UPublishList from './Pages/Teacher/Publishable';
 import TResourceDel from './Pages/Teacher/Bin';
+// import AddUser from './Pages/Teacher/AddStudents/AddStudents';
+// import AllUsers from './Pages/Teacher/viewStudents/viewStudents';
+import AddStudents from './Pages/Teacher/AddStudents';
+import ViewUsers from './Pages/Teacher/viewStudents';
 
 function App() {
   return (
@@ -31,6 +35,8 @@ function App() {
          {/* <Route path = "/Teacher-Signin" element={<TSignin/>}/> */}
 
           <Route path='/Cards' element ={<ClassCard/>}/>
+          <Route path='/AddStudent' element={<AddStudents />} />
+          <Route path='/ViewStudent' element={<ViewUsers />} />
           <Route path='/Resource-List' element={<UResourceList/>}/>
           <Route path='/TResourceDel-List' element={<TResourceDel />} />          
           <Route path='/Publish-List' element={<UPublishList/>}/>          

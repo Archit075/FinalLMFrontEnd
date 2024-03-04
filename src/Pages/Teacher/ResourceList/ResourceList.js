@@ -59,7 +59,7 @@ export default function ResourceList() {
               " **********"
           );
         } else {
-          // toast.error("Resources are empty");
+          toast.error("Resources are empty");
           console.log("PDf List is empty.");
           console.error(result["message"]);
         }
@@ -82,7 +82,7 @@ export default function ResourceList() {
     axios
       .delete(urlResource)
       .then((response) => {
-        const result = JSON.parse(response);
+        const result = response.data;
         console.log("response is : " + result);
 
         if (result["statusCode"] === 1) {
@@ -107,10 +107,10 @@ export default function ResourceList() {
   };
 
   useEffect(() => {
-    // searchResources();
-    returnBook();
+    searchResources();
+    // returnBook();
     console.log("getting called");
-  }, [setResources]);
+  }, []);
 
   return (
     <div
@@ -200,11 +200,12 @@ export default function ResourceList() {
                   </Card.Body>
                 </Card> */}
                 <div className="cardBox1" style={{ marginBottom: "24px" }}>
-                  <div className="card1">
-                    <h2>{Resource.pdfName}</h2>
-                    <span1>{Resource.category}</span1>
+                  <div className="card1" >
+                    <span1>{Resource.pdfName}</span1>
+                    <h2>{Resource.category}</h2>
                     <div class="content">
-                      <h3> {Resource.created.slice(0, 10)}</h3>
+                      <h3>{Resource.created.slice(0, 10)}</h3>
+                      <h3>{Resource.created.slice(11, 20)}</h3>
                       <p>{Resource.description}</p>
                       <Button
                         style={{ marginTop: "0" }}
