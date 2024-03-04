@@ -5,8 +5,8 @@ import { SPRING_URL, URL, URLUser } from "../../../config";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import Header from "../../../AllHeaders/HNavbar";
-import Footer from "../../../Footer/Footer";
-import AHeader from "../../../AllHeaders/AHeader";
+// import Footer from "../../../Footer/Footer";
+// import AHeader from "../../../AllHeaders/AHeader";
 
 export default function AllUsers() {
   const [students, setStudents] = useState([]);
@@ -22,7 +22,7 @@ export default function AllUsers() {
         const result = response.data;
         console.dir(result)
         console.log("result is: " + result[0]);
-        //   console.dir("result in dir is : "+result)
+          console.dir("result in dir is : "+result)
         if (result !== null ) {
           setStudents(result);
         } else {
@@ -57,7 +57,7 @@ export default function AllUsers() {
     console.log("getting called");
   }, []);
   return (
-    <div className="container">
+    <div className="container" style={{marginBottom: "20%", fontWeight: "bolder"}}>
       {/* <AHeader /> */}
       <h1>STUDENTS DETAILS</h1>
       <table class="table table-hover" id="reqTable">

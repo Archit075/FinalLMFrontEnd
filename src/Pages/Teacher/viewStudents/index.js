@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
-import LM3 from "./LM3.png";
+// import LM3 from "./LM3.png";
+// import LM3 from "./img5.jpg";
+// import LM3 from "./img6.jpg";
+import LM3 from "./img7.jpg";
 import Footer from "../../../Footer/Footer";
 import AllUsers from "./viewStudents";
 
@@ -13,7 +16,7 @@ export default function ViewUsers() {
 
       <Background>
       <img src={LM3} 
-      // style={{opacity: "0.5"}} 
+      style={{filter: "blur(8px)"}} 
       />
       </Background>
 
