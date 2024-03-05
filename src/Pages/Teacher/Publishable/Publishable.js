@@ -97,11 +97,11 @@ export default function Publishable() {
 
   return (
     <div
-      style={{ paddingTop: "50px", paddingBottom: "100px" }}
+      style={{ paddingBottom: "100px" }}
       className="container"
       id="YBC"
     >
-      <Container style={{ paddingTop: "50px", paddingBottom: "200px" }}>
+      <Container style={{ paddingTop: "30px", paddingBottom: "200px" }}>
         <Row>
           {Resources.map((Resource) => (
             <Col md={4} sm={12} lg={3} style={{ padding: "20px" }}>

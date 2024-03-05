@@ -16,7 +16,7 @@ export default function ViewUsers() {
 
       <Background>
       <img src={LM3} 
-      style={{filter: "blur(8px)"}} 
+      // style={{filter: "blur(5px)"}}
       />
       </Background>
 

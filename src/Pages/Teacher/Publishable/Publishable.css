@@ -2,8 +2,8 @@
     margin-top: 55px;
   }
 .cardBox3 {
-    width: 270px;
-    height: 350px;
+    width: 200px;
+    height: 300px;
     position: relative;
     display: grid;
     place-items: center;
@@ -16,7 +16,8 @@
     position: absolute;
     width: 95%;
     height: 95%;
-    background: rgb(243, 137, 8);
+    background: rgb(250, 174, 188);
+    background: rgb(250, 130, 1);
     border-radius: 20px;
     z-index: 5;
     display: flex;
@@ -37,22 +38,23 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 350;
     pointer-events: none;
     opacity: 0.5;
   }
   
   span1 {
     top: 75%;
+    font-size: small;
   }
   
   .card3 .content h3 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding-bottom: 10px;
   }
   .card3 .content p {
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 25px;
   }
   .card3 .content {

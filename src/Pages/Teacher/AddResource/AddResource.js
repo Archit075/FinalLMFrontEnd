@@ -100,7 +100,7 @@ function TAddResource() {
                 </h3>
                 <MDBInput
                   wrapperClass="mb-4"
-                  label="Name"
+                  label="File Name"
                   id="form1"
                   type="text"
                   onChange={(e) => {
@@ -109,7 +109,7 @@ function TAddResource() {
                 />
 
                 <MDBRow>
-                  <MDBCol md='6' className='mb-4'>
+                  {/* <MDBCol md='6' className='mb-4'>
                   <select
                       onChange={(e) => {
                         setResourceCategory(e.target.value);
@@ -120,8 +120,8 @@ function TAddResource() {
                       { text: 'Male', value: 3 }
                     ]}
                     />
-                  </MDBCol>
-                  {/* <MDBCol md="6">
+                  </MDBCol> */}
+                  <MDBCol md="6">
                     <MDBInput
                     
                       wrapperClass="mb-4"
@@ -133,7 +133,7 @@ function TAddResource() {
                         setResourceCategory(e.target.value);
                       }}
                     />
-                  </MDBCol> */}
+                  </MDBCol>
 
                   <MDBCol md="6" className="mb-4">
                     <MDBInput

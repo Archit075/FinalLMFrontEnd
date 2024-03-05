@@ -8,7 +8,7 @@ const PDF = () => {
     <Container>
       <AHeader />
       <Background>
-        <img src="/images/LM3.png" style={{opacity: "0.5"}} />
+        <img src="/images/LM3.png" style={{filter: "blur(5px)"}} />
       </Background>
       <SinglePage />
     </Container>

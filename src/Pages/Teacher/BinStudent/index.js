@@ -1,21 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import AHeader from "../../../AllHeaders/AHeader";
-import TResourceBin from "./TResourceBin";
+// import LM3 from "./LM3.png";
+// import LM3 from "./img5.jpg";
+// import LM3 from "./img6.jpg";
+import LM3 from "./img7.jpg";
 import Footer from "../../../Footer/Footer";
+import BinStudent from "./BinStudent";
 
-export default function TResourceDel() {
+export default function ViewBinUsers() {
   return (
     <Container>
+      <br/>
       <AHeader />
+
       <Background>
-        <img src="/images/LM3.png" style={{ filter: "blur(5px)" }} />
+      <img src={LM3} 
+      // style={{filter: "blur(5px)"}} 
+      />
       </Background>
-      <TResourceBin />
+
+      <BinStudent />
+      
       <Footer />
     </Container>
   );
 }
+
 
 const Container = styled.div`
   position: relative;
@@ -32,7 +43,10 @@ const Background = styled.div`
 
   img {
     width: 100%;
-    height: 100%;
+    height: 100%; 
     object-fit: cover;
   }
 `;
+
+
+

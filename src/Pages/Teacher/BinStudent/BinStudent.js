@@ -8,21 +8,20 @@ import { toast } from "react-toastify";
 // import Footer from "../../../Footer/Footer";
 // import AHeader from "../../../AllHeaders/AHeader";
 
-export default function AllUsers() {
+export default function BinStudent() {
   const [students, setStudents] = useState([]);
 
   const { standard } = sessionStorage;
 
   const searchStudents = () => {
-    const url = `${URLUser}/api/UserControllers/GetActiveByStd/${standard}`;
+    const url = `${URLUser}/api/UserControllers/GetByStd/${standard}`;
     console.log("url is : " + url);
     axios
       .post(url)
       .then((response) => {
-        const result = response.data;
+        const result = response.data.filter(res => res.flag === false);
         console.dir(result)
-        console.dir("flag " + result)
-        console.dir("result is: " + result[0].username);
+        console.log("result is: " + result[0]);
         console.dir("result in dir is : "+result)
         if (result !== null ) {
           setStudents(result);
@@ -37,15 +36,17 @@ export default function AllUsers() {
       });
   };
 
-  const deleteStudent = (stud_id) => {
-    console.log("id is :" + stud_id);
-    const url = `${URLUser}/api/UserControllers/Delete/${stud_id}`;
+  const ActivateStudent = (username) => {
+    console.log("id is :" + username);
+    const url = `${URLUser}/api/UserControllers/Activate/${username}`;  
 
-    axios.delete(url).then((response) => {
+    axios.patch(url)
+    .then((response) => {
       const result = response.data;
-      console.dir(response.data);
+      console.dir(result);
+      console.log(result["statusCode"]);
       if (result["statusCode"] === 1) {
-        toast.success(`student having id ${stud_id} deleted`);
+        toast.success(`student having id ${username} activated`);
         searchStudents();
       } else {
         toast.error(result["message"]);
@@ -56,14 +57,14 @@ export default function AllUsers() {
   useEffect(() => {
     searchStudents();
     console.log("getting called");
-  }, [setStudents]);
+  }, []);
 
 
   return (
     <div class= "container mt-5 py-1 table-responsive" style={{marginBottom: "20%"}}>
       {/* <AHeader /> */}
       {/* <h1>STUDENTS DETAILS</h1> */}
-      <table class="table table-hover mt-5 table-responsive-lg" style={{backgroundColor: "white"}} id="reqTable">
+      <table class="table table-hover mt-5 table-responsive-lg" style={{backgroundColor: "rgb(250, 174, 188)"}} id="reqTable">
         <thead class="table-dark" >
           <tr>
             <th scope="col">Student id</th>
@@ -77,7 +78,7 @@ export default function AllUsers() {
           </tr>
         </thead>
         <tbody>
-          {students.map((student, index) => (
+          {students.map((student) => (
             <tr>
               <th scope="row">{student.id}</th>
               <td>{student.username}</td>
@@ -85,13 +86,13 @@ export default function AllUsers() {
               <td>{student.password}</td>
               <td>{student.standard}</td>
               <td>{student.roll}</td>
-              <td>{student.dob.slice(0, 10)}</td>
+              <td>{student.dob}</td>
               <td>
                 <button
-                  class="btn btn-outline-danger mr-2 btn-sm"
-                  onClick={() => deleteStudent(student.id)}
+                  class="btn btn-outline-primary mr-2 btn-sm"
+                  onClick={() => ActivateStudent(student.username)}
                 >
-                  DELETE
+                  Activate
                 </button>
               </td>
             </tr>

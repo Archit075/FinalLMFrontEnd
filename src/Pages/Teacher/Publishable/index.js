@@ -9,7 +9,7 @@ export default function UPublishList() {
     <Container>
       <AHeader />
       <Background>
-        <img src="/images/LM3.png"/>
+        <img src="/images/LM3.png" style={{filter: "blur(5px)"}}/>
       </Background>
       <Publishable/>
       <Footer />

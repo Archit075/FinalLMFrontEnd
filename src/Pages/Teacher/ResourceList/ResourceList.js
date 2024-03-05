@@ -65,7 +65,7 @@ export default function ResourceList() {
         }
       })
       .catch((error) => {
-        // toast.warning("Resources are empty");
+        toast.warning("Resources are empty");
       });
   };
 

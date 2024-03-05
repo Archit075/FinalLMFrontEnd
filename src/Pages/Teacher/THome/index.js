@@ -16,7 +16,7 @@ export default function THome() {
     <Container>
       <AHeader />
       <Background>
-        <img src={LM3} />
+        <img src={LM3}/>
       </Background>
       <ClassCard/>
       <Footer />
@@ -44,3 +44,35 @@ const Background = styled.div`
     object-fit: cover;
   }
 `;
+
+
+
+// const [selectedOption, setSelectedOption] = useState('');
+// const handleChange = (e) => {
+//   // setSelectedOption(e.target.value);
+//   setResourceCategory(e.target.value);
+// }
+// const { standard } = sessionStorage;
+// const options = [
+//   { value: 'Pdf', label: 'Pdf' },
+//   { value: 'Video', label: 'Video' },
+//   { value: 'Images', label: 'Images' }
+// ];
+
+
+{/* <select
+                    style={{width: "240px", height: "36px", borderRadius: "3px", border: "1px solid grey"}}
+                      id="select"
+                      value={ResourceCategory}
+                      onChange={(e) => {
+                        handleChange(e.target.value);
+                      }}
+                    >
+                      <option value="">Select Category</option>
+                      {options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                      
+                    </select> */}

@@ -36,7 +36,7 @@ export default function Header() {
         style={{ backgroundColor: "#a4e7f3" }}
       >
         <Container>
-          <Navbar.Brand href="#home" style={{ float: "left" }}>
+          <Navbar.Brand href="/" style={{ float: "left" }}>
             <img
               alt=""
               src={logo1}
@@ -51,9 +51,13 @@ export default function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#about">AboutUS</Nav.Link>
-              <Nav.Link href="#contact">ContactUs</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="https://learningmate.com/about-us/">
+                AboutUS
+              </Nav.Link>
+              <Nav.Link href="https://learningmate.com/learn-more/">
+                ContactUs
+              </Nav.Link>
             </Nav>
             <Nav>
               <button
@@ -166,38 +170,37 @@ function MyTeacherModal(props) {
   const signInTeacher = () => {
     // setAction(!action);
     if (name.length === 0) {
-      toast.warning('please enter resource name')
+      toast.warning("please enter resource name");
       console.log("please enetr Username");
     } else if (standard.length === 0) {
-      toast.warning('Please enter resource category')
+      toast.warning("Please enter resource category");
       console.log("Please enter standard");
     } else if (email.length === 0) {
-      toast.warning('Please enter standard')
+      toast.warning("Please enter standard");
       console.log("Please enter email");
     } else if (password.length === 0) {
-      toast.warning('Please upload pdf file')
+      toast.warning("Please upload pdf file");
       console.log("Please enter the password");
     } else if (phoneNumber.length === 0) {
-      toast.warning('Please upload pdf file')
+      toast.warning("Please upload pdf file");
       console.log("Please enter the Contact details.");
     } else {
-
-    // if (formData.username.length === 0) {
-    //   // toast.warning('please enter resource name')
-    //   console.log("please enetr Username");
-    // } else if (formData.standard.length === 0) {
-    //   // toast.warning('Please enter resource category')
-    //   console.log("Please enter standard");
-    // } else if (formData.email.length === 0) {
-    //   // toast.warning('Please enter standard')
-    //   console.log("Please enter email");
-    // } else if (formData.password.length === 0) {
-    //   // toast.warning('Please upload pdf file')
-    //   console.log("Please enter the password");
-    // } else if (formData.number.length === 0) {
-    //   // toast.warning('Please upload pdf file')
-    //   console.log("Please enter the Contact details.");
-    // } else {
+      // if (formData.username.length === 0) {
+      //   // toast.warning('please enter resource name')
+      //   console.log("please enetr Username");
+      // } else if (formData.standard.length === 0) {
+      //   // toast.warning('Please enter resource category')
+      //   console.log("Please enter standard");
+      // } else if (formData.email.length === 0) {
+      //   // toast.warning('Please enter standard')
+      //   console.log("Please enter email");
+      // } else if (formData.password.length === 0) {
+      //   // toast.warning('Please upload pdf file')
+      //   console.log("Please enter the password");
+      // } else if (formData.number.length === 0) {
+      //   // toast.warning('Please upload pdf file')
+      //   console.log("Please enter the Contact details.");
+      // } else {
 
       // const data = new FormData();
 
@@ -225,42 +228,44 @@ function MyTeacherModal(props) {
       // console.log("phoneNumber is " + formData.number);
       console.log("phoneNumber is " + phoneNumber);
 
-
       const url = `${URLTeacher}/api/Home/register`; // url--------
 
       console.log("url is : " + url);
       console.log("data is : " + data);
 
-      axios.post(url, data).then((response) => {
-        console.log("hello");
+      axios
+        .post(url, data)
+        .then((response) => {
+          console.log("hello");
 
-        const result = response.data;
+          const result = response.data;
 
-        console.log(result);
-        console.log("Status code is : " + result);
-
-        if (result !== null) {
-          toast.success('Signed Up successfully')
-          console.log("SignUp Successfull !!");
-
-          // navigate('/Resource-List', { state: { classtd: formData.standard } })
-          // navigate('/Resource-List', { state: { classtd: standard } })
-          // navigate('/TeacherHome', { state: { classtd: standard } })
-          setEmail("")
-          setPassword("")
-          setPasswordVisible(false)
-          setAction(!action);
-        } else {
-          toast.error(result)
           console.log(result);
-          console.log("something went wrong");
-        }
-      }).catch((error)=>{
-        console.log(error);
-        console.log("got error" + error["response"]);
-        console.dir(error.response.data)
-        toast.error(error.response.data)
-      });
+          console.log("Status code is : " + result);
+
+          if (result !== null) {
+            toast.success("Signed Up successfully");
+            console.log("SignUp Successfull !!");
+
+            // navigate('/Resource-List', { state: { classtd: formData.standard } })
+            // navigate('/Resource-List', { state: { classtd: standard } })
+            // navigate('/TeacherHome', { state: { classtd: standard } })
+            setEmail("");
+            setPassword("");
+            setPasswordVisible(false);
+            setAction(!action);
+          } else {
+            toast.error(result);
+            console.log(result);
+            console.log("something went wrong");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log("got error" + error["response"]);
+          console.dir(error.response.data);
+          toast.error(error.response.data);
+        });
     }
   };
 
@@ -273,7 +278,7 @@ function MyTeacherModal(props) {
     if (email.length === 0) {
       toast.warning("please enter email");
       console.log("toast one called");
-    // } else if (formData.password.length === 0) {
+      // } else if (formData.password.length === 0) {
     } else if (password.length === 0) {
       alert("please enter password");
       console.log("toast one else called");
@@ -310,7 +315,7 @@ function MyTeacherModal(props) {
             sessionStorage["phone_number"] = phoneNumber;
 
             // navigate to home component
-            navigate("/TeacherHome", );
+            navigate("/TeacherHome");
           } else {
             // toast.error("Invalid admin name or password");
             console.error("Invalid admin name or password");
@@ -353,8 +358,8 @@ function MyTeacherModal(props) {
                 <MDBInput
                   // onChange={handleChange}
                   // value={formData.username}
-                  onChange={(e) =>{
-                    setName(e.target.value)
+                  onChange={(e) => {
+                    setName(e.target.value);
                   }}
                   wrapperClass="mb-4"
                   placeholder="Sam2004"
@@ -367,8 +372,8 @@ function MyTeacherModal(props) {
                 <MDBInput
                   // onChange={handleChange}
                   // value={formData.standard}
-                  onChange={(e) =>{
-                    SetStandard(e.target.value)
+                  onChange={(e) => {
+                    SetStandard(e.target.value);
                   }}
                   wrapperClass="mb-4"
                   label="Standard"
@@ -380,8 +385,8 @@ function MyTeacherModal(props) {
                 <MDBInput
                   // onChange={handleChange}
                   // value={formData.number}
-                  onChange={(e) =>{
-                    setPhoneNumber(e.target.value)
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
                   }}
                   wrapperClass="mb-4"
                   label="Contact"
@@ -392,8 +397,8 @@ function MyTeacherModal(props) {
                 <MDBInput
                   // onChange={handleChange}
                   // value={formData.email}
-                  onChange={(e) =>{
-                    setEmail(e.target.value)
+                  onChange={(e) => {
+                    setEmail(e.target.value);
                   }}
                   wrapperClass="mb-4"
                   placeholder="sam2004@gmail.com"
@@ -403,9 +408,9 @@ function MyTeacherModal(props) {
                   size="sm"
                 />
                 <MDBInput
-                onChange={(e) =>{
-                  setPassword(e.target.value)
-                }}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   wrapperClass="mb-4"
                   label="Password"
                   id="formControlLg"
@@ -461,8 +466,8 @@ function MyTeacherModal(props) {
                 <MDBInput
                   // onChange={handleChange}
                   // value={formData.email}
-                  onChange={(e) =>{
-                    setEmail(e.target.value)
+                  onChange={(e) => {
+                    setEmail(e.target.value);
                   }}
                   wrapperClass="mb-4"
                   label="Email address"
@@ -473,9 +478,9 @@ function MyTeacherModal(props) {
                   value={email}
                 />
                 <MDBInput
-                onChange={(e) =>{
-                  setPassword(e.target.value)
-                }}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   wrapperClass="mb-4"
                   label="Password"
                   placeholder="********"
@@ -596,7 +601,7 @@ function MyStudentModal(props) {
           const result = response.data;
           console.log(result);
 
-          if (result != "") {
+          if (result != null) {
             toast.success("Welcome to the application", {
               autoClose: 1500,
             });
@@ -620,11 +625,14 @@ function MyStudentModal(props) {
             toast.error("Invalid user name or password", {
               autoClose: 1500,
             });
+            toast.error(result["message"])
           }
         })
         .catch((error) => {
-          let err1 = error.response.data.error;
-          toast.error(err1, { autoClose: 2500 });
+          console.log("try catch");
+          console.dir(error);
+          let err1 = error.response.data["message"];
+          toast.error(err1, { autoClose: 2000 });
         });
     }
   };

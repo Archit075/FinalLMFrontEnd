@@ -12,7 +12,7 @@ export default function AddStudents() {
       <AHeader />
       <Background>
       <img src={LM3} 
-      // style={{opacity: "0.5"}} 
+      style={{filter: "blur(5px)"}} 
       />
       </Background>
       <AddUser />

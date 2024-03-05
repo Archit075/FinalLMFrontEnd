@@ -82,7 +82,7 @@ function AddUser() {
   return (
     <div className="container mt-3" >
       {/* <AHeader /> */}
-      <MDBContainer fluid>
+      <MDBContainer fluid style={{paddingLeft: "13%"}}>
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol lg="8">
             <MDBCard className="my-5 rounded-3" style={{ maxWidth: "600px", overflow: "hidden" }}>
@@ -156,7 +156,9 @@ function AddUser() {
                   id="form2"
                   type="datetime-local"
                   onChange={(e) => {
-                    setDob(e.target.value);
+                    var res = e.target.value.slice(0, 10)
+                    console.log(res)
+                    setDob(res);
                   }}
                 />
                 <Button

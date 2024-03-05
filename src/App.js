@@ -18,6 +18,8 @@ import TResourceDel from './Pages/Teacher/Bin';
 // import AllUsers from './Pages/Teacher/viewStudents/viewStudents';
 import AddStudents from './Pages/Teacher/AddStudents';
 import ViewUsers from './Pages/Teacher/viewStudents';
+import BinStudent from './Pages/Teacher/BinStudent/BinStudent';
+import ViewBinUsers from './Pages/Teacher/BinStudent';
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
           <Route path='/Cards' element ={<ClassCard/>}/>
           <Route path='/AddStudent' element={<AddStudents />} />
           <Route path='/ViewStudent' element={<ViewUsers />} />
+          <Route path='/BinStudent' element={<ViewBinUsers />} />
           <Route path='/Resource-List' element={<UResourceList/>}/>
           <Route path='/TResourceDel-List' element={<TResourceDel />} />          
           <Route path='/Publish-List' element={<UPublishList/>}/>          

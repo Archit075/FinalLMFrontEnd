@@ -90,20 +90,19 @@ export default function TResourceBin() {
 
   useEffect(() => {
     searchResources();
-
     console.log("getting called");
   }, []);
 
   return (
     <div
-      style={{ paddingTop: "50px", paddingBottom: "100px" }}
+      style={{ paddingBottom: "100px" }}
       className="container"
       id="YBC"
     >
-      <Container style={{ paddingTop: "50px", paddingBottom: "200px" }}>
+      <Container style={{ paddingTop: "30px", paddingBottom: "100px" }}>
         <Row>
           {Resources.map((Resource) => (
-                <Col md={4} sm={12} lg={3} style={{ marginBottom: "24px", margin: "2.5rem" }} >
+                <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }} >
               {/* <Card>
                 <Card.Img
                   style={{ height: "8rem", width: "100%" }}
@@ -175,7 +174,7 @@ export default function TResourceBin() {
 
               <div
                 className="cardBox2"
-                style={{ marginBottom: "24px", margin: "2.5rem" }}
+                style={{ marginBottom: "10px", margin: "1rem" }}
               >
                 <div className="card2">
                   <h2>{Resource.pdfName}</h2>

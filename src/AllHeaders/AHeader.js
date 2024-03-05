@@ -26,10 +26,14 @@ export default function AHeader() {
   };
 
   const handleAddstudent = () => {
-    navigate("/AddStudent", {state: { classtd: standard } });
+    navigate("/AddStudent", { state: { classtd: standard } });
   };
   const handleViewStudent = () => {
-    navigate("/ViewStudent", {state: { classtd: standard} })
+    navigate("/ViewStudent", { state: { classtd: standard } });
+  };
+
+  const handleBinStudent = () => {
+    navigate("/BinStudent", { state: { class: standard } });
   };
 
   const handleResourceListClick = () => {
@@ -100,31 +104,31 @@ export default function AHeader() {
           >
             <ul
               className="navbar-nav me-auto mb-lg-0"
-              style={{ paddingTop: "0px", marginTop: "0px",  }}
+              style={{ paddingTop: "0px", marginTop: "0px" }}
             >
-              <NavLink 
+              <NavLink
               // style={{justifyContent: "space-between"}}
               >
                 <li className="nav-item">
                   {/* <span> */}
-                    <button
-                      // to="/TeacherHome"
-                      className="btn btn-sm btn-outline-secondary"
-                      size="sm"
-                      onClick={handleHomeClick}
-                      style={{
-                        border: "0px solid grey",
-                        borderRadius: "4px",
-                        padding: "4px",
-                        color: "black",
-                        textDecoration: "none",
-                        // marginLeft: "2rem",
-                        marginRight: "0.5rem",
-                        backgroundColor: "#a4e7f3",
-                      }}
-                    >
-                      Home
-                    </button>
+                  <button
+                    // to="/TeacherHome"
+                    className="btn btn-sm btn-outline-secondary"
+                    size="sm"
+                    onClick={handleHomeClick}
+                    style={{
+                      border: "0px solid grey",
+                      borderRadius: "4px",
+                      padding: "4px",
+                      color: "black",
+                      textDecoration: "none",
+                      // marginLeft: "2rem",
+                      marginRight: "0.5rem",
+                      backgroundColor: "#a4e7f3",
+                    }}
+                  >
+                    Home
+                  </button>
                   {/* </span> */}
                 </li>
 
@@ -232,18 +236,32 @@ export default function AHeader() {
                   </span>
                 </li> */}
 
-                <li 
-                  style={{ marginRight: "2%" }}
-                >
+                <li style={{ marginRight: "2%" }}>
                   <Dropdown>
-                    <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
+                    <Dropdown.Toggle
+                      size="sm"
+                      variant="success"
+                      id="dropdown-basic"
+                    >
                       Students
                     </Dropdown.Toggle>
-                    <Dropdown.Menu style={{backgroundColor: "#a4e7f3"}}>
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+                    <Dropdown.Menu style={{ backgroundColor: "#a4e7f3" }}>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "40px", marginRight: "0" }}
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "40px",
+                            marginRight: "0",
+                          }}
                           onClick={handleAddstudent}
                         >
                           Add Students
@@ -260,58 +278,141 @@ export default function AHeader() {
                         </button>
                       </Dropdown.Item> */}
 
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "35px", marginRight: "0" }}
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "35px",
+                            marginRight: "0",
+                          }}
                           onClick={handleViewStudent}
                         >
                           View Students
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
+                        <button
+                          className="btn btn-outline-secondary"
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "46px",
+                            marginRight: "0",
+                          }}
+                          onClick={handleBinStudent}
+                        >
+                          Bin Students
                         </button>
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
 
-                <li 
-                  style={{ marginRight: "2%" }}
-                >
+                <li style={{ marginRight: "2%" }}>
                   <Dropdown>
-                    <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
+                    <Dropdown.Toggle
+                      size="sm"
+                      variant="success"
+                      id="dropdown-basic"
+                    >
                       Resources
                     </Dropdown.Toggle>
-                    <Dropdown.Menu style={{backgroundColor: "#a4e7f3"}}>
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+                    <Dropdown.Menu style={{ backgroundColor: "#a4e7f3" }}>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "27px", marginRight: "0" }}
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "27px",
+                            marginRight: "0",
+                          }}
                           onClick={handleAddResource}
                         >
                           Add Resources
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "47.5px", marginRight: "0" }}
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "47.5px",
+                            marginRight: "0",
+                          }}
                           onClick={handlePublishListClick}
                         >
                           Unpublished
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "113px", marginRight: "0" }}
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "113px",
+                            marginRight: "0",
+                          }}
                           onClick={handleBinClick}
                         >
                           Bin
                         </button>
                       </Dropdown.Item>
-                      <Dropdown.Item style={{paddingLeft: "5px", marginRight: "0", paddingRight: "0"}}>
+                      <Dropdown.Item
+                        style={{
+                          paddingLeft: "5px",
+                          marginRight: "0",
+                          paddingRight: "0",
+                        }}
+                      >
                         <button
                           className="btn btn-outline-secondary"
-                          style={{ backgroundColor: "#a4e7f3", color: "black", border: "none", paddingRight: "102px", marginRight: "0" }}
+                          style={{
+                            backgroundColor: "#a4e7f3",
+                            color: "black",
+                            border: "none",
+                            paddingRight: "102px",
+                            marginRight: "0",
+                          }}
                           onClick={handleResourceListClick}
                         >
                           View
@@ -328,12 +429,8 @@ export default function AHeader() {
                       </Dropdown.Item> */}
                     </Dropdown.Menu>
                   </Dropdown>
-
                 </li>
-                <li 
-                  className="nav-item"
-                  style={{ marginRight: "7%" }}
-                >
+                <li className="nav-item" style={{ marginRight: "7%" }}>
                   <button
                     onClick={logoutAdmin}
                     type="span"
