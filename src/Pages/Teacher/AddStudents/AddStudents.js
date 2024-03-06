@@ -154,7 +154,7 @@ function AddUser() {
                   wrapperClass="mb-4"
                   label="Date of Birth"
                   id="form2"
-                  type="datetime-local"
+                  type="date"
                   onChange={(e) => {
                     var res = e.target.value.slice(0, 10)
                     console.log(res)

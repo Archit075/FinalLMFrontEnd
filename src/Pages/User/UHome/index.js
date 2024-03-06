@@ -9,7 +9,7 @@ const UserHome = () => {
       <br/>
       <SHeader/>
       <Background>
-                <img src="/images/LM3.png" style={{opacity: "0.5"}}/>
+                <img src="/images/LM3.png"/>
       </Background>
       <UHome/>
     </Container>

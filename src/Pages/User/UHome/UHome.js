@@ -37,25 +37,84 @@ const UHome = () => {
       });
   };
 
+  const downloadFile = (date, resourceName) => {
+    // const url = `${UrlResources}/api/pdf/get/pdf/${resourceName}`;
+    console.log("FILENAME "+resourceName);
+    window.location.href = `https://localhost:7030/api/Pdf/DownloadFile/${resourceName}/${date}`;
+  };
+
   useEffect(() => {
     searchResources();
     console.log("getting called");
   }, []);
 
   return (
-    <div className="container" id="YBC">
-      <h1 id="YBID">Your Resources</h1>
+    <div className="page-wrapper" id="YBC">
       <Container>
         <Row>
           {Resources.map((Resource, index) => (
-            <Col md={4} sm={12} lg={3}>
-              <Card className={index % 2 === 0 ? "card-even" : "card-odd"}>
+            <Col className="infographic-cards" md={4} sm={12} lg={3}>
+              <Card style={{ margin: "5rem" }}>
+                <div
+                  class="color-4"
+                  onClick={() => {
+                    navigate("/pdfUser", {
+                      state: { pdfName: Resource.pdfName },
+                    });
+                    console.log(
+                      "pdfName in resourcelist is : " + Resource.pdfName
+                    );
+                  }}
+                >
+                  <h4>{Resource.pdfName}</h4>
+                  <h5>{"Category: " + Resource.category}</h5>
+                  <h5>{"Subject: " + Resource.subject}</h5>
+                  <p>{Resource.description}</p>
+                  {/* <span style={{}}> */}
+                  <h6 style={{ marginTop: "0" }}>
+                    {"Date: " +
+                      Resource.created.slice(0, 10) +
+                      " - Time: " +
+                      Resource.created.slice(12, 16)}
+                  </h6>
+                  {/* <h6 style={{float: "right", paddingRight: "10%"}}>{Resource.created.slice(12, 16)}</h6> */}
+                  {/* </span> */}
+
+                  {/* <Button
+                    style={{ marginRight: "2%" }}
+                    variant="primary"
+                    className="btn btn-success btn-sm"
+                    id="vbtn"
+                    onClick={() => {
+                      navigate("/pdfUser", {
+                        state: { pdfName: Resource.pdfName },
+                      });
+                      console.log(
+                        "pdfName in resourcelist is : " + Resource.pdfName
+                      );
+                    }}
+                  >
+                    View
+                  </Button> */}
+
+                  {/* <p class="number-box" style={{ color: "black" }}> */}
+                  {/* {Resource.standard} */}
+                </div>
+                <button
+                  class="number-box"
+                  style={{ marginLeft: "42%" }}
+                  onClick={()=> downloadFile(Resource.created, Resource.pdfName)}
+                >
+                  ⬇️
+                </button>
+                {/* </p> */}
+
                 {/* <Card.Img
                   style={{ height: "8rem", width: "100%" }}
                   variant="top"
                   src={Res1}
                 /> */}
-                <Card.Body style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                {/* <Card.Body style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                   <Card.Title
                     style={{
                       paddingTop: "2px",
@@ -99,7 +158,7 @@ const UHome = () => {
                   >
                     View
                   </Button>
-                </Card.Body>
+                </Card.Body> */}
               </Card>
             </Col>
           ))}
@@ -108,4 +167,5 @@ const UHome = () => {
     </div>
   );
 };
+
 export default UHome;

@@ -1,32 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router'
-import './SHeader.css'
+import { useNavigate } from "react-router";
+import "./SHeader.css";
+import logo1 from "./logoerr1.png";
+import { Button, NavDropdown, Navbar, Dropdown } from "react-bootstrap";
 
 export default function SHeader() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-  
+  const [standard, setStandard] = useState(sessionStorage.standard || null); // const classtd = standard;
+
   const logoutAdmin = () => {
     // remove the logged users details from session storage
-    sessionStorage.removeItem('token')
-    sessionStorage.removeItem('User_id')
-    sessionStorage.removeItem('username')
-    sessionStorage.removeItem('email')
-    sessionStorage.removeItem('standard')
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("User_id");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("standard");
 
     // navigate to sign in component
-    navigate('/')
-  }
+    navigate("/");
+  };
+
+  const handleHomeClick = () => {
+    navigate("/UHome", { state: { classtd: standard } });
+  };
+
+  const handleProfile = () => {
+    navigate("/SProfile", {});
+  };
 
   return (
-    <div>
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark py-2" style={{backgroundColor:"#613D4C"}}>
-        <div className="container-fluid">
-          <a className="navbar-brand">
-            Edu-Res Repository
-          </a>
+    <div style={{padding: "0", margin: "0"}}>
+      <nav
+        className="navbar fixed-top mb-0 py-0 navbar-expand-lg py-2"
+        style={{
+          backgroundColor: "#a4e7f3",
+          marginBottom: "0",
+          marginTop: "0",
+          paddingBottom: "0",
+          paddingTop: "0",
+        }}
+      >
+        <div
+          className="container-fluid"
+          style={{
+            padding: "0 0 0 0"
+          }}
+        >
+          <Navbar.Brand
+            href="#home"
+            style={{
+              float: "left",
+              marginBottom: "0",
+              marginTop: "0",
+              paddingBottom: "0",
+              paddingTop: "0",
+            }}
+          >
+            <img
+              alt=""
+              src={logo1}
+              width="30px"
+              height="30px"
+              className="d-inline align-top"
+            />
+            {""}
+            <span style={{ color: "blue", fontWeight: "bold" }}>ER</span>-
+            <span style={{ color: "green", fontWeight: "bold" }}>Repo</span>
+          </Navbar.Brand>
           <button
             class="navbar-toggler"
             type="button"
@@ -43,42 +86,87 @@ export default function SHeader() {
             id="navbarSupportedContent"
             className="d-flex justify-content-end"
           >
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-lg-0 mb-0 py-0">
               <NavLink>
-              <li class="nav-item">
-                <span>
-                  <Link
-                    to="/UHome"
+                <li class="nav-item">
+                  <button
+                    // to="/TeacherHome"
+                    className="btn btn-sm btn-outline-secondary"
+                    size="sm"
+                    onClick={handleHomeClick}
+                    // to="/UHome"
                     style={{
                       color: "#FFF",
                       textDecoration: "none",
                       margin: "1rem",
+                      border: "1px solid grey",
+                      borderRadius: "4px",
+                      color: "black",
+                      marginRight: "0.5rem",
+                      backgroundColor: "#a4e7f3",
+                      // padding: "8px",
+                      // marginLeft: "2rem",
                       // fontSize: "20px"
                     }}
                   >
                     Home
-                  </Link>
-                </span>
-              </li>
-              <li class="nav-item">
-                  <span>
-                    <Link
-                      to="/SProfile"
-                      style={{
-                        color: "#FFF",
-                        textDecoration: "none",
-                        margin: "1rem",
-                      }}
-                    >
-                      Profile
-                    </Link>
-                  </span>
+                  </button>
+                  {/* </span> */}
                 </li>
                 <li class="nav-item">
-                  <span><button onClick={logoutAdmin} class="btn btn-link" style={{ color: '#FFF' ,textDecoration: 'none',justifyContent:'center',display:'contents',fontMize:"20px"}}>Logout</button></span>
+                  <button
+                    // to="/TeacherHome"
+                    className="btn btn-sm btn-outline-secondary"
+                    size="sm"
+                    onClick={handleProfile}
+                    // to="/SProfile"
+                    style={{
+                      color: "green",
+                      textDecoration: "none",
+                      margin: "1rem",
+                      border: "1px solid grey",
+                      borderRadius: "4px",
+                      color: "black",
+                      marginRight: "0.5rem",
+                      backgroundColor: "#a4e7f3",
+                      // marginLeft: "2rem",
+                      // padding: "8px",
+                    }}
+                  >
+                    Profile
+                  </button>
+                  {/* </span> */}
+                </li>
+                <li class="nav-item" style={{ marginRight: "7%" }}>
+                  {/* <button
+                      onClick={logoutAdmin}
+                      type="span"
+                      className="btn btn-sm btn-outline-secondary"
+                      style={{
+                        textDecoration: "none",
+                        justifyContent: "center",
+                        display: "contents",
+                        border: "1px solid black",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      Logout
+                    </button> */}
+                  <button
+                    onClick={logoutAdmin}
+                    type="span"
+                    className="btn btn-sm btn-outline-secondary"
+                    style={{
+                      color: "black",
+                      textDecoration: "none",
+                      border: "1px solid grey",
+                      marginTop: "1rem",
+                    }}
+                  >
+                    Logout
+                  </button>
                 </li>
               </NavLink>
-              
             </ul>
           </div>
         </div>
@@ -87,28 +175,32 @@ export default function SHeader() {
   );
 }
 
+{
+  /* <li className="nav-item" style={{ marginRight: "7%" }}>
+  <button
+    onClick={logoutAdmin}
+    type="span"
+    className="btn btn-sm btn-outline-secondary"
+    style={{
+      // backgroundColor: "rgb(15, 203, 153)",
+      color: "black",
+      textDecoration: "none",
+      border: "1px solid grey",
+      borderRadius: "4px",
+    }}
+  >
+    Logout
+  </button>
+</li>; */
+}
 const NavLink = styled.li`
   display: flex;
   margin-top: 5px;
   margin-left: 4px;
-
-
 `;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <li className="nav-item dropdown " id="dropd">
+{
+  /* <li className="nav-item dropdown " id="dropd">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -132,8 +224,10 @@ const NavLink = styled.li`
                     </Link>
                   </li>
                 </ul>
-              </li> */}
-              {/* <li class="nav-item">
+              </li> */
+}
+{
+  /* <li class="nav-item">
                   <span>
                     <Link
                       to="/SFeedback"
@@ -147,4 +241,5 @@ const NavLink = styled.li`
                       Feedback
                     </Link>
                   </span>
-                </li> */}
+                </li> */
+}
