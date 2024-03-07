@@ -1,24 +1,21 @@
 import React from "react";
-import UHome from "./UHome";
+// import Profile from "./profile";
 import styled from "styled-components";
 import SHeader from "../../../AllHeaders/SHeader";
-import Footer from "../../../Footer/Footer";
+import UpdateInfo from "./updateProfile";
 
-const UserHome = () => {
+export default function UProfile() {
   return (
     <Container>
-      <br />
       <SHeader />
       <Background>
-        <img src="/images/LM3.png" style={{filter: "blur(5px)"}}/>
+        <img src="/images/LM3.png" style={{filter: "blur(3px)"}}/>
       </Background>
-      <UHome />
-      <Footer />
+      <UpdateInfo />
     </Container>
   );
-};
+}
 
-export default UserHome;
 
 const Container = styled.div`
   position: relative;

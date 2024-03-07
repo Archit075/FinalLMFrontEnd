@@ -2,15 +2,17 @@ import React from "react";
 import Profile from "./profile";
 import styled from "styled-components";
 import SHeader from "../../../AllHeaders/SHeader";
+import Footer from "../../../Footer/Footer";
 
 export default function SProfile() {
   return (
     <Container>
       <SHeader />
       <Background>
-        <img src="/images/LM3.png" />
+        <img src="/images/LM3.png" style={{filter: "blur(3px)"}}/>
       </Background>
       <Profile />
+      <Footer />
     </Container>
   );
 }

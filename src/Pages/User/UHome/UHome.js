@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Res1 from "./YourBooks.jpg";
 // import { Link } from 'react-router-dom'
+import Download1 from './downloading.png'
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
@@ -49,8 +50,8 @@ const UHome = () => {
   }, []);
 
   return (
-    <div className="page-wrapper" id="YBC">
-      <Container>
+    <div className="page-wrapper" id="YBC" style={{paddingLeft: "0"}}>
+      <Container style={{paddingLeft: "0", marginLeft: "4%"}}>
         <Row>
           {Resources.map((Resource, index) => (
             <Col className="infographic-cards" md={4} sm={12} lg={3}>
@@ -71,12 +72,13 @@ const UHome = () => {
                   <h5>{"Subject: " + Resource.subject}</h5>
                   <p>{Resource.description}</p>
                   {/* <span style={{}}> */}
-                  <h6 style={{ marginTop: "0" }}>
+                  <h6 style={{ paddingTop: "0" }}>
                     {"Date: " +
                       Resource.created.slice(0, 10) +
                       " - Time: " +
                       Resource.created.slice(12, 16)}
                   </h6>
+                  <p style={{fontWeight: "bolder"}}>Click on Card to View</p>
                   {/* <h6 style={{float: "right", paddingRight: "10%"}}>{Resource.created.slice(12, 16)}</h6> */}
                   {/* </span> */}
 
@@ -105,7 +107,7 @@ const UHome = () => {
                   style={{ marginLeft: "42%" }}
                   onClick={()=> downloadFile(Resource.created, Resource.pdfName)}
                 >
-                  ⬇️
+                  <img style={{marginLeft: "23%"}} src={Download1}/>
                 </button>
                 {/* </p> */}
 

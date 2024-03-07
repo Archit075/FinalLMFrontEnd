@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import UserHome from './Pages/User/UHome';
 import USignin from './Pages/Home/USignIn';
-import SProfile from './Pages/User/Profile';
 import THome from './Pages/Teacher/THome';
 import ClassCard from './Pages/Teacher/ClassesCard/ClassesCard';
 import UResourceList from './Pages/Teacher/ResourceList';
@@ -20,6 +19,10 @@ import AddStudents from './Pages/Teacher/AddStudents';
 import ViewUsers from './Pages/Teacher/viewStudents';
 import BinStudent from './Pages/Teacher/BinStudent/BinStudent';
 import ViewBinUsers from './Pages/Teacher/BinStudent';
+import UpdateInfo from './Pages/User/UpdateProfile/updateProfile';
+// import UProfile from './Pages/User/Profile';
+import SProfile from './Pages/User/Profile';
+import UProfile from './Pages/User/UpdateProfile';
 
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
           <Route path='/User-UserSignin' element ={<USignin/>}/>
           <Route path='/UHome' element = {<UserHome/>}/>
           <Route path="/SProfile" element={<SProfile />} />
+          <Route path='/UpdateProfile' element={<UProfile />} />
 
 
           <Route path="/TeacherHome" element={<THome/>} />

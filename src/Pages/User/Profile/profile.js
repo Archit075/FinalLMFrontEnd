@@ -39,6 +39,10 @@ const Profile = () => {
       });
   };
 
+  const handleUpdateProfile = () => {
+    navigate("/UpdateProfile", {});
+  };
+
   //   const edit = () => {
   //     navigate('/SEdit')
   //   }
@@ -49,7 +53,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {/* <CardGroup
         style={{
           backgroundColor: "white",
@@ -99,7 +103,7 @@ const Profile = () => {
           </Card.Footer>
         </Card>
       </CardGroup> */}
-      <div class="wrapper" style={{marginTop: "10%"}}>
+      {/* <div class="wrapper" style={{marginTop: "10%"}}>
         <div class="user-card">
             <div class="user-card-img">
               <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png" alt=""/>
@@ -113,17 +117,62 @@ const Profile = () => {
               <h4><span>🏫:  </span> {profile.standard}</h4>
             </div>
         </div>
-    </div>
-    </div>
+      </div> */}
+
+      <div
+        class="card2"
+        style={{
+          marginTop: "10%",
+          marginLeft: "35%",
+          marginBottom: "5%",
+          fontWeight: "bolder",
+          // fontFamily: "Poppins",
+          // alignItems: "cente",
+          // justifyContent: "center",
+          // backgroundColor: "#ADE5F9",
+          // minHeight: "100vh",
+        }}
+      >
+        <div class="img1">
+          <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+        </div>
+        <div class="infos1" style={{ marginLeft: "0" }}>
+          <div class="name1">
+            <h1>{profile.username}</h1>
+            <h4 style={{ fontWeight: "bolder" }}>{profile.email}</h4>
+          </div>
+          <p class="text1">Standard: {profile.standard}</p>
+          <ul class="stats1" style={{paddingLeft: "0"}}>
+            <li>
+              <h3 style={{ fontWeight: "bolder" }}>{User_id}</h3>
+              <h4 style={{ fontWeight: "bolder" }}>Id</h4>
+            </li>
+            <li>
+              <h3 style={{ fontWeight: "bolder" }}>{profile.dob}</h3>
+              <h4 style={{ fontWeight: "bolder" }}>Date of Birth</h4>
+            </li>
+            <li>
+              <h3 style={{ fontWeight: "bolder" }}>{profile.roll}</h3>
+              <h4 style={{ fontWeight: "bolder" }}>Roll no.</h4>
+            </li>
+          </ul>
+          <div class="links1" style={{ paddingLeft: "0"}}>
+            <button
+              class="follow1"
+              to="/UpdateProfile"
+              onClick={handleUpdateProfile}
+            >
+              Update Profile
+            </button>
+            {/* <button class="view">View profile</button> */}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default Profile;
-
-
-
-
-
 
 // <!DOCTYPE html>
 // <html lang="en">
@@ -152,6 +201,6 @@ export default Profile;
 //             </div>
 //         </div>
 //     </div>
-      
+
 // </body>
 // </html>

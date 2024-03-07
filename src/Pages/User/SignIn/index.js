@@ -46,7 +46,7 @@ const USignin = () => {
            navigate('/UHome')
 
           // get the data sent by server
-          const { token, id, username, email, standard , role} = result;
+          const { token, id, username, email, standard , role, roll} = result;
          console.log("token is : "+token);
 
 
@@ -55,6 +55,7 @@ const USignin = () => {
           sessionStorage["User_id"] = id;
           sessionStorage["username"] = username;
           sessionStorage["email"] = email;
+          sessionStorage["roll"] = roll;
           sessionStorage["standard"] = standard;
           sessionStorage["role"] = role;
           
