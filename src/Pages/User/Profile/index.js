@@ -8,7 +8,7 @@ export default function SProfile() {
     <Container>
       <SHeader />
       <Background>
-        <img src="/images/LM3.png" style={{opacity: "0.5"}}/>
+        <img src="/images/LM3.png" />
       </Background>
       <Profile />
     </Container>

@@ -50,7 +50,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
-      <ToastContainer theme='colored'/>
+      <ToastContainer position= "top-center" theme='colored' />
     </div>
   );
 }

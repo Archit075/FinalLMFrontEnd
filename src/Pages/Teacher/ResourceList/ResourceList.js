@@ -89,7 +89,7 @@ export default function ResourceList() {
           toast.success("Resources deleted successfully!!", {autoClose: 800});
           console.log(result["message"]);
           setResources((prevResources) =>
-            prevResources.filter((resource) => resource.pdfName !== pdf_Name)
+            prevResources.filter((resource) => resource.id !== id)
           );
           // searchIssuedBooksBySpring();
         } else {
@@ -201,12 +201,14 @@ export default function ResourceList() {
                 </Card> */}
                 <div className="cardBox1" style={{ marginBottom: "24px" }}>
                   <div className="card1" >
-                    <span1>{Resource.pdfName}</span1>
-                    <h2>{Resource.category}</h2>
+                    <span1>{Resource.subject}</span1>
+                    <h2>{Resource.pdfName}</h2>
                     <div class="content">
                       <h3>{Resource.created.slice(0, 10)}</h3>
                       <h3>{Resource.created.slice(11, 20)}</h3>
+                      <p>{Resource.category}</p>
                       <p>{Resource.description}</p>
+
                       <Button
                         style={{ marginTop: "0" }}
                         variant="primary"

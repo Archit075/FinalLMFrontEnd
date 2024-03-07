@@ -36,9 +36,9 @@ export default function BinStudent() {
       });
   };
 
-  const ActivateStudent = (username) => {
+  const ActivateStudent = (username, id) => {
     console.log("id is :" + username);
-    const url = `${URLUser}/api/UserControllers/Activate/${username}`;  
+    const url = `${URLUser}/api/UserControllers/Activate/${username}/${id}`;  
 
     axios.patch(url)
     .then((response) => {
@@ -46,7 +46,10 @@ export default function BinStudent() {
       console.dir(result);
       console.log(result["statusCode"]);
       if (result["statusCode"] === 1) {
-        toast.success(`student having id ${username} activated`);
+        toast.success(`student having id ${username} activated`, {
+          autoClose: 800,
+          // position: "top-center",
+        });
         searchStudents();
       } else {
         toast.error(result["message"]);
@@ -90,7 +93,7 @@ export default function BinStudent() {
               <td>
                 <button
                   class="btn btn-outline-primary mr-2 btn-sm"
-                  onClick={() => ActivateStudent(student.username)}
+                  onClick={() => ActivateStudent(student.username,student.id)}
                 >
                   Activate
                 </button>

@@ -57,8 +57,8 @@ export default function Publishable() {
       });
   };
 
-  const PublishBook = (pdf_Name, std) => {
-    const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${std}`;
+  const PublishBook = (pdf_Name, id) => {
+    const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${id}`;
     console.log("pdf name is : " + pdf_Name);
     console.log("url is : " + urlResource);
 
@@ -74,7 +74,7 @@ export default function Publishable() {
           });
           console.log("message is " + result["message"]);
           setResources((prevResources) =>
-            prevResources.filter((resource) => resource.pdfName !== pdf_Name)
+            prevResources.filter((resource) => resource.id !== id)
           );
           // searchIssuedBooksBySpring();
         } else {
@@ -175,7 +175,7 @@ export default function Publishable() {
                       variant="primary"
                       className="btn mr-5 btn-sm"
                       id="rbtn"
-                      onClick={() => PublishBook(Resource.pdfName, standard)}
+                      onClick={() => PublishBook(Resource.pdfName, Resource.id)}
                     >
                       Publish
                     </Button>

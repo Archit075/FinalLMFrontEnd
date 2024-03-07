@@ -45,7 +45,9 @@ export default function AllUsers() {
       const result = response.data;
       console.dir(response.data);
       if (result["statusCode"] === 1) {
-        toast.success(`student having id ${stud_id} deleted`);
+        toast.success(`student having id ${stud_id} deleted`, {
+          autoClose: 800,
+        });
         searchStudents();
       } else {
         toast.error(result["message"]);
