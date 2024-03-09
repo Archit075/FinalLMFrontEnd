@@ -5,15 +5,15 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { URLUser, UrlGateway } from "../../../config";
 
-const UpdateInfo = () => {
+const UpdateTInfo = () => {
   // const [first_name, setFirstName] = useState("");
   const [Username, setUsername] = useState("");
   const [Email, setEmail] = useState("");
-  const [dob, setDob] = useState("");
+  const [Contact, setContact] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { User_id, username,  standard, roll } = sessionStorage;
+  const { id, username, email, standard, role, contact } = sessionStorage;
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const UpdateInfo = () => {
       toast.warning("please enter username");
     } else if (Email.length === 0) {
       toast.warning("please enter email");
-    } else if (dob.length === 0) {
+    } else if (Contact.length === 0) {
       toast.warning("please enter mobile");
     } else if (password.length === 0) {
       toast.warning("please enter password");
@@ -33,12 +33,12 @@ const UpdateInfo = () => {
         Username,
         Email,
         password,
-        dob,
+        Contact,
       };
 
       // url to make signin api call
       // const urlUser = `${URLUser}/api/UserControllers/UpdateUser`;
-      const urlUser = `${UrlGateway}//gateway/user/update`;
+      const urlUser = `${UrlGateway}/gateway/user/update`;
       // `;
       // // const urlSpring = `${SPRING_URL}/student/update/${stud_id}`;
 
@@ -47,7 +47,7 @@ const UpdateInfo = () => {
         console.log(result);
         if (result !== null) {
           toast.success("Profile successfully updated!!!");
-          navigate("/UProfile");
+          navigate("/TProfile");
         } else {
           toast.error(result["error"]);
         }
@@ -60,51 +60,67 @@ const UpdateInfo = () => {
       <div
         className="container"
         style={{
-          marginTop: "30%",
+          marginTop: "10%",
+          padding: "5%",
           // backgroundColor: "grey",
           // backgroundColor: "cyan",
           border: "2px solid gray",
           boxShadow: "10px 10px 5px gray",
           borderRadius: "3%",
+          marginBottom: "5%",
           // filter: "blur(8px)"
         }}
       >
-        <h1 className="title" style={{fontWeight: "bold"}}>Update Information</h1>
+        <h1 className="title" style={{ fontWeight: "bold" }}>
+          Update Information
+        </h1>
         <div className="edit">
           <div className="row">
             <div className="col"></div>
             <div className="col">
               <div className="form">
                 <div className="mb-2">
-                  <label htmlFor="" className="label-control fw-bold" id="editLab">
+                  <label
+                    htmlFor=""
+                    className="label-control fw-bold"
+                    id="editLab"
+                  >
                     Username
                   </label>
-                  <input style={{width: "250px"}}
+                  <input
                     onChange={(e) => {
                       setUsername(e.target.value);
                     }}
-                    class="editable-placeholder" 
-                    value={ username }
+                    class="editable-placeholder"
+                    value={username}
                     type="text"
                     className="form-control"
                   />
                 </div>
 
                 <div className="mb-2">
-                  <label htmlFor="" className="label-control fw-bold" id="editLab">
-                    Date of Birth
+                  <label
+                    htmlFor=""
+                    className="label-control fw-bold"
+                    id="editLab"
+                  >
+                    Contact Number
                   </label>
                   <input
                     onChange={(e) => {
-                      setDob(e.target.value);
+                      setContact(e.target.value);
                     }}
-                    type="date"
+                    type="number"
                     className="form-control"
                   />
                 </div>
 
                 <div className="mb-2">
-                  <label htmlFor="" className="label-control fw-bold" id="editLab">
+                  <label
+                    htmlFor=""
+                    className="label-control fw-bold"
+                    id="editLab"
+                  >
                     Email
                   </label>
                   <input
@@ -117,7 +133,11 @@ const UpdateInfo = () => {
                 </div>
 
                 <div className="mb-2">
-                  <label htmlFor="" className="label-control fw-bold" id="editLab">
+                  <label
+                    htmlFor=""
+                    className="label-control fw-bold"
+                    id="editLab"
+                  >
                     Password
                   </label>
                   <input
@@ -143,7 +163,11 @@ const UpdateInfo = () => {
             </div> */}
 
                 <div className="mb-2">
-                  <label htmlFor="" className="label-control fw-bold" id="editLab">
+                  <label
+                    htmlFor=""
+                    className="label-control fw-bold"
+                    id="editLab"
+                  >
                     Confirm Password
                   </label>
                   <input
@@ -170,4 +194,4 @@ const UpdateInfo = () => {
   );
 };
 
-export default UpdateInfo;
+export default UpdateTInfo;

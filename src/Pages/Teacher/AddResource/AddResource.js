@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 // import { toast } from 'react-toastify'
-import { UrlResources } from "../../../config";
+import { UrlGateway, UrlResources } from "../../../config";
 import "./AddResource.css";
 import { logDOM } from "@testing-library/react";
 import { toast } from "react-toastify";
@@ -54,7 +54,9 @@ function TAddResource() {
       data.append("ResourceDescription", ResourceDescription);
       data.append("DateCreated", DateCreated);
 
-      const url = `${UrlResources}/api/Pdf`;
+      // const url = `${UrlResources}/api/Pdf`;
+      const url = `${UrlGateway}/gateway/pdf/Add`;
+
 
       axios
         .post(url, data)
@@ -173,8 +175,10 @@ function TAddResource() {
                 <MDBInput
                   wrapperClass="mb-4"
                   label="Description"
+                  placeholder="maximum 50 letters"
                   id="form2"
                   type="text"
+                  maxLength={50}
                   onChange={(e) => {
                     setResourceDescription(e.target.value);
                   }}

@@ -18,7 +18,7 @@ import {
 import React, { useEffect, useState } from "react";
 import "./HNavbar.css";
 import { useNavigate } from "react-router";
-import { URLTeacher, URLUser, UrlResources } from "../config";
+import { URLTeacher, URLUser, UrlGateway, UrlResources } from "../config";
 import axios from "axios";
 import logo1 from "./logoerr1.png";
 
@@ -228,10 +228,13 @@ function MyTeacherModal(props) {
       // console.log("phoneNumber is " + formData.number);
       console.log("phoneNumber is " + phoneNumber);
 
-      const url = `${URLTeacher}/api/Home/register`; // url--------
+      // const url = `${URLTeacher}/api/Home/register`; // url--------
+      const url = `${UrlGateway}/gateway/teacher/register`; 
+
+
 
       console.log("url is : " + url);
-      console.log("data is : " + data);
+      console.log("data is : " + data.name);
 
       axios
         .post(url, data)
@@ -289,7 +292,9 @@ function MyTeacherModal(props) {
       };
 
       // url to make signin api call
-      const urlTeacher = `${URLTeacher}/api/Home/token`;
+      // const urlTeacher = `${URLTeacher}/api/Home/token`;
+      const urlTeacher = `${UrlGateway}/gateway/teacher/login`;
+
 
       // make api call using axios
       axios
@@ -323,10 +328,9 @@ function MyTeacherModal(props) {
         })
         .catch((error) => {
           // console.log(error.response.data);
-          toast.error(error.response.data)
+          toast.error(error.response.data);
           // console.log("inside catch");
           // console.dir(error);
-          
         });
     }
   };
@@ -591,7 +595,9 @@ function MyStudentModal(props) {
       console.log("Email is : " + body.email);
       console.log("Password is " + body.password);
 
-      const url = `${URLUser}/api/UserControllers/Login`;
+      // const url = `${URLUser}/api/UserControllers/Login`;
+      const url = `${UrlGateway}/gateway/user/login`;  
+
 
       console.log(url);
       // make api call using axios
@@ -628,7 +634,7 @@ function MyStudentModal(props) {
             toast.error("Invalid user name or password", {
               autoClose: 1500,
             });
-            toast.error(result["message"])
+            toast.error(result["message"]);
           }
         })
         .catch((error) => {
@@ -653,9 +659,18 @@ function MyStudentModal(props) {
             className="text-center text-md-start d-flex flex-column justify-content-center"
           >
             <h1 className="my-5 display-3 fw-bold ls-tight px-3">
-              The best offer <br />
-              <span style={{ color: "black" }}>for your business</span>
+              The best place <br />
+              <span style={{ color: "black" }}>for your Study Material</span>
             </h1>
+            <div className="text-white mx-4 mb-3 mb-md-0">
+              <span style={{ color: "blue", fontWeight: "bold" }}>
+                Learning
+              </span>
+              <span style={{ color: "green", fontWeight: "bold" }}>Mate</span>
+              <span style={{ color: "black", fontWeight: "bold" }}>
+                © 2004.
+              </span>
+            </div>
 
             {/* <p className="px-3" style={{ color: "hsl(217, 10%, 50.8%)" }}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,

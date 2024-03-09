@@ -127,7 +127,7 @@ export default function SHeader() {
                       border: "1px solid grey",
                       borderRadius: "4px",
                       color: "black",
-                      marginRight: "0.5rem",
+                      marginRight: "1rem",
                       backgroundColor: "#a4e7f3",
                       // marginLeft: "2rem",
                       // padding: "8px",

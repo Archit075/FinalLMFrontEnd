@@ -55,6 +55,10 @@ export default function AHeader() {
     // {state: {classtd: standard}}
   };
 
+  const handleprofileeClick = () => {
+    navigate("/Tprofile")
+  }
+
   const logoutAdmin = () => {
     // remove the logged users details from session storage
     sessionStorage.removeItem("id");
@@ -128,6 +132,26 @@ export default function AHeader() {
                     }}
                   >
                     Home
+                  </button>
+                  </li>
+                  <li>
+                  <button
+                    // to="/TeacherHome"
+                    className="btn btn-sm btn-outline-secondary"
+                    size="sm"
+                    onClick={handleprofileeClick}
+                    style={{
+                      border: "0px solid grey",
+                      borderRadius: "4px",
+                      padding: "4px",
+                      color: "black",
+                      textDecoration: "none",
+                      // marginLeft: "2rem",
+                      marginRight: "0.5rem",
+                      backgroundColor: "#a4e7f3",
+                    }}
+                  >
+                    Profile
                   </button>
                   {/* </span> */}
                 </li>

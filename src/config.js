@@ -3,3 +3,5 @@ export const URLTeacher = 'https://localhost:7159'
 
 export const UrlResources = 'https://localhost:7030'
 
+export const UrlGateway = 'https://localhost:7019'
+

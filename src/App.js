@@ -17,12 +17,15 @@ import TResourceDel from './Pages/Teacher/Bin';
 // import AllUsers from './Pages/Teacher/viewStudents/viewStudents';
 import AddStudents from './Pages/Teacher/AddStudents';
 import ViewUsers from './Pages/Teacher/viewStudents';
-import BinStudent from './Pages/Teacher/BinStudent/BinStudent';
+// import BinStudent from './Pages/Teacher/BinStudent/BinStudent';
 import ViewBinUsers from './Pages/Teacher/BinStudent';
-import UpdateInfo from './Pages/User/UpdateProfile/updateProfile';
+// import UpdateInfo from './Pages/User/UpdateProfile/updateProfile';
 // import UProfile from './Pages/User/Profile';
 import SProfile from './Pages/User/Profile';
 import UProfile from './Pages/User/UpdateProfile';
+// import TProfile from './Pages/Teacher/Profile/TProfile';
+import TeacherProfile from './Pages/Teacher/Profile';
+import UpdateTProfile from './Pages/Teacher/UpdateProfile';
 
 function App() {
   return (
@@ -34,6 +37,8 @@ function App() {
           <Route path='/User-UserSignin' element ={<USignin/>}/>
           <Route path='/UHome' element = {<UserHome/>}/>
           <Route path="/SProfile" element={<SProfile />} />
+          <Route path='/Tprofile' element={<TeacherProfile />} />
+          <Route path='/updateTProfile' element={<UpdateTProfile />} />
           <Route path='/UpdateProfile' element={<UProfile />} />
 
 

@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { UrlResources } from "../../../config";
+import { UrlGateway, UrlResources } from "../../../config";
 import "./ResourceList.css";
 import { Col, Container, Row } from "react-bootstrap";
 import NotFound from "./NotFound/NotFound";
@@ -33,8 +33,9 @@ export default function ResourceList() {
     }
 
     console.log(standard);
-    // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
-    const url = `${UrlResources}/api/Pdf/Pdf/Standard/${classtd}`;
+    // const url = `${UrlResources}/api/Pdf/Pdf/Standard/${classtd}`;
+    const url = `${UrlGateway}/gateway/pdf/getallbystd/${classtd}`;
+
     console.log("url is : " + url);
     // console.dir(Resources);
 
@@ -42,15 +43,15 @@ export default function ResourceList() {
       .post(url)
       .then((response) => {
         const result = response.data;
-        const str1 = result[1].created;
-        const str2 = result[1].dateCreated;
+        const str1 = result[0].created;
+        const str2 = result[0].dateCreated;
         console.log("result is :" + result[0]);
         console.log(result);
 
         if (result != null) {
           setResources(result);
           toast.info("Welcome to Resources", {autoClose: 800});
-          console.log(result[1].message);
+          console.log(result[0].message);
           console.dir(
             "********** " +
               str1.slice(0, 10) +
@@ -70,10 +71,9 @@ export default function ResourceList() {
   };
 
   const returnBook = (pdf_Name, id) => {
-    const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
-    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
-    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf2?date=2024-02-23T16%3A49%3A18.824678
-    // https://localhost:7030/api/Pdf/productPdf/delete/Pdf5?/date=2024-02-23T17:09:28.0920332
+    // const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
+    const urlResource = `${UrlGateway}/gateway/pdf/delete/${pdf_Name}/${id}`;
+
     console.log("pdf name is : " + pdf_Name);
     console.log("pdf date is  : " + id);
     // console.log(urlResource, UrlResources);

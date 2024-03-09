@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { SPRING_URL, URL, URLUser } from "../../../config";
+import { SPRING_URL, URL, URLUser, UrlGateway } from "../../../config";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import Header from "../../../AllHeaders/HNavbar";
@@ -14,10 +14,11 @@ export default function BinStudent() {
   const { standard } = sessionStorage;
 
   const searchStudents = () => {
-    const url = `${URLUser}/api/UserControllers/GetByStd/${standard}`;
+    // const url = `${URLUser}/api/UserControllers/GetByStd/${standard}`;
+    const url = `${UrlGateway}/gateway/user/getUsersByStd/${standard}`;
     console.log("url is : " + url);
     axios
-      .post(url)
+      .get(url)
       .then((response) => {
         const result = response.data.filter(res => res.flag === false);
         console.dir(result)
@@ -31,14 +32,17 @@ export default function BinStudent() {
       })
       .catch((error) => {
         console.log("try catch error.");
+        toast.error("Bin list is empty !!")
         console.dir(error);
-        toast.error(error.response.data.error);
+        // toast.error(error.response.data.error);
       });
   };
 
   const ActivateStudent = (username, id) => {
     console.log("id is :" + username);
-    const url = `${URLUser}/api/UserControllers/Activate/${username}/${id}`;  
+    // const url = `${URLUser}/api/UserControllers/Activate/${username}/${id}`;  
+    const url = `${UrlGateway}/gateway/user/activate/${username}/${id}`;
+
 
     axios.patch(url)
     .then((response) => {

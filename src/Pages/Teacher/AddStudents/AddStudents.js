@@ -53,7 +53,9 @@ function AddUser() {
       data.append("dob", dob);
 
 
-      const url = `${URLUser}/api/UserControllers/Register`;
+      // const url = `${URLUser}/api/UserControllers/Register`;
+      const url = `${UrlGateway}/gateway/user/register`;
+
    
 
       axios.post(url, data).then((response) => {

@@ -107,7 +107,7 @@ const UHome = () => {
                   style={{ marginLeft: "42%" }}
                   onClick={()=> downloadFile(Resource.created, Resource.pdfName)}
                 >
-                  <img style={{marginLeft: "23%"}} src={Download1}/>
+                  <img style={{marginLeft: "5%"}} width={"40px"} src={Download1}/>
                 </button>
                 {/* </p> */}
 

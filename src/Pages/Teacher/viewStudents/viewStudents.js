@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { SPRING_URL, URL, URLUser } from "../../../config";
+import { SPRING_URL, URL, URLUser, UrlGateway } from "../../../config";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import Header from "../../../AllHeaders/HNavbar";
@@ -14,10 +14,12 @@ export default function AllUsers() {
   const { standard } = sessionStorage;
 
   const searchStudents = () => {
-    const url = `${URLUser}/api/UserControllers/GetActiveByStd/${standard}`;
+    // const url = `${URLUser}/api/UserControllers/GetActiveByStd/${standard}`;
+    const url = `${UrlGateway}/gateway/user/getActiveStudents/${standard}`;
+
     console.log("url is : " + url);
     axios
-      .post(url)
+      .get(url)
       .then((response) => {
         const result = response.data;
         console.dir(result)
@@ -32,23 +34,29 @@ export default function AllUsers() {
       })
       .catch((error) => {
         console.log("try catch error.");
+        toast.error("No students are their in the list !!")
         console.dir(error);
-        toast.error(error.response.data.error);
+        // toast.error(error.response.data);
       });
   };
 
-  const deleteStudent = (stud_id) => {
-    console.log("id is :" + stud_id);
-    const url = `${URLUser}/api/UserControllers/Delete/${stud_id}`;
+  const deleteStudent = (id) => {
+    console.log("id is :" + id);
+    // const url = `${URLUser}/api/UserControllers/Delete/${stud_id}`;
+    const url = `${UrlGateway}/gateway/user/delete/${id}`;
+
 
     axios.delete(url).then((response) => {
       const result = response.data;
       console.dir(response.data);
       if (result["statusCode"] === 1) {
-        toast.success(`student having id ${stud_id} deleted`, {
+        toast.success(`student having id ${id} deleted`, {
           autoClose: 800,
         });
-        searchStudents();
+        // searchStudents();
+        setStudents((prevStudent) =>
+            prevStudent.filter((student) => student.id !== id)
+          );
       } else {
         toast.error(result["message"]);
       }

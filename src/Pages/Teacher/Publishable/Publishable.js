@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { UrlResources } from "../../../config";
+import { UrlGateway, UrlResources } from "../../../config";
 import "./Publishable.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -30,8 +30,10 @@ export default function Publishable() {
     }
 
     console.log(standard);
-    // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
-    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`; //https://localhost:7030/api/Pdf/productPdf/delete/1
+
+    // const url = `${UrlResources}/api/Pdf/Pdf/Standard/Publishable/${classtd}`; 
+    const url = `${UrlGateway}/gateway/pdf/getPublishablesbystd/${classtd}`; 
+
     console.log("url is : " + url);
     console.dir(Resources);
 
@@ -58,7 +60,9 @@ export default function Publishable() {
   };
 
   const PublishBook = (pdf_Name, id) => {
-    const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${id}`;
+    // const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${id}`;
+    const urlResource = `${UrlGateway}/gateway/pdf/Publish/${pdf_Name}/${id}`;
+
     console.log("pdf name is : " + pdf_Name);
     console.log("url is : " + urlResource);
 

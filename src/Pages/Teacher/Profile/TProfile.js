@@ -7,42 +7,46 @@ import Res1 from "./YourBooks.jpg";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import "./profile.css";
+import "./TProfile.css";
 import { URLUser, URLuser, UrlGateway } from "../../../config";
 import { CardBody, Container } from "react-bootstrap";
 
-const Profile = () => {
-  const { User_id } = sessionStorage;
+const TProfile = () => {
+  const { id } = sessionStorage;
 
   const [profile, setProfile] = useState([]);
+  console.log("hey there");
 
   const navigate = useNavigate();
 
   const searchProfile = () => {
     // const url = `${URLUser}/api/UserControllers/GetById/${User_id}`;
-    const url = `${UrlGateway}/gateway/user/byid/${User_id}`;
+    const url = `${UrlGateway}/gateway/Home/getbyid/${id}`;
 
-    console.log(url);
+    console.log("T profile Url is: " + url);
 
     axios
       .get(url)
       .then((response) => {
         const result = response.data;
-        console.log("The result is:" + result);
-        if (result !== null) {
+        console.log("inside axios");
+        console.dir(result);
+        if (result != null) {
           setProfile(result);
-          console.log(User_id);
+          console.log(id);
         } else {
           toast.error(result["error"]);
         }
       })
       .catch((error) => {
+        console.log("try catch");
+        console.dir(error)
         toast.error(error.response.data.error);
       });
   };
 
   const handleUpdateProfile = () => {
-    navigate("/UpdateProfile", {});
+    navigate("/UpdateTProfile", {});
   };
 
   //   const edit = () => {
@@ -132,7 +136,8 @@ const Profile = () => {
           // alignItems: "cente",
           // justifyContent: "center",
           // backgroundColor: "#ADE5F9",
-          // minHeight: "100vh",
+            // const { token, id, name, phoneNumber, role, standard } = result;
+            // minHeight: "100vh",   
         }}
       >
         <div class="img1">
@@ -146,16 +151,16 @@ const Profile = () => {
           <p class="text1">Standard: {profile.standard}</p>
           <ul class="stats1" style={{paddingLeft: "0"}}>
             <li>
-              <h3 style={{ fontWeight: "bolder" }}>{User_id}</h3>
+              <h3 style={{ fontWeight: "bolder" }}>{id}</h3>
               <h4 style={{ fontWeight: "bolder" }}>Id</h4>
             </li>
             <li>
-              <h3 style={{ fontWeight: "bolder" }}>{profile.dob}</h3>
-              <h4 style={{ fontWeight: "bolder" }}>Date of Birth</h4>
+              <h3 style={{ fontWeight: "bolder" }}>{profile.phoneNumber}</h3>
+              <h4 style={{ fontWeight: "bolder" }}>Contact Number</h4>
             </li>
             <li>
-              <h3 style={{ fontWeight: "bolder" }}>{profile.roll}</h3>
-              <h4 style={{ fontWeight: "bolder" }}>Roll no.</h4>
+              <h3 style={{ fontWeight: "bolder" }}>{profile.role}</h3>
+              <h4 style={{ fontWeight: "bolder" }}>Role</h4>
             </li>
           </ul>
           <div class="links1" style={{ paddingLeft: "0"}}>
@@ -174,7 +179,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default TProfile;
 
 // <!DOCTYPE html>
 // <html lang="en">

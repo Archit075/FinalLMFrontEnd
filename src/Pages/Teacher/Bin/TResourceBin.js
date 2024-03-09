@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { UrlResources } from "../../../config";
+import { UrlGateway, UrlResources } from "../../../config";
 import "./TResourceBin.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -30,9 +30,10 @@ export default function TResourceBin() {
     }
 
     console.log(standard);
-    // const urlSpring = `${SPRING_URL}/student/viewIssuedBooks/${stud_id}`;
-    const url = `${UrlResources}/api/Pdf/Pdf/Standard/Deleted/${classtd}`;
-    //localhost:7030/api/Pdf/productPdf/delete/1
+
+    // const url = `${UrlResources}/api/Pdf/Pdf/Standard/Deleted/${classtd}`;
+    const url = `${UrlGateway}/gateway/pdf/getDeletedbystd/${classtd}`;
+
     https: console.log("url is : " + url);
     console.dir(Resources);
 
@@ -59,7 +60,9 @@ export default function TResourceBin() {
   };
 
   const binBook = (pdf_Name, id) => {
-    const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${id}`;
+    // const urlResource = `${UrlResources}/api/Pdf/Publish/${pdf_Name}/${id}`;
+    const urlResource = `${UrlGateway}/gateway/pdf/Publish/${pdf_Name}/${id}`;
+
     console.log("pdf name is : " + pdf_Name);
     console.log("url is : " + urlResource);
 
@@ -96,7 +99,7 @@ export default function TResourceBin() {
   }, []);
 
   return (
-    <div style={{ paddingBottom: "100px" }} className="container" id="YBC">
+    <div style={{ paddingBottom: "200px" }} className="container" id="YBC">
       <Container style={{ paddingTop: "30px", paddingBottom: "100px" }}>
         <Row>
           {Resources.map((Resource) => (
