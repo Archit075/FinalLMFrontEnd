@@ -7,52 +7,104 @@ import { URLUser, UrlGateway } from "../../../config";
 
 const UpdateTInfo = () => {
   // const [first_name, setFirstName] = useState("");
-  const [Username, setUsername] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Contact, setContact] = useState("");
+  const { id, name, email, standard, role, phone_number } = sessionStorage;
+
+  const [_username, setUsername] = useState(name);
+  const [_email, setEmail] = useState(email);
+  const [contact, setContact] = useState(phone_number);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { id, username, email, standard, role, contact } = sessionStorage;
+  console.log(sessionStorage);
 
   const navigate = useNavigate();
 
   const save = () => {
-    if (Username.length === 0) {
+    if (_username.length === 0) {
       toast.warning("please enter username");
-    } else if (Email.length === 0) {
+    } else if (_email.length === 0) {
       toast.warning("please enter email");
-    } else if (Contact.length === 0) {
+    } else if (contact.length === 0) {
       toast.warning("please enter mobile");
-    } else if (password.length === 0) {
-      toast.warning("please enter password");
-    } else if (confirmPassword.length === 0) {
-      toast.warning("please enter correct password");
-    } else {
-      const body = {
-        Username,
-        Email,
-        password,
-        Contact,
-      };
+      // } else if (password.length === 0) {
+      //   toast.warning("please enter password");
+      // } else if (confirmPassword.length === 0) {
+      //   toast.warning("please enter correct password");
+    } 
+    else {
+      // if (password.length === 0 && confirmPassword.length === 0) {
+      //   const body = {
+      //     id,
+      //     Username,
+      //     _email,
+      //     password,
+      //     Contact,
+      //     standard
+      //   };
 
-      // url to make signin api call
-      // const urlUser = `${URLUser}/api/UserControllers/UpdateUser`;
-      const urlUser = `${UrlGateway}/gateway/user/update`;
-      // `;
-      // // const urlSpring = `${SPRING_URL}/student/update/${stud_id}`;
+      //   const urlUser = `${UrlGateway}/gateway/user/update`;
+      //   // `;
+      //   // // const urlSpring = `${SPRING_URL}/student/update/${stud_id}`;
 
-      axios.put(urlUser, body).then((response) => {
-        const result = response.data;
-        console.log(result);
-        if (result !== null) {
-          toast.success("Profile successfully updated!!!");
-          navigate("/TProfile");
-        } else {
-          toast.error(result["error"]);
-        }
-      });
+      //   axios.put(urlUser, body).then((response) => {
+      //     const result = response.data;
+      //     console.log(result);
+      //     if (result !== null) {
+      //       toast.success("Profile successfully updated!!!");
+      //       navigate("/TProfile");
+      //     } else {
+      //       toast.error(result["error"]);
+      //     }
+      //   });
+      // } 
+      //else {
+        const body = {
+          id : id,         
+          email : _email,
+          password : password,
+          phoneNumber : contact,
+          name : _username,
+          standard : standard
+        };
+        console.dir(body);
+
+        // url to make signin api call
+        // const urlUser = `${URLUser}/api/UserControllers/UpdateUser`;
+        const urlUser = `${UrlGateway}/gateway/teacher/updateteacher`;
+        // `;
+        // // const urlSpring = `${SPRING_URL}/student/update/${stud_id}`;
+
+        axios.put(urlUser, body).then((response) => {
+          const result = response.data;
+          console.log(result);
+          if (result !== null) {
+            toast.success("Profile successfully updated!!!");
+            sessionStorage["name"] = _username;
+            sessionStorage["phone_number"] = contact;
+            sessionStorage["email"] = _email;
+            navigate("/TProfile");
+          } else {
+            toast.error(result["error"]);
+          }
+        }).catch((error)=>{
+          console.dir(error);
+          console.log("try catch.");
+        })
+      //}
     }
+  };
+
+  const handlename = (e) => {
+    // setInputValue(event.target.value);
+    setUsername(e.target.value);
+  };
+
+  const handleContact = (e) => {
+    setContact(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -88,13 +140,11 @@ const UpdateTInfo = () => {
                     Username
                   </label>
                   <input
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                    }}
                     class="editable-placeholder"
-                    value={username}
+                    value={_username}
                     type="text"
                     className="form-control"
+                    onChange={handlename}
                   />
                 </div>
 
@@ -107,9 +157,8 @@ const UpdateTInfo = () => {
                     Contact Number
                   </label>
                   <input
-                    onChange={(e) => {
-                      setContact(e.target.value);
-                    }}
+                    value={contact}
+                    onChange={handleContact}
                     type="number"
                     className="form-control"
                   />
@@ -124,9 +173,8 @@ const UpdateTInfo = () => {
                     Email
                   </label>
                   <input
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
+                  value={_email}
+                    onChange={handleEmail}
                     type="text"
                     className="form-control"
                   />

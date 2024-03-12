@@ -25,6 +25,23 @@ export default function ResourceList() {
   console.log("Value of standard in resourcelist : " + standard);
   const navigate = useNavigate();
   const [Resources, setResources] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filterResult, setFilterResult] = useState([]);
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== "") {
+      const filteredData = Resources.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilterResult(filteredData);
+    } else {
+      setFilterResult(Resources);
+    }
+  };
 
   const searchResources = () => {
     if (!classtd) {
@@ -50,7 +67,7 @@ export default function ResourceList() {
 
         if (result != null) {
           setResources(result);
-          toast.info("Welcome to Resources", {autoClose: 800});
+          toast.info("Welcome to Resources", { autoClose: 800 });
           console.log(result[0].message);
           console.dir(
             "********** " +
@@ -86,7 +103,7 @@ export default function ResourceList() {
         console.log("response is : " + result);
 
         if (result["statusCode"] === 1) {
-          toast.success("Resources deleted successfully!!", {autoClose: 800});
+          toast.success("Resources deleted successfully!!", { autoClose: 800 });
           console.log(result["message"]);
           setResources((prevResources) =>
             prevResources.filter((resource) => resource.id !== id)
@@ -112,6 +129,17 @@ export default function ResourceList() {
     console.log("getting called");
   }, []);
 
+  useEffect(() => {
+    setFilterResult(
+      Resources.filter((item) =>
+        Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase())
+      )
+    );
+  }, [searchInput, Resources]);
+
   return (
     <div
       style={{ paddingTop: "50px", paddingBottom: "100px" }}
@@ -120,131 +148,105 @@ export default function ResourceList() {
     >
       <Container style={{ paddingBottom: "200px" }}>
         <Row>
-          {Resources != {} ? (
-            Resources.map((Resource) => (
-              <Col md={4} sm={12} lg={3}>
-                {/* <Card style={{ marginBottom: "24px" }}>
-                  <Card.Img
-                  style={{ height: "8rem", width: "100%" }}
-                  variant="top"
-                  src={Res1}
-                  />
-                  <Card.Body
-                  style={{
-                    paddingTop: "5px",
-                    paddingBottom: "5px",
-                    backgroundColor: "#DDF5FF",
-                  }}
-                  >
-                    <Card.Title
-                      style={{
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        margin: "0",
-                      }}
-                    >
-                      {Resource.pdfName}
-                    </Card.Title>
-                    <Card.Text
-                      style={{
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        margin: "0",
-                      }}
-                    >
-                      {Resource.category}
-                    </Card.Text>
-                    <Card.Text
-                      style={{
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        margin: "0",
-                      }}
-                    >
-                      {Resource.dateCreated}
-                    </Card.Text>
-                    <br />
-                    <Card.Text
-                      style={{
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        margin: "0",
-                      }}
-                    >
-                      {Resource.created.slice(0, 10)}
-                    </Card.Text>
-                    <Button
-                      style={{ marginTop: "0" }}
-                      variant="primary"
-                      className="btn btn-success btn-sm"
-                      id="vbtn"
-                      onClick={() => {
-                        navigate("/pdfPage", {
-                          state: { pdfName: Resource.pdfName },
-                        });
-                        console.log(
-                          "pdfName in resourcelist is : " + Resource.pdfName
-                        );
-                      }}
-                    >
-                      View
-                    </Button>
-                    <Button
-                      variant="danger"
-                      className="btn mr-5 btn-sm"
-                      id="rbtn"
-                      onClick={() => returnBook(Resource.pdfName, Resource.id)}
-                    >
-                      Delete
-                    </Button>
-                  </Card.Body>
-                </Card> */}
-                <div className="cardBox1" style={{ marginBottom: "24px" }}>
-                  <div className="card1" >
-                    <span1>{Resource.subject}</span1>
-                    <h2>{Resource.pdfName}</h2>
-                    <div class="content">
-                      <h3>{Resource.created.slice(0, 10)}</h3>
-                      <h3>{Resource.created.slice(11, 20)}</h3>
+          <Col>
+            <input
+              placeholder="Search resource here..."
+              className="form-control"
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </Col>
+        </Row>
+        <br />
+        <br />
+        <Row>
+          {searchInput.length > 1
+            ? filterResult.map((Resource) => (
+                <Col md={4} sm={12} lg={3}>
+                  <div className="cardBox1" style={{ marginBottom: "24px" }}>
+                    <div className="card1">
+                      <span1>{Resource.subject}</span1>
+                      <h5>{Resource.pdfName}</h5>
+                      <h5>{Resource.created.slice(0, 10)}</h5>
+                      <h5>{Resource.created.slice(11, 20)}</h5>
                       <p>{Resource.category}</p>
-                      <p>{Resource.description}</p>
+                      <div class="content">
+                        <p>{Resource.description}</p>
 
-                      <Button
-                        style={{ marginTop: "0" }}
-                        variant="primary"
-                        className="btn btn-success btn-sm"
-                        id="vbtn"
-                        onClick={() => {
-                          navigate("/pdfPage", {
-                            state: { pdfName: Resource.pdfName },
-                          });
-                          console.log(
-                            "pdfName in resourcelist is : " + Resource.pdfName
-                          );
-                        }}
-                      >
-                        View
-                      </Button>
-                      <Button
-                        variant="danger"
-                        className="btn mr-5 btn-sm"
-                        id="rbtn"
-                        onClick={() =>
-                          returnBook(Resource.pdfName, Resource.id)
-                        }
-                      >
-                        Delete
-                      </Button>
+                        <Button
+                          style={{ marginTop: "0" }}
+                          variant="primary"
+                          className="btn btn-success btn-sm"
+                          id="vbtn"
+                          onClick={() => {
+                            navigate("/pdfPage", {
+                              state: { pdfName: Resource.pdfName },
+                            });
+                            console.log(
+                              "pdfName in resourcelist is : " + Resource.pdfName
+                            );
+                          }}
+                        >
+                          View
+                        </Button>
+                        <Button
+                          variant="danger"
+                          className="btn mr-5 btn-sm"
+                          id="rbtn"
+                          onClick={() =>
+                            returnBook(Resource.pdfName, Resource.id)
+                          }
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Col>
-            ))
-          ) : (
-            <div>
-              <NotFound />
-            </div>
-          )}
+                </Col>
+              ))
+            : 
+            Resources.map((Resource) => (
+                <Col md={4} sm={12} lg={3}>
+                  <div className="cardBox1" style={{ marginBottom: "24px" }}>
+                    <div className="card1">
+                      <span1>{Resource.subject}</span1>
+                      <h5>{Resource.pdfName}</h5>
+                      <h5>{Resource.created.slice(0, 10)}</h5>
+                      <h5>{Resource.created.slice(11, 20)}</h5>
+                      <p>{Resource.category}</p>
+                      <div class="content">
+                        <p>{Resource.description}</p>
+
+                        <Button
+                          style={{ marginTop: "0" }}
+                          variant="primary"
+                          className="btn btn-success btn-sm"
+                          id="vbtn"
+                          onClick={() => {
+                            navigate("/pdfPage", {
+                              state: { pdfName: Resource.pdfName },
+                            });
+                            console.log(
+                              "pdfName in resourcelist is : " + Resource.pdfName
+                            );
+                          }}
+                        >
+                          View
+                        </Button>
+                        <Button
+                          variant="danger"
+                          className="btn mr-5 btn-sm"
+                          id="rbtn"
+                          onClick={() =>
+                            returnBook(Resource.pdfName, Resource.id)
+                          }
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+              ))}
         </Row>
       </Container>
       {/* </div> */}

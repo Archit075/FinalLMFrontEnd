@@ -10,7 +10,7 @@ const UserHome = () => {
       <br />
       <SHeader />
       <Background>
-        <img src="/images/LM3.png" style={{filter: "blur(5px)"}}/>
+        <img src="/images/LM3.png" alt="blank" style={{filter: "blur(5px)"}}/>
       </Background>
       <UHome />
       <Footer />

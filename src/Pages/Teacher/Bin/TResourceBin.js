@@ -22,6 +22,23 @@ export default function TResourceBin() {
   console.log("Value of standard in resourcelist : " + standard);
   const navigate = useNavigate();
   const [Resources, setResources] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filterResult, setFilterResult] = useState([]);
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== "") {
+      const filteredData = Resources.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilterResult(filteredData);
+    } else {
+      setFilterResult(Resources);
+    }
+  };
 
   const searchResources = () => {
     if (!classtd) {
@@ -98,80 +115,37 @@ export default function TResourceBin() {
     console.log("getting called");
   }, []);
 
+  useEffect(() => {
+    setFilterResult(
+      Resources.filter((item) =>
+        Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase())
+      )
+    );
+  }, [searchInput, Resources]);
+
   return (
     <div style={{ paddingBottom: "200px" }} className="container" id="YBC">
       <Container style={{ paddingTop: "30px", paddingBottom: "100px" }}>
         <Row>
-          {Resources.map((Resource) => (
+          <Col>
+            <input
+              placeholder="Search resource here..."
+              className="form-control"
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </Col>
+        </Row>
+        <br />
+        <br />
+        <Row>
+          {
+          searchInput.length > 1 ?
+          filterResult.map((Resource) => (
             <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }}>
-              {/* <Card>
-                <Card.Img
-                  style={{ height: "8rem", width: "100%" }}
-                  variant="top"
-                  src={Res1}
-                />
-                <Card.Body
-                  style={{
-                    paddingTop: "5px",
-                    paddingBottom: "5px",
-                    backgroundColor: "#DDF5FF",
-                  }}
-                >
-                  <Card.Title
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.pdfName}
-                  </Card.Title>
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.category}
-                  </Card.Text>
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.dateCreated}
-                  </Card.Text>
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.created}
-                  </Card.Text>
-                  <Card.Text
-                    style={{
-                      paddingTop: "2px",
-                      paddingBottom: "2px",
-                      margin: "0",
-                    }}
-                  >
-                    {Resource.standard}
-                  </Card.Text>
-                  <Button
-                    variant="primary"
-                    className="btn mr-5 btn-sm"
-                    id="rbtn"
-                    onClick={() => PublishBook(Resource.pdfName, standard)}
-                  >
-                    Publish
-                  </Button>
-                </Card.Body>
-              </Card> */}
+              
 
               <div
                 className="cardBox2"
@@ -213,7 +187,54 @@ export default function TResourceBin() {
                 </div>
               </div>
             </Col>
-          ))}
+          ))
+          :
+            Resources.map((Resource) => (
+              <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }}>
+                
+  
+                <div
+                  className="cardBox2"
+                  style={{ marginBottom: "10px", margin: "1rem" }}
+                >
+                  <div className="card2">
+                    <h2>{Resource.pdfName}</h2>
+                    <span1>{Resource.subject}</span1>
+                    {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
+                    {/* <h3>{Resource.created.slice(11, 20)}</h3> */}
+                    <div class="content">
+                      <p>{Resource.description}</p>
+                      <p>{Resource.category}</p>
+                      {/* <Button
+                          style={{ marginTop: "0" }}
+                          variant="primary"
+                          className="btn btn-success btn-sm"
+                          id="vbtn"
+                          onClick={() => {
+                            navigate("/pdfPage", {
+                              state: { pdfName: Resource.pdfName },
+                            });
+                            console.log(
+                              "pdfName in resourcelist is : " + Resource.pdfName
+                            );
+                          }}
+                        >
+                          View
+                        </Button> */}
+                      <Button
+                        variant="primary"
+                        className="btn mr-5 btn-sm"
+                        id="rbtn"
+                        onClick={() => binBook(Resource.pdfName, Resource.id)}
+                      >
+                        Publish
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Col>
+            ))
+          }
         </Row>
       </Container>
       {/* </div> */}

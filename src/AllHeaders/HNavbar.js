@@ -33,7 +33,7 @@ export default function Header() {
         collapseOnSelect
         expand="lg"
         className="Navbar active"
-        style={{ backgroundColor: "#a4e7f3" }}
+        style={{ backgroundColor: "#a4e7f3", height: "70px" }}
       >
         <Container>
           <Navbar.Brand href="/" style={{ float: "left" }}>
@@ -309,7 +309,7 @@ function MyTeacherModal(props) {
             console.log("toast two called");
 
             // get the data sent by server
-            const { token, id, name, phoneNumber, role, standard } = result;
+            const { token, id, name, phoneNumber, role, standard, email } = result;
 
             // persist the logged in user's information for future use
             sessionStorage["id"] = id;
@@ -318,6 +318,8 @@ function MyTeacherModal(props) {
             sessionStorage["role"] = role;
             sessionStorage["standard"] = standard;
             sessionStorage["phone_number"] = phoneNumber;
+            sessionStorage["email"] = email;
+
 
             // navigate to home component
             navigate("/TeacherHome");
@@ -640,8 +642,9 @@ function MyStudentModal(props) {
         .catch((error) => {
           console.log("try catch");
           console.dir(error);
+          toast.error("Wrong credentials")
           let err1 = error.response.data["message"];
-          toast.error(err1, { autoClose: 2000 });
+          // toast.error(err1, { autoClose: 2000 });
         });
     }
   };

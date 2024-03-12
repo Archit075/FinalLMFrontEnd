@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { URLUser, UrlGateway } from "../../../config";
+import { UrlGateway } from "../../../config";
 
 const UpdateInfo = () => {
   // const [first_name, setFirstName] = useState("");
@@ -13,7 +13,7 @@ const UpdateInfo = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { User_id, username,  standard, roll } = sessionStorage;
+  const { username } = sessionStorage;
 
   const navigate = useNavigate();
 

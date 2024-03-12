@@ -87,7 +87,7 @@ const Home = () => {
 
   return (
     <div  style={{width: "100vw"}}>
-      <Header />
+      <Header/>
       <Parallax
         className="h1"
         bgImage = {img1}

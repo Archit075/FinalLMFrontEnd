@@ -1,15 +1,15 @@
+// import Res1 from "./YourBooks.jpg";
+// import { Link } from "react-router-dom";
+// import CardGroup from "react-bootstrap/CardGroup";
+// import Card from "react-bootstrap/Card";
+// import { CardBody, Container } from "react-bootstrap";
 import React from "react";
 import { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
 import { toast } from "react-toastify";
-import Res1 from "./YourBooks.jpg";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import "./profile.css";
 import { URLUser, URLuser, UrlGateway } from "../../../config";
-import { CardBody, Container } from "react-bootstrap";
 
 const Profile = () => {
   const { User_id } = sessionStorage;

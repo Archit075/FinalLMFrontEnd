@@ -9,7 +9,7 @@ export default function UProfile() {
     <Container>
       <SHeader />
       <Background>
-        <img src="/images/LM3.png" style={{filter: "blur(3px)"}}/>
+        <img src="/images/LM3.png" alt="" style={{filter: "blur(3px)"}}/>
       </Background>
       <UpdateInfo />
     </Container>

@@ -2,9 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 // import { toast } from 'react-toastify'
-import { UrlGateway, UrlResources } from "../../../config";
+import { UrlGateway } from "../../../config";
+// import { UrlGateway, UrlResources } from "../../../config";
 import "./AddResource.css";
-import { logDOM } from "@testing-library/react";
+// import { logDOM } from "@testing-library/react";
 import { toast } from "react-toastify";
 import {
   MDBBtn,
@@ -32,53 +33,56 @@ function TAddResource() {
   // toast.info("Add your resources here!!")
 
   const addResource = () => {
-    if (ResourceName.length === 0) {
-      toast.error("please enter resource name");
-    } else if (ResourceCategory.length === 0) {
-      toast.error("Please enter resource category");
-    } else if (standard.length === 0) {
-      toast.error("Please enter standard");
-    } else if (Subject.length === 0) {
-      toast.error("Please enter Subject");
-    } else if (ResourceDescription.length === 0) {
-      toast.error("Please enter Description");
-    } else if (PdfFile.length === 0) {
-      toast.error("Please upload pdf file");
+    if (ResourceCategory === "pdf") {
+      if (ResourceName.length === 0) {
+        toast.error("please enter resource name");
+      } else if (ResourceCategory.length === 0) {
+        toast.error("Please enter resource category");
+      } else if (standard.length === 0) {
+        toast.error("Please enter standard");
+      } else if (Subject.length === 0) {
+        toast.error("Please enter Subject");
+      } else if (ResourceDescription.length === 0) {
+        toast.error("Please enter Description");
+      } else if (PdfFile.length === 0) {
+        toast.error("Please upload pdf file");
+      } else {
+        const data = new FormData();
+        data.append("ResourceName", ResourceName);
+        data.append("ResourceCategory", ResourceCategory);
+        data.append("Standard", standard);
+        data.append("PdfFile", PdfFile);
+        data.append("Subject", Subject);
+        data.append("ResourceDescription", ResourceDescription);
+        data.append("DateCreated", DateCreated);
+
+        // const url = `${UrlResources}/api/Pdf`;
+        const url = `${UrlGateway}/gateway/pdf/Add`;
+
+        axios
+          .post(url, data)
+          .then((response) => {
+            console.log("hello");
+            const result = response.data;
+            console.log("result is : " + result);
+            console.log("Status code is : " + result["statusCode"]);
+            if (result["statusCode"] === 1) {
+              toast.success("resource successfully added", { autoClose: 800 });
+
+              navigate("/Publish-List", { state: { classtd: standard } });
+            } else {
+              // toast.error("something went wrong!!!")
+              console.log("message is  : " + result["message"]);
+
+              console.log("something went wrong");
+            }
+          })
+          .catch((error) => {
+            toast.error("error occured.", { autoClose: 800 });
+          });
+      }
     } else {
-      const data = new FormData();
-      data.append("ResourceName", ResourceName);
-      data.append("ResourceCategory", ResourceCategory);
-      data.append("Standard", standard);
-      data.append("PdfFile", PdfFile);
-      data.append("Subject", Subject);
-      data.append("ResourceDescription", ResourceDescription);
-      data.append("DateCreated", DateCreated);
-
-      // const url = `${UrlResources}/api/Pdf`;
-      const url = `${UrlGateway}/gateway/pdf/Add`;
-
-
-      axios
-        .post(url, data)
-        .then((response) => {
-          console.log("hello");
-          const result = response.data;
-          console.log("result is : " + result);
-          console.log("Status code is : " + result["statusCode"]);
-          if (result["statusCode"] === 1) {
-            toast.success("resource successfully added", { autoClose: 800 });
-
-            navigate("/Publish-List", { state: { classtd: standard } });
-          } else {
-            // toast.error("something went wrong!!!")
-            console.log("message is  : " + result["message"]);
-
-            console.log("something went wrong");
-          }
-        })
-        .catch((error) => {
-          console.log("error occured.");
-        });
+      toast.error("error occured", { autoClose: 800 });
     }
   };
 
@@ -97,9 +101,9 @@ function TAddResource() {
               {/* <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp' className='w-100 rounded-top'  alt="Sample photo"/> */}
 
               <MDBCardBody className="px-5">
-                <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">
+                <h4 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">
                   --------Adding Study Material--------
-                </h3>
+                </h4>
                 <MDBInput
                   wrapperClass="mb-4"
                   label="File Name"
@@ -124,7 +128,7 @@ function TAddResource() {
                     />
                   </MDBCol> */}
                   <MDBCol md="6">
-                    <MDBInput
+                    {/* <MDBInput
                     
                       wrapperClass="mb-4"
                       label="Resource category"
@@ -134,7 +138,27 @@ function TAddResource() {
                       onChange={(e) => {
                         setResourceCategory(e.target.value);
                       }}
-                    />
+                    /> */}
+
+                    <select
+                      style={{
+                        width: "240px",
+                        height: "38px",
+                        borderRadius: "3px",
+                        border: "1px solid grey",
+                      }}
+                      onChange={(e) => {
+                        setResourceCategory(e.target.value);
+                        console.log("Value selected : ", ResourceCategory);
+                        console.log("Value selected E : ", e.target.value);
+                      }}
+                    >
+                      <option>Select File Type</option>
+                      <option>pdf</option>
+                      <option>doc</option>
+                      <option>video</option>
+                      <option>images</option>
+                    </select>
                   </MDBCol>
 
                   <MDBCol md="6" className="mb-4">

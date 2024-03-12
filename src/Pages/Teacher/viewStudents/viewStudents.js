@@ -10,6 +10,22 @@ import { toast } from "react-toastify";
 
 export default function AllUsers() {
   const [students, setStudents] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [filterResult, setFilterResult] = useState([]);
+
+  const searchItems = (searchValue) => {
+
+    setSearchInput(searchValue);
+    if (searchInput !== '') {
+      const filteredData = students.filter((item) => {
+        return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+      })
+      setFilterResult(filteredData);
+    }
+    else {
+      setFilterResult(students);
+    }
+  }
 
   const { standard } = sessionStorage;
 
@@ -70,10 +86,53 @@ export default function AllUsers() {
 
 
   return (
-    <div class= "container mt-5 py-1 table-responsive" style={{marginBottom: "20%"}}>
+    // <div class= "container mt-5 py-1 table-responsive" style={{marginBottom: "20%"}}>
+    //   {/* <AHeader /> */}
+    //   {/* <h1>STUDENTS DETAILS</h1> */}
+    //   <table class="table table-hover mt-5 table-responsive-lg" style={{backgroundColor: "white"}} id="reqTable">
+    //     <thead class="table-dark" >
+    //       <tr>
+    //         <th scope="col">Student id</th>
+    //         <th scope="col">Username</th>
+    //         <th scope="col">Email</th>
+    //         <th scope="col">Password</th>
+    //         <th scope="col">Standard</th>
+    //         <th scope="col">Roll</th>
+    //         <th scope="col">Date of Birth</th>
+    //         <th scope="col">Action</th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>
+    //       {students.map((student, index) => (
+    //         <tr>
+    //           <th scope="row">{student.id}</th>
+    //           <td>{student.username}</td>
+    //           <td>{student.email}</td>
+    //           <td>{student.password}</td>
+    //           <td>{student.standard}</td>
+    //           <td>{student.roll}</td>
+    //           <td>{student.dob.slice(0, 10)}</td>
+    //           <td>
+    //             <button
+    //               class="btn btn-outline-danger mr-2 btn-sm"
+    //               onClick={() => deleteStudent(student.id)}
+    //             >
+    //               DELETE
+    //             </button>
+    //           </td>
+    //         </tr>
+    //       ))}
+    //     </tbody>
+    //   </table>
+    //   {/* <Footer /> */}
+    // </div>
+
+    <div class="container mt-5 py-1 table-responsive" style={{ marginBottom: "20%" }}>
       {/* <AHeader /> */}
       {/* <h1>STUDENTS DETAILS</h1> */}
-      <table class="table table-hover mt-5 table-responsive-lg" style={{backgroundColor: "white"}} id="reqTable">
+
+      <input placeholder="search student here..." className="form-control" onChange={(e) => searchItems(e.target.value)} />
+      {/* <table class="table table-hover mt-5 table-responsive-lg" style={{ backgroundColor: "white" }} id="reqTable">
         <thead class="table-dark" >
           <tr>
             <th scope="col">Student id</th>
@@ -107,7 +166,86 @@ export default function AllUsers() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
+
+      {
+        searchInput.length > 1 ?
+          <table class="table table-hover mt-5 table-responsive-lg" style={{ backgroundColor: "white" }} id="reqTable">
+            <thead class="table-dark" >
+              <tr>
+                <th scope="col">Student id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Standard</th>
+                <th scope="col">Roll</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filterResult.map((student, index) => (
+                <tr>
+                  <th scope="row">{student.id}</th>
+                  <td>{student.username}</td>
+                  <td>{student.email}</td>
+                  <td>{student.password}</td>
+                  <td>{student.standard}</td>
+                  <td>{student.roll}</td>
+                  <td>{student.dob.slice(0, 10)}</td>
+                  <td>
+                    <button
+                      class="btn btn-outline-danger mr-2 btn-sm"
+                      onClick={() => deleteStudent(student.id)}
+                    >
+                      DELETE
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          :
+          (
+
+            <table class="table table-hover mt-5 table-responsive-lg" style={{ backgroundColor: "white" }} id="reqTable">
+              <thead class="table-dark" >
+                <tr>
+                  <th scope="col">Student id</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Password</th>
+                  <th scope="col">Standard</th>
+                  <th scope="col">Roll</th>
+                  <th scope="col">Date of Birth</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((student, index) => (
+                  <tr>
+                    <th scope="row">{student.id}</th>
+                    <td>{student.username}</td>
+                    <td>{student.email}</td>
+                    <td>{student.password}</td>
+                    <td>{student.standard}</td>
+                    <td>{student.roll}</td>
+                    <td>{student.dob.slice(0, 10)}</td>
+                    <td>
+                      <button
+                        class="btn btn-outline-danger mr-2 btn-sm"
+                        onClick={() => deleteStudent(student.id)}
+                      >
+                        DELETE
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )
+      }
+
       {/* <Footer /> */}
     </div>
   );

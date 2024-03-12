@@ -15,9 +15,9 @@ const USignin = () => {
 
   const signinUser = async () => {
     console.log("hello")
-    if (email.length == 0) {
+    if (email.length === 0) {
       toast.warning("please enter email");
-    }else if (password.length == 0) {
+    }else if (password.length === 0) {
       toast.warning("please enter password");
     }else{
       const body = {
@@ -39,7 +39,7 @@ const USignin = () => {
         const result = response.data;
         console.log(result)
 
-        if (result != "") {
+        if (result !== "") {
           toast.success("Welcome to the application",{
             autoClose:1500
         });
