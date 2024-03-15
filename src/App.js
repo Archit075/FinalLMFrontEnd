@@ -26,6 +26,8 @@ import UProfile from './Pages/User/UpdateProfile';
 // import TProfile from './Pages/Teacher/Profile/TProfile';
 import TeacherProfile from './Pages/Teacher/Profile';
 import UpdateTProfile from './Pages/Teacher/UpdateProfile';
+import Video from './Pages/Teacher/ViewVideo';
+import VIDEOUser from './Pages/User/VideoView';
 
 function App() {
   return (
@@ -53,7 +55,9 @@ function App() {
           <Route path='/TResourceDel-List' element={<TResourceDel />} />          
           <Route path='/Publish-List' element={<UPublishList/>}/>          
           <Route path="/pdfPage" element={<PDF />} />
+          <Route path="videoPage" element={<Video/>}/>
           <Route path="/pdfUser" element={<PDFUser/>}/>
+          <Route path="/videoUser" element={<VIDEOUser/>}/>
           <Route path="/TAddResource" element={<AddResource/>}/>
           {/* <Route path='/Login' element={<} /> */}
 

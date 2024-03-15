@@ -49,13 +49,13 @@ export default function Publishable() {
           toast.info("Welcome to Publishable!!", { autoClose: 800 });
           console.log(result["message"]);
         } else {
-          toast.error("Resources are empty");
+          toast.error("Resources are empty", { autoClose: 800 });
           console.log("PDf List is empty.");
           console.error(result["message"]);
         }
       })
       .catch((error) => {
-        toast.warning("Resources are empty");
+        toast.warning("Resources are empty",);
       });
   };
 
@@ -95,7 +95,6 @@ export default function Publishable() {
 
   useEffect(() => {
     searchResources();
-
     console.log("getting called");
   }, []);
 
@@ -155,7 +154,7 @@ export default function Publishable() {
               <div className="cardBox3" style={{ marginBottom: "24px" }}>
                 <div className="card3">
                   <h2>{Resource.pdfName}</h2>
-                  <span1>{Resource.category}</span1>
+                  <span1 style={{backgroundColor: Resource.category === "pdf" ? 'orange' : 'purple', padding: "2%", borderRadius: "10%"}}>{Resource.category}</span1>
                   <div class="content">
                     {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
                     <p>{Resource.description}</p>

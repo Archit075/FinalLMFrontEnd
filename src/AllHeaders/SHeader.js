@@ -1,10 +1,11 @@
+// import { Button, NavDropdown, Navbar, Dropdown } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import "./SHeader.css";
 import logo1 from "./logoerr1.png";
-import { Button, NavDropdown, Navbar, Dropdown } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 
 export default function SHeader() {
   const navigate = useNavigate();

@@ -1,26 +1,26 @@
+// import { URLTeacher, URLUser, UrlGateway, UrlResources } from "../config";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import {
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBBtn,
-  MDBIcon,
   MDBInput,
   MDBCheckbox,
   MDBCard,
   MDBCardBody,
 } from "mdb-react-ui-kit";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./HNavbar.css";
 import { useNavigate } from "react-router";
-import { URLTeacher, URLUser, UrlGateway, UrlResources } from "../config";
+import { UrlGateway } from "../config";
 import axios from "axios";
 import logo1 from "./logoerr1.png";
+import validator from "validator";
 
 export default function Header() {
   const [modalTeacher, setModalTeacher] = useState(false);
@@ -129,6 +129,21 @@ function MyTeacherModal(props) {
   const handleToggle = () => {
     setAction(!action);
   };
+
+  function validateEmail(email) {
+    const lowercaseEmail = email.toLowerCase();
+    if (email !== lowercaseEmail || !/\d/.test(email)) {
+      // Email contains uppercase letters, not allowed
+      return false;
+    }
+    return validator.isEmail(lowercaseEmail);
+  }
+
+  function validatePassword(password) {
+    const passwordRegex =
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return passwordRegex.test(password);
+  }
   //ugugvuvbil
 
   // function MyForm() {
@@ -170,19 +185,31 @@ function MyTeacherModal(props) {
   const signInTeacher = () => {
     // setAction(!action);
     if (name.length === 0) {
-      toast.warning("please enter resource name");
-      console.log("please enetr Username");
+      toast.warning("please enter Username", {autoClose: 800});
+      console.log("please enetr Username", {autoClose: 800});
     } else if (standard.length === 0) {
-      toast.warning("Please enter resource category");
-      console.log("Please enter standard");
+      toast.warning("Please enter standard", {autoClose: 800});
+      console.log("Please enter standard", {autoClose: 800});
     } else if (email.length === 0) {
-      toast.warning("Please enter standard");
-      console.log("Please enter email");
+      toast.warning("Please enter email", {autoClose: 800});
+      console.log("Please enter email", {autoClose: 800});
+    } else if (!validateEmail(email)) {
+      toast.warning("Please enter valid email format", {autoClose: 800});
+      toast.info(
+        "Minimum one alphanumeric character and one special character is required. and no uppercase letter will be accepted.", {autoClose: 800}
+      );
+      console.log("Please enter the password");
     } else if (password.length === 0) {
-      toast.warning("Please upload pdf file");
+      toast.warning("Please enter the password", {autoClose: 800});
+      console.log("Please enter the password");
+    } else if (!validatePassword(password)) {
+      toast.warning("Please enter valid password format", {autoClose: 800});
+      toast.info(
+        "Minimum one alphanumeric character and one special character is required with one uppercase letter.", {autoClose: 800}
+      );
       console.log("Please enter the password");
     } else if (phoneNumber.length === 0) {
-      toast.warning("Please upload pdf file");
+      toast.warning("Please enter the Contact details.", {autoClose: 800});
       console.log("Please enter the Contact details.");
     } else {
       // if (formData.username.length === 0) {
@@ -229,9 +256,7 @@ function MyTeacherModal(props) {
       console.log("phoneNumber is " + phoneNumber);
 
       // const url = `${URLTeacher}/api/Home/register`; // url--------
-      const url = `${UrlGateway}/gateway/teacher/register`; 
-
-
+      const url = `${UrlGateway}/gateway/teacher/register`;
 
       console.log("url is : " + url);
       console.log("data is : " + data.name);
@@ -295,7 +320,6 @@ function MyTeacherModal(props) {
       // const urlTeacher = `${URLTeacher}/api/Home/token`;
       const urlTeacher = `${UrlGateway}/gateway/teacher/login`;
 
-
       // make api call using axios
       axios
         .post(urlTeacher, body)
@@ -309,7 +333,8 @@ function MyTeacherModal(props) {
             console.log("toast two called");
 
             // get the data sent by server
-            const { token, id, name, phoneNumber, role, standard, email } = result;
+            const { token, id, name, phoneNumber, role, standard, email } =
+              result;
 
             // persist the logged in user's information for future use
             sessionStorage["id"] = id;
@@ -319,7 +344,6 @@ function MyTeacherModal(props) {
             sessionStorage["standard"] = standard;
             sessionStorage["phone_number"] = phoneNumber;
             sessionStorage["email"] = email;
-
 
             // navigate to home component
             navigate("/TeacherHome");
@@ -598,8 +622,7 @@ function MyStudentModal(props) {
       console.log("Password is " + body.password);
 
       // const url = `${URLUser}/api/UserControllers/Login`;
-      const url = `${UrlGateway}/gateway/user/login`;  
-
+      const url = `${UrlGateway}/gateway/user/login`;
 
       console.log(url);
       // make api call using axios
@@ -613,13 +636,13 @@ function MyStudentModal(props) {
           console.log(result);
 
           if (result != null) {
-            toast.success("Welcome to the application", {
+            toast.success("Welcome "+`${result.username}`, {
               autoClose: 1500,
             });
             navigate("/UHome");
 
             // get the data sent by server
-            const { token, id, username, email, standard, role } = result;
+            const { token, id, username, email, standard, role, dob, roll } = result;
             console.log("token is : " + token);
 
             //persist the logged in user's information for future use
@@ -629,6 +652,9 @@ function MyStudentModal(props) {
             sessionStorage["email"] = email;
             sessionStorage["standard"] = standard;
             sessionStorage["role"] = role;
+            sessionStorage["roll"] = roll;
+            
+            sessionStorage["dob"] = dob;
 
             // navigate to home component
             // navigate("/home");
@@ -642,7 +668,7 @@ function MyStudentModal(props) {
         .catch((error) => {
           console.log("try catch");
           console.dir(error);
-          toast.error("Wrong credentials")
+          toast.error("Wrong credentials");
           let err1 = error.response.data["message"];
           // toast.error(err1, { autoClose: 2000 });
         });

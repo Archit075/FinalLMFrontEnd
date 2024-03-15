@@ -35,13 +35,13 @@ const TProfile = () => {
           setProfile(result);
           console.log(id);
         } else {
-          toast.error(result["error"]);
+          toast.error(result["error"], {autoClose: 800});
         }
       })
       .catch((error) => {
         console.log("try catch");
-        console.dir(error)
-        toast.error(error.response.data.error);
+        console.dir(error);
+        toast.error(error.response.data.error, {autoClose: 800});
       });
   };
 
@@ -136,20 +136,20 @@ const TProfile = () => {
           // alignItems: "cente",
           // justifyContent: "center",
           // backgroundColor: "#ADE5F9",
-            // const { token, id, name, phoneNumber, role, standard } = result;
-            // minHeight: "100vh",   
+          // const { token, id, name, phoneNumber, role, standard } = result;
+          // minHeight: "100vh",
         }}
       >
         <div class="img1">
-          <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+          {/* <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" /> */}
         </div>
-        <div class="infos1" style={{ marginLeft: "0" }}>
+        <div class="infos1" >
           <div class="name1">
-            <h1>{profile.username}</h1>
+          <h1 style={{fontWeight: "bold"}}>{profile.name}</h1>
             <h4 style={{ fontWeight: "bolder" }}>{profile.email}</h4>
           </div>
           <p class="text1">Standard: {profile.standard}</p>
-          <ul class="stats1" style={{paddingLeft: "0"}}>
+          <ul class="stats1" style={{ paddingLeft: "0" }}>
             <li>
               <h3 style={{ fontWeight: "bolder" }}>{id}</h3>
               <h4 style={{ fontWeight: "bolder" }}>Id</h4>
@@ -163,7 +163,7 @@ const TProfile = () => {
               <h4 style={{ fontWeight: "bolder" }}>Role</h4>
             </li>
           </ul>
-          <div class="links1" style={{ paddingLeft: "0"}}>
+          <div class="links1" style={{ paddingLeft: "0" }}>
             <button
               class="follow1"
               to="/UpdateProfile"

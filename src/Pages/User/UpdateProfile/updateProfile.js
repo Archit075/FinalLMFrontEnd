@@ -7,33 +7,35 @@ import { UrlGateway } from "../../../config";
 
 const UpdateInfo = () => {
   // const [first_name, setFirstName] = useState("");
-  const [Username, setUsername] = useState("");
-  const [Email, setEmail] = useState("");
-  const [dob, setDob] = useState("");
-  const [password, setPassword] = useState("");
+  const { username, email, dob } = sessionStorage;
+
+  const [_username, setUsername] = useState(username);
+  const [_email, setEmail] = useState(email);
+  const [_dob, setDob] = useState(dob);
+  const [_password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { username } = sessionStorage;
+  console.log(sessionStorage);
 
   const navigate = useNavigate();
 
   const save = () => {
-    if (Username.length === 0) {
-      toast.warning("please enter username");
-    } else if (Email.length === 0) {
-      toast.warning("please enter email");
-    } else if (dob.length === 0) {
-      toast.warning("please enter mobile");
-    } else if (password.length === 0) {
-      toast.warning("please enter password");
+    if (_username.length === 0) {
+      toast.warning("please enter username", {autoClose: 800});
+    } else if (_email.length === 0) {
+      toast.warning("please enter email", {autoClose: 800});
+    } else if (_dob.length === 0) {
+      toast.warning("please enter mobile", {autoClose: 800});
+    } else if (_password.length === 0) {
+      toast.warning("please enter password", {autoClose: 800});
     } else if (confirmPassword.length === 0) {
-      toast.warning("please enter correct password");
+      toast.warning("please enter correct password", {autoClose: 800});
     } else {
       const body = {
-        Username,
-        Email,
-        password,
-        dob,
+        username : _username,
+        email: _email,
+        password: _password,
+        dob: _dob,
       };
 
       // url to make signin api call
@@ -46,15 +48,26 @@ const UpdateInfo = () => {
         const result = response.data;
         console.log(result);
         if (result !== null) {
-          toast.success("Profile successfully updated!!!");
+          toast.success("Profile successfully updated!!!", {autoClose: 800});
           navigate("/UProfile");
         } else {
-          toast.error(result["error"]);
+          toast.error(result["error"], {autoClose: 800});
         }
       });
     }
   };
 
+  const handlename = (e) => {
+    // setInputValue(event.target.value);
+    setUsername(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handleDOB = (e) => {
+    setDob(e.target.value);
+  }
   return (
     <>
       <div
@@ -72,7 +85,6 @@ const UpdateInfo = () => {
         <h1 className="title" style={{fontWeight: "bold"}}>Update Information</h1>
         <div className="edit">
           <div className="row">
-            <div className="col"></div>
             <div className="col">
               <div className="form">
                 <div className="mb-2">
@@ -80,13 +92,10 @@ const UpdateInfo = () => {
                     Username
                   </label>
                   <input style={{width: "250px"}}
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                    }}
-                    class="editable-placeholder" 
-                    value={ username }
+                    onChange={handlename}
+                    value={ _username }
                     type="text"
-                    className="form-control"
+                    className="form-control editable-placeholder"
                   />
                 </div>
 
@@ -95,9 +104,9 @@ const UpdateInfo = () => {
                     Date of Birth
                   </label>
                   <input
-                    onChange={(e) => {
-                      setDob(e.target.value);
-                    }}
+                  style={{width: "250px"}}
+                    onChange={handleDOB}
+                     value={ _dob }
                     type="date"
                     className="form-control"
                   />
@@ -108,9 +117,9 @@ const UpdateInfo = () => {
                     Email
                   </label>
                   <input
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
+                  style={{width: "250px"}}
+                    onChange={handleEmail}
+                     value={ _email }
                     type="text"
                     className="form-control"
                   />
@@ -121,6 +130,7 @@ const UpdateInfo = () => {
                     Password
                   </label>
                   <input
+                  style={{width: "250px"}}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
@@ -147,6 +157,7 @@ const UpdateInfo = () => {
                     Confirm Password
                   </label>
                   <input
+                  style={{width: "250px"}}
                     onChange={(e) => {
                       setConfirmPassword(e.target.value);
                     }}
@@ -162,7 +173,6 @@ const UpdateInfo = () => {
                 </div>
               </div>
             </div>
-            <div className="col"></div>
           </div>
         </div>
       </div>

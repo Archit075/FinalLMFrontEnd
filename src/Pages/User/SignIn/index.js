@@ -63,13 +63,11 @@ const USignin = () => {
           // navigate to home component
           // navigate("/home");
         } else {
-          toast.error("Invalid user name or password", {
-            autoClose:1500
-          });
+          toast.error("Invalid user name or password", {autoClose: 800});
         }
       }).catch(error => {
         let err1 = error.response.data.error;
-        toast.error(err1, { autoClose:2500  })
+        toast.error(err1, {autoClose: 800})
       });
     }
   };

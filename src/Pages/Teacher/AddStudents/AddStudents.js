@@ -1,24 +1,24 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { URLUser, UrlGateway, UrlResources } from "../../../config";
+import { UrlGateway } from "../../../config";
+// import { URLUser, UrlGateway, UrlResources } from "../../../config";
 // import "./AddUser.css";
-import { logDOM } from "@testing-library/react";
+// import { logDOM } from "@testing-library/react";
 import { toast } from "react-toastify";
 import {
   MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBRow,
   MDBCol,
   MDBInput,
-  MDBSelect,
 } from "mdb-react-ui-kit";
 import { Button } from "react-bootstrap";
-import AHeader from "../../../AllHeaders/AHeader";
-import Footer from "../../../Footer/Footer";
+// import AHeader from "../../../AllHeaders/AHeader";
+// import Footer from "../../../Footer/Footer";
+import validator from "validator";
 
 function AddUser() {
   const [username, setUsername] = useState("");
@@ -30,64 +30,94 @@ function AddUser() {
 
   const navigate = useNavigate();
 
+  function validateEmail(email) {
+    const lowercaseEmail = email.toLowerCase();
+    if (email !== lowercaseEmail || !/\d/.test(email)) {
+      // Email contains uppercase letters, not allowed
+      return false;
+    }
+    return validator.isEmail(lowercaseEmail);
+  }
+
+  function validatePassword(password) {
+    const passwordRegex =
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return passwordRegex.test(password);
+  }
+
   const addUser = () => {
     if (username.length === 0) {
       toast.error("please enter resource name");
     } else if (email.length === 0) {
       toast.error("Please enter email");
+    } else if (!validateEmail(email)) {
+      toast.warning("Please enter valid email format");
+      toast.info(
+        "Minimum one alphanumeric character and one special character is required. and no uppercase letter will be accepted."
+      );
+      console.log("Please enter the password");
     } else if (password.length === 0) {
       toast.error("Please enter password");
+    } else if (!validatePassword(password)) {
+      toast.warning("Please enter valid password format");
+      toast.info(
+        "Minimum one alphanumeric character and one special character is required with one uppercase letter."
+      );
+      console.log("Please enter the password");
     } else if (roll.length === 0) {
       toast.error("Please enter roll");
     } else if (dob.length === 0) {
       toast.error("Please enter date of birth");
     } else if (standard.length === 0) {
       toast.error("Please enter standard");
-    }  else {
+    } else {
       const data = new FormData();
       data.append("username", username);
       data.append("email", email);
       data.append("password", password);
-      data.append("standard", standard)
+      data.append("standard", standard);
       data.append("roll", roll);
       data.append("dob", dob);
-
 
       // const url = `${URLUser}/api/UserControllers/Register`;
       const url = `${UrlGateway}/gateway/user/register`;
 
-   
+      axios
+        .post(url, data)
+        .then((response) => {
+          console.log("hello");
+          const result = response.data;
+          console.log("result is : " + result);
+          console.log("Status code is : " + result["statusCode"]);
+          if (result != null) {
+            toast.success("resource successfully added");
 
-      axios.post(url, data).then((response) => {
-        console.log("hello");
-        const result = response.data;
-        console.log("result is : " + result);
-        console.log("Status code is : " + result["statusCode"]);
-        if (result != null) {
-          toast.success("resource successfully added");
+            navigate("/ViewStudent");
+          } else {
+            // toast.error("something went wrong!!!")
+            console.log("message is  : " + result);
 
-          navigate("/ViewStudent" );
-        } else {
-          // toast.error("something went wrong!!!")
-          console.log("message is  : " + result);
-
-          console.log("something went wrong");
-        }
-      }).catch((error) =>{
-        toast.warning(error.response.data)
-        console.log(error);
+            console.log("something went wrong");
+          }
+        })
+        .catch((error) => {
+          toast.warning(error.response.data);
+          console.log(error);
           console.log("error occured.");
-      });
+        });
     }
   };
 
   return (
-    <div className="container mt-3" >
+    <div className="container mt-3">
       {/* <AHeader /> */}
-      <MDBContainer fluid style={{paddingLeft: "13%"}}>
+      <MDBContainer fluid style={{ paddingLeft: "13%" }}>
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol lg="8">
-            <MDBCard className="my-5 rounded-3" style={{ maxWidth: "600px", overflow: "hidden" }}>
+            <MDBCard
+              className="my-5 rounded-3"
+              style={{ maxWidth: "600px", overflow: "hidden" }}
+            >
               {/* <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp' className='w-100 rounded-top'  alt="Sample photo"/> */}
 
               <MDBCardBody className="px-5">
@@ -158,8 +188,8 @@ function AddUser() {
                   id="form2"
                   type="date"
                   onChange={(e) => {
-                    var res = e.target.value.slice(0, 10)
-                    console.log(res)
+                    var res = e.target.value.slice(0, 10);
+                    console.log(res);
                     setDob(res);
                   }}
                 />

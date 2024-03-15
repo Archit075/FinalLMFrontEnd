@@ -3,15 +3,16 @@
 // import { Link } from "react-router-dom";
 // import { toast } from "react-toastify";
 // import moment from "moment";
+import { UrlGateway, UrlResources } from "../../../config";
+// import NotFound from "./NotFound/NotFound";
 import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import { useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { UrlGateway, UrlResources } from "../../../config";
+// import { UrlGateway } from "../../../config";
 import "./ResourceList.css";
 import { Col, Container, Row } from "react-bootstrap";
-import NotFound from "./NotFound/NotFound";
 
 export default function ResourceList() {
   const { standard } = sessionStorage;
@@ -77,18 +78,24 @@ export default function ResourceList() {
               " **********"
           );
         } else {
-          toast.error("Resources are empty");
+          toast.error("Resources are empty", { autoClose: 800 });
           console.log("PDf List is empty.");
           console.error(result["message"]);
         }
       })
       .catch((error) => {
-        toast.warning("Resources are empty");
+        toast.warning("Resources are empty", { autoClose: 800 });
       });
   };
 
   const returnBook = (pdf_Name, id) => {
     // const urlResource = `${UrlResources}/api/Pdf/productPdf/delete/${pdf_Name}/${id}`;
+console.log("standard is : "+standard);
+
+    if( classtd != standard){
+      toast.error(`You are not authorized to modify the resources in class ${classtd}`)
+    }
+    else{
     const urlResource = `${UrlGateway}/gateway/pdf/delete/${pdf_Name}/${id}`;
 
     console.log("pdf name is : " + pdf_Name);
@@ -121,7 +128,7 @@ export default function ResourceList() {
         console.log("There is an error");
         // console.error(error.response.data.error);
       });
-  };
+}};
 
   useEffect(() => {
     searchResources();
@@ -149,10 +156,10 @@ export default function ResourceList() {
       <Container style={{ paddingBottom: "200px" }}>
         <Row>
           <Col>
-            <input
+              <input
               placeholder="Search resource here..."
               className="form-control"
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={(e) => searchItems(e.target.value)}
             />
           </Col>
         </Row>
@@ -168,7 +175,8 @@ export default function ResourceList() {
                       <h5>{Resource.pdfName}</h5>
                       <h5>{Resource.created.slice(0, 10)}</h5>
                       <h5>{Resource.created.slice(11, 20)}</h5>
-                      <p>{Resource.category}</p>
+                        
+                      <p style={{backgroundColor: Resource.category === "pdf" ? 'red' : 'blue', padding: "2%", borderRadius: "7%"}}>{Resource.category}</p>
                       <div class="content">
                         <p>{Resource.description}</p>
 
@@ -212,7 +220,7 @@ export default function ResourceList() {
                       <h5>{Resource.pdfName}</h5>
                       <h5>{Resource.created.slice(0, 10)}</h5>
                       <h5>{Resource.created.slice(11, 20)}</h5>
-                      <p>{Resource.category}</p>
+                      <p style={{backgroundColor: Resource.category === "pdf" ? 'orange' : 'purple', padding: "2%", borderRadius: "10%"}}>{Resource.category}</p>
                       <div class="content">
                         <p>{Resource.description}</p>
 
@@ -222,12 +230,23 @@ export default function ResourceList() {
                           className="btn btn-success btn-sm"
                           id="vbtn"
                           onClick={() => {
-                            navigate("/pdfPage", {
-                              state: { pdfName: Resource.pdfName },
-                            });
-                            console.log(
-                              "pdfName in resourcelist is : " + Resource.pdfName
-                            );
+                            if(Resource.category == "pdf"){
+                              navigate("/pdfPage", {
+                                state: { pdfName: Resource.pdfName },
+                              });
+                              console.log(
+                                "pdfName in resourcelist is : " + Resource.pdfName
+                              );
+                            }
+                            else if(Resource.category == "video"){
+                              navigate("/videoPage", {
+                                state: { pdfName: Resource.pdfName },
+                              });
+                              console.log(
+                                "pdfName in resourcelist is : " + Resource.pdfName
+                              );
+                            }
+                            
                           }}
                         >
                           View

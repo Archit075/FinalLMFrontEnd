@@ -72,7 +72,7 @@ export default function TResourceBin() {
         }
       })
       .catch((error) => {
-        toast.warning("Resources are empty");
+        toast.warning("Resources are empty", { autoClose: 800 });
       });
   };
 
@@ -132,6 +132,7 @@ export default function TResourceBin() {
         <Row>
           <Col>
             <input
+              style={{ marginTop: "1.6%" }}
               placeholder="Search resource here..."
               className="form-control"
               onChange={(e) => setSearchInput(e.target.value)}
@@ -141,25 +142,22 @@ export default function TResourceBin() {
         <br />
         <br />
         <Row>
-          {
-          searchInput.length > 1 ?
-          filterResult.map((Resource) => (
-            <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }}>
-              
-
-              <div
-                className="cardBox2"
-                style={{ marginBottom: "10px", margin: "1rem" }}
-              >
-                <div className="card2">
-                  <h2>{Resource.pdfName}</h2>
-                  <span1>{Resource.subject}</span1>
-                  {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
-                  {/* <h3>{Resource.created.slice(11, 20)}</h3> */}
-                  <div class="content">
-                    <p>{Resource.description}</p>
-                    <p>{Resource.category}</p>
-                    {/* <Button
+          {searchInput.length > 1
+            ? filterResult.map((Resource) => (
+                <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }}>
+                  <div
+                    className="cardBox2"
+                    style={{ marginBottom: "10px", margin: "1rem" }}
+                  >
+                    <div className="card2">
+                      <h2>{Resource.pdfName}</h2>
+                      <span1>{Resource.subject}</span1>
+                      {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
+                      {/* <h3>{Resource.created.slice(11, 20)}</h3> */}
+                      <div class="content">
+                        <p>{Resource.description}</p>
+                        <p style={{backgroundColor: Resource.category === "pdf" ? 'orange' : 'purple', padding: "2%", borderRadius: "10%"}}>{Resource.category}</p>
+                        {/* <Button
                         style={{ marginTop: "0" }}
                         variant="primary"
                         className="btn btn-success btn-sm"
@@ -175,37 +173,34 @@ export default function TResourceBin() {
                       >
                         View
                       </Button> */}
-                    <Button
-                      variant="primary"
-                      className="btn mr-5 btn-sm"
-                      id="rbtn"
-                      onClick={() => binBook(Resource.pdfName, Resource.id)}
-                    >
-                      Publish
-                    </Button>
+                        <Button
+                          variant="primary"
+                          className="btn mr-5 btn-sm"
+                          id="rbtn"
+                          onClick={() => binBook(Resource.pdfName, Resource.id)}
+                        >
+                          Publish
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Col>
-          ))
-          :
-            Resources.map((Resource) => (
-              <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }}>
-                
-  
-                <div
-                  className="cardBox2"
-                  style={{ marginBottom: "10px", margin: "1rem" }}
-                >
-                  <div className="card2">
-                    <h2>{Resource.pdfName}</h2>
-                    <span1>{Resource.subject}</span1>
-                    {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
-                    {/* <h3>{Resource.created.slice(11, 20)}</h3> */}
-                    <div class="content">
-                      <p>{Resource.description}</p>
-                      <p>{Resource.category}</p>
-                      {/* <Button
+                </Col>
+              ))
+            : Resources.map((Resource) => (
+                <Col md={4} sm={12} lg={3} style={{ marginBottom: "10px" }}>
+                  <div
+                    className="cardBox2"
+                    style={{ marginBottom: "10px", margin: "1rem" }}
+                  >
+                    <div className="card2">
+                      <h2>{Resource.pdfName}</h2>
+                      <span1>{Resource.subject}</span1>
+                      {/* <h3> {Resource.created.slice(0, 10)}</h3> */}
+                      {/* <h3>{Resource.created.slice(11, 20)}</h3> */}
+                      <div class="content">
+                        <p>{Resource.description}</p>
+                        <p style={{backgroundColor: Resource.category === "pdf" ? 'orange' : 'purple', padding: "2%", borderRadius: "10%", width: "50px", marginLeft: "33%"}}>{Resource.category}</p>
+                        {/* <Button
                           style={{ marginTop: "0" }}
                           variant="primary"
                           className="btn btn-success btn-sm"
@@ -221,20 +216,19 @@ export default function TResourceBin() {
                         >
                           View
                         </Button> */}
-                      <Button
-                        variant="primary"
-                        className="btn mr-5 btn-sm"
-                        id="rbtn"
-                        onClick={() => binBook(Resource.pdfName, Resource.id)}
-                      >
-                        Publish
-                      </Button>
+                        <Button
+                          variant="primary"
+                          className="btn mr-5 btn-sm"
+                          id="rbtn"
+                          onClick={() => binBook(Resource.pdfName, Resource.id)}
+                        >
+                          Publish
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Col>
-            ))
-          }
+                </Col>
+              ))}
         </Row>
       </Container>
       {/* </div> */}

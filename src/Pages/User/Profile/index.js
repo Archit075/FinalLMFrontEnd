@@ -9,7 +9,7 @@ export default function SProfile() {
     <Container>
       <SHeader />
       <Background>
-        <img src="/images/LM3.png" style={{filter: "blur(3px)"}}/>
+        <img alt="" src="/images/LM3.png" style={{filter: "blur(3px)"}}/>
       </Background>
       <Profile />
       <Footer />

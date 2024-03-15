@@ -2,6 +2,7 @@ import { useState } from "react";
 // import "./edit.css";
 import { toast } from "react-toastify";
 import axios from "axios";
+import './style.css'
 import { useNavigate } from "react-router";
 import { URLUser, UrlGateway } from "../../../config";
 
@@ -15,7 +16,7 @@ const UpdateTInfo = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  console.log(sessionStorage);
+  // console.log(sessionStorage);
 
   const navigate = useNavigate();
 
@@ -30,7 +31,10 @@ const UpdateTInfo = () => {
       //   toast.warning("please enter password");
       // } else if (confirmPassword.length === 0) {
       //   toast.warning("please enter correct password");
-    } 
+    } else if(password.length === 0){
+      toast.warning("Password field is mandatory because of orders from above")
+      console.log("Password field is mandatory because of orders from above")
+    }
     else {
       // if (password.length === 0 && confirmPassword.length === 0) {
       //   const body = {
@@ -78,13 +82,13 @@ const UpdateTInfo = () => {
           const result = response.data;
           console.log(result);
           if (result !== null) {
-            toast.success("Profile successfully updated!!!");
+            toast.success("Profile successfully updated!!!", {autoClose: 800});
             sessionStorage["name"] = _username;
             sessionStorage["phone_number"] = contact;
             sessionStorage["email"] = _email;
             navigate("/TProfile");
           } else {
-            toast.error(result["error"]);
+            toast.error(result["error"], {autoClose: 800});
           }
         }).catch((error)=>{
           console.dir(error);
@@ -157,9 +161,11 @@ const UpdateTInfo = () => {
                     Contact Number
                   </label>
                   <input
+                    // display= "none"
+                    maxLength={10}
                     value={contact}
                     onChange={handleContact}
-                    type="number"
+                    type="number/text"
                     className="form-control"
                   />
                 </div>

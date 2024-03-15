@@ -1,21 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import SHeader from "../../../AllHeaders/SHeader";
-import SinglePage from "../../Teacher/ViewPdf/Single-page";
+import ViewVideo from "../../Teacher/ViewVideo/View-video";
 
-const PDFUser = () => {
+const VIDEOUser = () => {
   return (
     <Container>
-      <SHeader/>
+      <SHeader />
       <Background>
-        <img alt="" src="/images/LM3.png" style={{filter: "blur(6px)"}} />
+        <img src="/images/LM3.png" style={{filter: "blur(5px)"}} />
+        <Overlay />
       </Background>
-      <SinglePage />
+      <ViewVideo />
     </Container>
   );
 };
 
-export default PDFUser;
+export default VIDEOUser;
 
 const Container = styled.div`
   position: relative;
@@ -36,3 +37,12 @@ const Background = styled.div`
         object-fit:cover;
     }
 `
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+`;

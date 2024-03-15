@@ -3,13 +3,14 @@
 // import CardGroup from "react-bootstrap/CardGroup";
 // import Card from "react-bootstrap/Card";
 // import { CardBody, Container } from "react-bootstrap";
+// import { URLUser, URLuser, UrlGateway } from "../../../config";
 import React from "react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import "./profile.css";
-import { URLUser, URLuser, UrlGateway } from "../../../config";
+import { UrlGateway } from "../../../config";
 
 const Profile = () => {
   const { User_id } = sessionStorage;
@@ -33,11 +34,11 @@ const Profile = () => {
           setProfile(result);
           console.log(User_id);
         } else {
-          toast.error(result["error"]);
+          toast.error(result["error"], {autoClose: 800});
         }
       })
       .catch((error) => {
-        toast.error(error.response.data.error);
+        toast.error(error.response.data.error, {autoClose: 800});
       });
   };
 
@@ -52,7 +53,7 @@ const Profile = () => {
   useEffect(() => {
     searchProfile();
     console.log("getting called");
-  }, []);
+  });
 
   return (
     <>
@@ -136,15 +137,16 @@ const Profile = () => {
         }}
       >
         <div class="img1">
-          <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+          {/* <img alt="" src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" /> */}
+
         </div>
-        <div class="infos1" style={{ marginLeft: "0" }}>
+        <div class="infos1" >
           <div class="name1">
-            <h1>{profile.username}</h1>
+            <h1 style={{fontWeight: "bold"}}>{profile.username}</h1>
             <h4 style={{ fontWeight: "bolder" }}>{profile.email}</h4>
           </div>
           <p class="text1">Standard: {profile.standard}</p>
-          <ul class="stats1" style={{paddingLeft: "0"}}>
+          <ul class="stats1" style={{paddingLeft: "8%"}}>
             <li>
               <h3 style={{ fontWeight: "bolder" }}>{User_id}</h3>
               <h4 style={{ fontWeight: "bolder" }}>Id</h4>

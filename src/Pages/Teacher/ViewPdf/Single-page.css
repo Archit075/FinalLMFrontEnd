@@ -1,6 +1,8 @@
 .react-pdf__Page__canvas{
     /* margin-left: 461px; */
     /* width: 50%; */
+    max-width: 80vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     float: right;
     /* float: left; */
     margin-right: 20px;
@@ -21,6 +23,10 @@
 }
 
 .btndiv {
+    /* display: flex;
+  justify-content: center;
+  margin-top: 20px; */
+
     margin: 10%;
     margin-bottom: 200px;
     /* margin: 500px; */

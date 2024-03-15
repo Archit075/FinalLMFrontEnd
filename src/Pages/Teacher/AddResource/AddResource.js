@@ -33,7 +33,7 @@ function TAddResource() {
   // toast.info("Add your resources here!!")
 
   const addResource = () => {
-    if (ResourceCategory === "pdf") {
+    if (ResourceCategory === "pdf" || "video") {
       if (ResourceName.length === 0) {
         toast.error("please enter resource name");
       } else if (ResourceCategory.length === 0) {
@@ -79,10 +79,12 @@ function TAddResource() {
           })
           .catch((error) => {
             toast.error("error occured.", { autoClose: 800 });
+            console.dir(error);
           });
       }
     } else {
       toast.error("error occured", { autoClose: 800 });
+      console.dir("error");
     }
   };
 
@@ -107,6 +109,7 @@ function TAddResource() {
                 <MDBInput
                   wrapperClass="mb-4"
                   label="File Name"
+                  maxLength={15}
                   id="form1"
                   type="text"
                   onChange={(e) => {
@@ -215,7 +218,7 @@ function TAddResource() {
                   onChange={(e) => {
                     setPdfFile(e.target.files[0]);
                   }}
-                  accept="pdf/*"
+                  accept="*"
                   type="file"
                 />
 
